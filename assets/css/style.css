@@ -259,6 +259,46 @@ h1, h2, h3, h4 {
   background: rgba(0, 51, 153, 0.06);
 }
 
+/* Modern EU-style buttons */
+
+/* Primary */
+.btn-primary {
+  background: linear-gradient(135deg, #003399 0%, #00246a 100%);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.45rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.96rem;
+  box-shadow: 0 4px 12px rgba(0, 51, 153, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 51, 153, 0.38);
+  background: linear-gradient(135deg, #003fa5 0%, #002d80 100%);
+}
+
+/* Secondary */
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  color: var(--text-strong);
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.96rem;
+  backdrop-filter: blur(6px);
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
 /* Hero image placeholder */
 
 .hero-image-placeholder {

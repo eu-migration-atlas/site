@@ -58,6 +58,20 @@ body {
   line-height: 1.6;
 }
 
+h1, h2, h3, h4 {
+  font-family: "Merriweather", "Georgia", serif;
+  letter-spacing: 0.01em;
+  color: var(--text-strong);
+}
+
+.section-light h1,
+.section-light h2,
+.section-light h3,
+.section-light h4 {
+  color: var(--text-on-light);
+}
+
+
 /* Layout helpers */
 
 .container {

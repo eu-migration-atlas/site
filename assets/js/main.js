@@ -64,4 +64,64 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLabel(selectA, labelA, 'No country selected yet', pillA);
     updateLabel(selectB, labelB, 'No country selected yet', pillB);
   }
+
+  // Compare metric tiles – synced expand/collapse between countries
+  const metricTiles = document.querySelectorAll('.compare-metric-tile');
+
+  if (metricTiles.length) {
+    const triggers = document.querySelectorAll('.compare-metric-trigger');
+
+    function setTileExpanded(tile, expanded) {
+      const detail = tile.querySelector('.compare-metric-detail');
+      const trigger = tile.querySelector('.compare-metric-trigger');
+
+      tile.classList.toggle('is-expanded', expanded);
+
+      if (detail) {
+        detail.hidden = !expanded;
+      }
+      if (trigger) {
+        trigger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
+    }
+
+    function collapseAllTiles() {
+      metricTiles.forEach(tile => setTileExpanded(tile, false));
+    }
+
+    function toggleTopic(topic) {
+      const topicTiles = Array.from(metricTiles).filter(
+        tile => tile.dataset.topic === topic
+      );
+
+      if (!topicTiles.length) return;
+
+      const isCurrentlyExpanded = topicTiles.every(tile =>
+        tile.classList.contains('is-expanded')
+      );
+
+      // Eerst alles dicht
+      collapseAllTiles();
+
+      // Als het al open stond: nu gewoon alles dicht laten
+      if (isCurrentlyExpanded) {
+        return;
+      }
+
+      // Anders dit onderwerp in beide landen openen
+      topicTiles.forEach(tile => setTileExpanded(tile, true));
+    }
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const tile = trigger.closest('.compare-metric-tile');
+        if (!tile) return;
+
+        const topic = tile.dataset.topic;
+        if (!topic) return;
+
+        toggleTopic(topic);
+      });
+    });
+  }
 });

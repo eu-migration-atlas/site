@@ -131,10 +131,6 @@ body {
 
 /* Main */
 
-.site-main {
-  padding: 2rem 0 3rem;
-}
-
 .site-main h1 {
   font-size: 1.9rem;
   margin-bottom: 0.5rem;
@@ -426,3 +422,6 @@ body {
   box-shadow: var(--shadow-soft-light);
 }
 
+.section-light li {
+  color: var(--text-on-light);
+}

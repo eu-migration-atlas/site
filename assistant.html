@@ -1,6 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EU Migration Atlas – Atlas AI Assistant</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body class="page-assistant">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-flag"></span>
+        <span class="logo-text">EU Migration Atlas</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" data-page="home">Home</a>
+        <a href="countries.html" data-page="countries">Countries</a>
+        <a href="compare.html" data-page="compare">Compare</a>
+        <a href="assistant.html" data-page="assistant">Atlas AI</a>
+        <a href="about.html" data-page="about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main page-assistant">
+    <section class="section section-light">
+      <div class="container">
+        <header class="section-header">
+          <h1>Atlas AI Assistant</h1>
+          <p>
+            The Atlas AI assistant helps users explore migration policies and political climates across EU Member States. 
+            You can ask questions about specific countries, compare approaches, or request explanations of key EU frameworks.
+          </p>
+        </header>
+
+        <div class="assistant-layout">
+          <article class="assistant-intro">
+            <h2>What you can do with Atlas AI</h2>
+            <ul>
+              <li>Ask for a summary of a country’s migration policy and political climate.</li>
+              <li>Compare two Member States across specific themes (asylum, borders, integration).</li>
+              <li>Request clarification on EU frameworks such as CEAS or the Pact on Migration and Asylum.</li>
+              <li>Get short explanations suitable for students, journalists, or policymakers.</li>
+            </ul>
+
+            <p class="assistant-disclaimer">
+              <strong>Disclaimer:</strong> This assistant is a prototype for educational purposes within the 
+              minor <em>Cross-Border Migration, Governance &amp; Security</em>. It does not represent an official tool of the European Commission.
+            </p>
+          </article>
+
+          <section class="assistant-shell">
+            <div class="assistant-frame" aria-label="Atlas AI chat window">
+              <script>
+                window.voiceflow = window.voiceflow || {};
+                window.voiceflow.chat = window.voiceflow.chat || {};
+                window.voiceflow.chat.load && window.voiceflow.chat.load({
+                  verify: { projectID: "691c8f2a2df5fd739c5141c2" },
+                  url: 'https://general-runtime.voiceflow.com',
+                  versionID: 'production'
+                });
+              </script>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">
+        © 2025 EU Migration Atlas – Cross-Border Migration, Governance &amp; Security
+      </p>
+      <p class="footer-right">
+        Fictional project for DG Migration &amp; Home Affairs (DG HOME)
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
 

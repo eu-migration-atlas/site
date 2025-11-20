@@ -388,33 +388,12 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
-.btn-primary {
-  background: var(--eu-blue);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #00246a;
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 1px solid var(--eu-blue);
-  color: var(--eu-blue);
-}
-
-.btn-secondary:hover {
-  background: rgba(0, 51, 153, 0.06);
-}
-
-/* Modern EU-style buttons */
 /* Primary */
 .btn-primary {
   background: linear-gradient(135deg, #003399 0%, #00246a 100%);
   color: #fff;
   border: none;
   padding: 0.65rem 1.45rem;
-  border-radius: 999px;
   font-weight: 600;
   font-size: 0.96rem;
   box-shadow: 0 4px 12px rgba(0, 51, 153, 0.28);
@@ -464,15 +443,9 @@ h1, h2, h3, h4 {
 
 .country-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.1rem;
-  margin-bottom: 2.5rem;
-}
-
-@media (min-width: 900px) {
-  .country-layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2.8rem;
 }
 
 .feature-grid {
@@ -486,6 +459,12 @@ h1, h2, h3, h4 {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.4rem;
   margin-bottom: 2.6rem;
+}
+
+@media (min-width: 900px) {
+  .country-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
@@ -650,16 +629,6 @@ h1, h2, h3, h4 {
 .about-body li {
   color: var(--text-muted);
   font-size: 0.95rem;
-}
-
-/* ========================================
-   Page sections: premium country highlights
-   ======================================== */
-.country-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.4rem;
-  margin-bottom: 2.8rem;
 }
 
 /* ========================================

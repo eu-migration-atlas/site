@@ -1,12 +1,47 @@
 :root {
+  /* Brand / EU */
   --eu-blue: #003399;
   --eu-gold: #ffcc00;
+
+  /* Dark theme basis (page & header) */
+  --bg-page: #0b1624;           /* algemene paginabackground */
+  --bg-surface-dark: #0f192a;  /* header/hero/footers */
+  --bg-surface-elevated: #111827;
+
+  /* Light surfaces voor hybride blokken */
   --bg-light: #f5f7fb;
-  --text-main: #222;
-  --text-muted: #666;
-  --border-soft: #e0e4ef;
+  --bg-light-soft: #ffffff;
+
+  /* Tekstkleuren */
+  --text-main: #e5e9f5;         /* tekst op donker */
+  --text-muted: #a3adc4;
+  --text-strong: #ffffff;
+  --text-on-light: #222;
+  --text-muted-light: #666;
+
+  /* Borders & schaduwen */
+  --border-soft: #1f2937;
+  --border-soft-light: #e0e4ef;
+  --shadow-soft: 0 4px 10px rgba(15, 23, 42, 0.3);
+  --shadow-soft-light: 0 4px 10px rgba(15, 23, 42, 0.06);
+
+  /* Layout */
   --max-width: 1100px;
   --radius-lg: 14px;
+
+  /* Accent / gradient */
+  --atlas-gradient: radial-gradient(
+    circle at 15% 20%,
+    #dde7ff 0,
+    #dde7ff 18%,
+    #c4d2ff 35%,
+    #9db5ff 55%,
+    #7a96ff 75%,
+    #5a78e7 100%
+  );
+
+  /* Animatie */
+  --transition-fast: 0.15s ease-out;
 }
 
 *,
@@ -19,7 +54,7 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text-main);
-  background-color: var(--bg-light);
+  background-color: var(--bg-page);
   line-height: 1.6;
 }
 
@@ -34,11 +69,12 @@ body {
 /* Header & nav */
 
 .site-header {
-  background: white;
-  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-surface-dark);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
   position: sticky;
   top: 0;
   z-index: 20;
+  backdrop-filter: blur(10px);
 }
 
 .header-inner {
@@ -68,13 +104,7 @@ body {
 .logo-text {
   font-weight: 650;
   letter-spacing: 0.01em;
-  color: var(--eu-blue);
-}
-
-.main-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  color: var(--text-strong);
 }
 
 .main-nav a {
@@ -84,17 +114,19 @@ body {
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
   border: 1px solid transparent;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .main-nav a:hover {
-  border-color: var(--border-soft);
-  background-color: rgba(0, 0, 0, 0.02);
+  border-color: rgba(148, 163, 184, 0.35);
+  background-color: rgba(15, 23, 42, 0.8);
+  color: var(--text-main);
 }
 
 .main-nav a.is-active {
-  color: var(--eu-blue);
-  border-color: rgba(0, 51, 153, 0.2);
-  background-color: rgba(0, 51, 153, 0.04);
+  color: var(--text-strong);
+  border-color: rgba(37, 99, 235, 0.7);
+  background-color: rgba(37, 99, 235, 0.18);
 }
 
 /* Main */
@@ -115,8 +147,8 @@ body {
 /* Footer */
 
 .site-footer {
-  border-top: 1px solid var(--border-soft);
-  background: white;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  background: var(--bg-surface-dark);
   padding: 0.9rem 0;
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -132,11 +164,11 @@ body {
 /* Simple card helper, handig voor later */
 
 .card {
-  background: white;
+  background: var(--bg-light-soft);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft);
+  border: 1px solid var(--border-soft-light);
   padding: 1.25rem 1.4rem;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.03);
+  box-shadow: var(--shadow-soft-light);
   margin-bottom: 1.25rem;
 }
 
@@ -147,8 +179,21 @@ body {
 }
 
 .hero-split {
-  background: #fdfdfd;
+  background: var(--bg-surface-dark);
   padding: 3rem 0 3.5rem;
+}
+
+.hero-text h1 {
+  font-size: 2.7rem;
+  margin: 0 0 0.8rem;
+  color: var(--text-strong);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 36rem;
+  margin-bottom: 1.8rem;
 }
 
 .hero-layout {
@@ -158,11 +203,6 @@ body {
   align-items: center;
 }
 
-.hero-text h1 {
-  font-size: 2.7rem;
-  margin: 0 0 0.8rem;
-}
-
 .hero-eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -170,13 +210,6 @@ body {
   font-weight: 600;
   color: var(--eu-blue);
   margin-bottom: 0.7rem;
-}
-
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  max-width: 36rem;
-  margin-bottom: 1.8rem;
 }
 
 .hero-actions {
@@ -220,8 +253,8 @@ body {
 
 .hero-image-placeholder {
   border-radius: 18px;
-  border: 1px solid var(--border-soft);
-  background: radial-gradient(circle at 15% 20%, #dde7ff 0, #dde7ff 20%, #c4d2ff 35%, #c4d2ff 45%, #9db5ff 60%, #7a96ff 75%, #5a78e7 100%);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: var(--atlas-gradient);
   min-height: 220px;
   display: flex;
   align-items: flex-end;
@@ -230,6 +263,7 @@ body {
   color: white;
   font-size: 0.9rem;
   font-weight: 500;
+  box-shadow: var(--shadow-soft);
 }
 
 /* Responsive */
@@ -272,25 +306,24 @@ body {
 }
 
 .country-card {
-  background: #ffffff;
+  background: var(--bg-light-soft);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft);
+  border: 1px solid var(--border-soft-light);
   padding: 1.2rem 1.3rem;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.03);
+  box-shadow: var(--shadow-soft-light);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .country-card:hover {
   transform: translateY(-2px);
-  box-shado
-
-  .page-country .country-header {
-  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.55);
+  background-color: #f9fbff;
 }
 
 .country-eyebrow {
@@ -366,3 +399,30 @@ body {
   color: var(--text-muted);
   font-size: 0.95rem;
 }
+
+  /* Algemene tekst op lichte blokken */
+
+.section-light,
+.section-light p,
+.section-light h1,
+.section-light h2,
+.section-light h3,
+.section-light h4 {
+  color: var(--text-on-light);
+}
+
+  /* Lichte content-secties binnen donkere pagina */
+
+.section-light {
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-soft-light);
+  border-bottom: 1px solid var(--border-soft-light);
+  padding: 2.5rem 0;
+}
+
+.section-light .card {
+  background: var(--bg-light-soft);
+  border-color: var(--border-soft-light);
+  box-shadow: var(--shadow-soft-light);
+}
+

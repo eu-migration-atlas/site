@@ -1,29 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EU Migration Atlas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EU Migration Atlas – Home</title>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script defer src="assets/js/main.js"></script>
 </head>
-<body>
-    <h1>Welcome to the EU Migration Atlas</h1>
-    <p>This website is part of a group project for the minor Cross-Border Migration, Governance & Security.</p>
-    
-<script type="text/javascript">
-(function(d, t) {
-  var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-  v.onload = function() {
-    window.voiceflow.chat.load({
+<body class="page-home">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-flag"></span>
+        <span class="logo-text">EU Migration Atlas</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" data-page="home">Home</a>
+        <a href="countries.html" data-page="countries">Countries</a>
+        <a href="compare.html" data-page="compare">Compare</a>
+        <a href="assistant.html" data-page="assistant">Atlas AI</a>
+        <a href="about.html" data-page="about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+
+      <h1>Welcome to the EU Migration Atlas</h1>
+      <p>
+        This website is part of a group project for the minor Cross-Border Migration, 
+        Governance & Security.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">
+        © 2025 EU Migration Atlas – Cross-Border Migration, Governance & Security
+      </p>
+      <p class="footer-right">
+        Fictional project for DG Migration & Home Affairs (DG HOME)
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    window.voiceflow = window.voiceflow || {};
+    window.voiceflow.chat = window.voiceflow.chat || {};
+    window.voiceflow.chat.load && window.voiceflow.chat.load({
       verify: { projectID: "691c8f2a2df5fd739c5141c2" },
       url: 'https://general-runtime.voiceflow.com',
       versionID: 'production'
     });
-  };
-  v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-  v.type = "text/javascript";
-  s.parentNode.insertBefore(v, s);
-})(document, 'script');
-</script>
+  </script>
 </body>
 </html>

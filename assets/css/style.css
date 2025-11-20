@@ -247,3 +247,44 @@ body {
     font-size: 2.1rem;
   }
 }
+
+/* Page header */
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+.page-header p {
+  max-width: 40rem;
+}
+
+/* Country grid */
+
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.3rem;
+}
+
+.country-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  padding: 1.2rem 1.3rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.country-card:hover {
+  transform: translateY(-2px);
+  box-shado

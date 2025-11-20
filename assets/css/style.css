@@ -1,3 +1,7 @@
+/* ========================================
+   Variables
+   Colors, spacing, and breakpoints used across the site.
+   ======================================== */
 :root {
   /* Brand / EU */
   --eu-blue: #003399;
@@ -25,9 +29,19 @@
   --shadow-soft: 0 4px 10px rgba(15, 23, 42, 0.3);
   --shadow-soft-light: 0 4px 10px rgba(15, 23, 42, 0.06);
 
+  /* Spacing */
+  --space-xs: 0.35rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+
   /* Layout */
-  --max-width: 1100px;
+  --max-width: 1180px;
   --radius-lg: 14px;
+
+  /* Breakpoints */
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
 
   /* Accent / gradient */
   --atlas-gradient: radial-gradient(
@@ -72,12 +86,29 @@ h1, h2, h3, h4 {
 }
 
 
-/* Layout helpers */
+/* Layout: containers & page structure */
 
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 1.25rem;
+}
+
+.page {
+  padding: var(--space-lg) 0;
+}
+
+.site-main {
+  padding: 0 0 3rem;
+}
+
+.site-main h1 {
+  font-size: 1.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-main p {
+  color: var(--text-muted);
 }
 
 /* Header & nav */
@@ -143,17 +174,6 @@ h1, h2, h3, h4 {
   background-color: rgba(37, 99, 235, 0.18);
 }
 
-/* Main */
-
-.site-main h1 {
-  font-size: 1.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.site-main p {
-  color: var(--text-muted);
-}
-
 /* Footer */
 
 .site-footer {
@@ -183,10 +203,6 @@ h1, h2, h3, h4 {
 }
 
 /* Hero split layout (home) */
-
-.site-main {
-  padding: 0 0 3rem;
-}
 
 .hero-split {
   background: var(--bg-surface-dark);

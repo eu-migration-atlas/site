@@ -58,6 +58,9 @@
   --transition-fast: 0.15s ease-out;
 }
 
+/* ========================================
+   Base: resets & typography
+   ======================================== */
 *,
 *::before,
 *::after {
@@ -78,16 +81,9 @@ h1, h2, h3, h4 {
   color: var(--text-strong);
 }
 
-.section-light h1,
-.section-light h2,
-.section-light h3,
-.section-light h4 {
-  color: var(--text-on-light);
-}
-
-
-/* Layout: containers & page structure */
-
+/* ========================================
+   Layout: containers & page structure
+   ======================================== */
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -111,46 +107,54 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
 }
 
-/* Layout: grids */
-
-.feature-grid,
-.country-grid,
-.compare-grid,
-.country-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.3rem;
+.section {
+  padding: 2.6rem 0;
 }
 
-.country-layout {
-  gap: 1.1rem;
-  margin-bottom: 2.5rem;
+.section + .section {
+  padding-top: 0;
 }
 
-.feature-grid > *,
-.country-grid > *,
-.compare-grid > *,
-.country-layout > * {
-  min-width: 0;
+.section h2,
+.section-title {
+  font-size: 1.55rem;
+  margin: 0 0 0.4rem;
 }
 
-@media (min-width: 640px) {
-  .feature-grid,
-  .country-grid,
-  .compare-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .country-layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.section-lead {
+  max-width: 44rem;
+  color: var(--text-muted-light);
+  margin: 0.3rem 0 1.6rem;
 }
 
-@media (min-width: 1024px) {
-  .feature-grid,
-  .country-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.section p {
+  max-width: 48rem;
+}
+
+.section-light,
+.section-light p,
+.section-light h1,
+.section-light h2,
+.section-light h3,
+.section-light h4 {
+  color: var(--text-on-light);
+}
+
+.section-light {
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-soft-light);
+  border-bottom: 1px solid var(--border-soft-light);
+  padding: 2.5rem 0;
+}
+
+.section-light .card {
+  background: var(--bg-light-soft);
+  border-color: var(--border-soft-light);
+  box-shadow: var(--shadow-soft-light);
+}
+
+.section-light li {
+  color: var(--text-on-light);
 }
 
 /* Header & nav */
@@ -216,8 +220,6 @@ h1, h2, h3, h4 {
   background-color: rgba(37, 99, 235, 0.18);
 }
 
-/* Footer */
-
 .site-footer {
   border-top: 1px solid rgba(148, 163, 184, 0.35);
   background: var(--bg-surface-dark);
@@ -233,8 +235,9 @@ h1, h2, h3, h4 {
   gap: 0.75rem;
 }
 
-/* Components: cards */
-
+/* ========================================
+   Components: cards, badges & tags
+   ======================================== */
 .card,
 .feature-card,
 .country-card,
@@ -306,50 +309,70 @@ h1, h2, h3, h4 {
   gap: 0.5rem;
 }
 
-/* Hero split layout (home) */
-
-.hero-split {
-  background: var(--bg-surface-dark);
-  padding: 3rem 0 3.5rem;
+.feature-card {
+  padding: 1.35rem 1.55rem;
 }
 
-.hero-text h1 {
-  font-size: 2.7rem;
-  margin: 0 0 0.8rem;
-  color: var(--text-strong);
+.feature-card h2 {
+  font-size: 1.1rem;
 }
 
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  max-width: 36rem;
-  margin-bottom: 1.8rem;
+.feature-card p {
+  font-size: 0.94rem;
 }
 
-.hero-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 2.5rem;
+.feature-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
   align-items: center;
-}
-
-.hero-eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
+  justify-content: center;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--eu-blue);
-  margin-bottom: 0.7rem;
+  letter-spacing: 0.06em;
+  background: rgba(0, 51, 153, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  color: #003399;
+  margin-bottom: 0.4rem;
 }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
+.country-layout .card {
+  padding: 1.4rem 1.6rem 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Buttons */
+.country-layout .card-tag {
+  position: absolute;
+  top: 0.95rem;
+  right: 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0, 51, 153, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  color: #003399;
+}
 
+.country-layout .card-title {
+  font-size: 1.08rem;
+  margin: 0 0 0.3rem;
+  color: var(--text-on-light);
+}
+
+.country-layout .card p {
+  margin: 0.1rem 0 0;
+  font-size: 0.94rem;
+  color: var(--text-muted-light);
+}
+
+/* ========================================
+   Components: buttons
+   ======================================== */
 .btn-primary,
 .btn-secondary {
   display: inline-block;
@@ -360,34 +383,12 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
-.btn-primary {
-  background: var(--eu-blue);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #00246a;
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 1px solid var(--eu-blue);
-  color: var(--eu-blue);
-}
-
-.btn-secondary:hover {
-  background: rgba(0, 51, 153, 0.06);
-}
-
-/* Modern EU-style buttons */
-
 /* Primary */
 .btn-primary {
   background: linear-gradient(135deg, #003399 0%, #00246a 100%);
   color: #fff;
   border: none;
   padding: 0.65rem 1.45rem;
-  border-radius: 999px;
   font-weight: 600;
   font-size: 0.96rem;
   box-shadow: 0 4px 12px rgba(0, 51, 153, 0.28);
@@ -419,24 +420,47 @@ h1, h2, h3, h4 {
   transform: translateY(-2px);
 }
 
-/* Hero image placeholder */
-
-.hero-image-placeholder {
-  border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  background: var(--atlas-gradient);
-  min-height: 220px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 1.1rem 1.3rem;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: var(--shadow-soft);
+/* ========================================
+   Layout: grids
+   ======================================== */
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
 }
 
-/* Responsive */
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.3rem;
+}
+
+.country-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2.8rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.3rem;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2.6rem;
+}
+
+@media (min-width: 900px) {
+  .country-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 @media (max-width: 900px) {
   .hero-layout {
@@ -452,49 +476,56 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Page header */
-
-.page-header {
-  margin-bottom: 2rem;
+/* ========================================
+   Page sections: hero & highlights
+   ======================================== */
+.hero-split {
+  background: var(--bg-surface-dark);
+  padding: 3rem 0 3.5rem;
 }
 
-.page-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.4rem;
+.hero-text h1 {
+  font-size: 2.7rem;
+  margin: 0 0 0.8rem;
+  color: var(--text-strong);
 }
 
-.page-header p {
-  max-width: 40rem;
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 36rem;
+  margin-bottom: 1.8rem;
 }
 
-/* Country grid */
-
-.country-grid {
-  gap: 1.3rem;
-}
-
-.country-eyebrow {
+.hero-eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--eu-blue);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.7rem;
 }
 
-.country-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.4rem;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
 }
 
-.country-intro {
-  max-width: 42rem;
-  color: var(--text-muted);
+.hero-image-placeholder {
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: var(--atlas-gradient);
+  min-height: 220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 1.1rem 1.3rem;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-soft);
 }
-
-
-
-/* Feature cards onder de hero (home) */
 
 .section-features {
   padding-top: 2.4rem;
@@ -520,45 +551,40 @@ h1, h2, h3, h4 {
   margin: 0.15rem 0 0;
 }
 
-/* Grid voor de vier pijlers */
-
-.feature-grid {
-  gap: 1.3rem;
+/* ========================================
+   Page sections: headers, country, and about
+   ======================================== */
+.page-header {
+  margin-bottom: 2rem;
 }
 
-/* Individuele card */
-
-.feature-card {
-  padding: 1.35rem 1.55rem;
-}
-
-.feature-card h2 {
-  font-size: 1.1rem;
-}
-
-.feature-card p {
-  font-size: 0.94rem;
-}
-
-/* Icon-bolletje linksboven */
-
-.feature-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  background: rgba(0, 51, 153, 0.06);
-  border: 1px solid rgba(37, 99, 235, 0.5);
-  color: #003399;
+.page-header h1 {
+  font-size: 2rem;
   margin-bottom: 0.4rem;
 }
 
-/* About page */
+.page-header p {
+  max-width: 40rem;
+}
+
+.country-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--eu-blue);
+  margin-bottom: 0.4rem;
+}
+
+.country-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.country-intro {
+  max-width: 42rem;
+  color: var(--text-muted);
+}
 
 .page-about .about-header {
   margin-bottom: 1.5rem;
@@ -600,119 +626,9 @@ h1, h2, h3, h4 {
   font-size: 0.95rem;
 }
 
-  /* Algemene tekst op lichte blokken */
-
-.section-light,
-.section-light p,
-.section-light h1,
-.section-light h2,
-.section-light h3,
-.section-light h4 {
-  color: var(--text-on-light);
-}
-
-  /* Lichte content-secties binnen donkere pagina */
-
-.section-light {
-  background: var(--bg-light);
-  border-top: 1px solid var(--border-soft-light);
-  border-bottom: 1px solid var(--border-soft-light);
-  padding: 2.5rem 0;
-}
-
-.section-light .card {
-  background: var(--bg-light-soft);
-  border-color: var(--border-soft-light);
-  box-shadow: var(--shadow-soft-light);
-}
-
-.section-light li {
-  color: var(--text-on-light);
-}
-
-/* ============================
-   1. GENERIC SECTIONS & TYPO
-   ============================ */
-
-.section {
-  padding: 2.6rem 0;
-}
-
-.section + .section {
-  padding-top: 0;
-}
-
-/* Strakkere koppen / tekstbreedte in content-secties */
-.section h2,
-.section-title {
-  font-size: 1.55rem;
-  margin: 0 0 0.4rem;
-}
-
-.section-lead {
-  max-width: 44rem;
-  color: var(--text-muted-light);
-  margin: 0.3rem 0 1.6rem;
-}
-
-/* Beetje rust in lange tekstblokken (About, uitleg, etc.) */
-.section p {
-  max-width: 48rem;
-}
-
-/* ============================
-   2. "PREMIUM" COUNTRY SECTIONS
-   (voor de vier blokken op Italy, etc.)
-   ============================ */
-
-/* Grid voor de vier hoofdblokken (PC / MS / CP / AP) */
-.country-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.4rem;
-  margin-bottom: 2.8rem;
-}
-
-/* Kaarten zelf – nette witte tegels op donkerblauwe achtergrond */
-.country-layout .card {
-  padding: 1.4rem 1.6rem 1.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Kleine label / badge rechtsboven: PC, MS, CP, AP, enz. */
-.country-layout .card-tag {
-  position: absolute;
-  top: 0.95rem;
-  right: 1.1rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  background: rgba(0, 51, 153, 0.06);
-  border: 1px solid rgba(37, 99, 235, 0.5);
-  color: #003399;
-}
-
-/* Titel en tekst in de kaarten */
-.country-layout .card-title {
-  font-size: 1.08rem;
-  margin: 0 0 0.3rem;
-  color: var(--text-on-light);
-}
-
-.country-layout .card p {
-  margin: 0.1rem 0 0;
-  font-size: 0.94rem;
-  color: var(--text-muted-light);
-}
-
-/* ============================
-   3. COMPARE PAGE BASIS
-   ============================ */
-
+/* ========================================
+   Page sections: compare
+   ======================================== */
 .page-compare .page-header {
   margin-bottom: 1.8rem;
 }
@@ -723,17 +639,10 @@ h1, h2, h3, h4 {
   margin-bottom: 1.8rem;
 }
 
-/* Twee kolommen naast elkaar (Country A / Country B) */
-.compare-grid {
-  gap: 1.4rem;
-  margin-bottom: 2.6rem;
-}
-
 .compare-panel {
   padding: 1.3rem 1.5rem;
 }
 
-/* Dropdowns / filters bovenaan */
 .compare-filters {
   display: flex;
   flex-wrap: wrap;
@@ -813,4 +722,3 @@ h1, h2, h3, h4 {
     min-height: 360px;
   }
 }
-

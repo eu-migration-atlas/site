@@ -288,3 +288,39 @@ body {
 .country-card:hover {
   transform: translateY(-2px);
   box-shado
+
+  .page-country .country-header {
+  margin-bottom: 1.5rem;
+}
+
+.country-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--eu-blue);
+  margin-bottom: 0.4rem;
+}
+
+.country-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.country-intro {
+  max-width: 42rem;
+  color: var(--text-muted);
+}
+
+.country-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .country-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

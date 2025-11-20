@@ -81,13 +81,6 @@ h1, h2, h3, h4 {
   color: var(--text-strong);
 }
 
-.section-light h1,
-.section-light h2,
-.section-light h3,
-.section-light h4 {
-  color: var(--text-on-light);
-}
-
 /* ========================================
    Layout: containers & page structure
    ======================================== */
@@ -163,6 +156,8 @@ h1, h2, h3, h4 {
 .section-light li {
   color: var(--text-on-light);
 }
+
+/* Header & nav */
 
 .site-header {
   background: var(--bg-surface-dark);
@@ -717,12 +712,6 @@ h1, h2, h3, h4 {
 
   .section {
     padding: 2.1rem 0;
-  }
-
-  .country-layout,
-  .feature-grid,
-  .compare-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .assistant-shell {

@@ -568,3 +568,217 @@ h1, h2, h3, h4 {
 .section-light li {
   color: var(--text-on-light);
 }
+
+/* ============================
+   1. GENERIC SECTIONS & TYPO
+   ============================ */
+
+.section {
+  padding: 2.6rem 0;
+}
+
+.section + .section {
+  padding-top: 0;
+}
+
+/* Strakkere koppen / tekstbreedte in content-secties */
+.section h2,
+.section-title {
+  font-size: 1.55rem;
+  margin: 0 0 0.4rem;
+}
+
+.section-lead {
+  max-width: 44rem;
+  color: var(--text-muted-light);
+  margin: 0.3rem 0 1.6rem;
+}
+
+/* Beetje rust in lange tekstblokken (About, uitleg, etc.) */
+.section p {
+  max-width: 48rem;
+}
+
+/* ============================
+   2. "PREMIUM" COUNTRY SECTIONS
+   (voor de vier blokken op Italy, etc.)
+   ============================ */
+
+/* Grid voor de vier hoofdblokken (PC / MS / CP / AP) */
+.country-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2.8rem;
+}
+
+/* Kaarten zelf – nette witte tegels op donkerblauwe achtergrond */
+.country-layout .card {
+  background: var(--bg-light-soft);
+  border-radius: 18px;
+  border: 1px solid var(--border-soft-light);
+  padding: 1.4rem 1.6rem 1.5rem;
+  box-shadow: var(--shadow-soft-light);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+/* Hover: subtiele lift + blauwe rand */
+.country-layout .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
+  border-color: rgba(37, 99, 235, 0.55);
+  background-color: #f9fbff;
+}
+
+/* Kleine label / badge rechtsboven: PC, MS, CP, AP, enz. */
+.country-layout .card-tag {
+  position: absolute;
+  top: 0.95rem;
+  right: 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0, 51, 153, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  color: #003399;
+}
+
+/* Titel en tekst in de kaarten */
+.country-layout .card-title {
+  font-size: 1.08rem;
+  margin: 0 0 0.3rem;
+  color: var(--text-on-light);
+}
+
+.country-layout .card p {
+  margin: 0.1rem 0 0;
+  font-size: 0.94rem;
+  color: var(--text-muted-light);
+}
+
+/* ============================
+   3. COMPARE PAGE BASIS
+   ============================ */
+
+.page-compare .page-header {
+  margin-bottom: 1.8rem;
+}
+
+.compare-intro {
+  max-width: 44rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+}
+
+/* Twee kolommen naast elkaar (Country A / Country B) */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2.6rem;
+}
+
+.compare-panel {
+  background: var(--bg-light-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft-light);
+  padding: 1.3rem 1.5rem;
+  box-shadow: var(--shadow-soft-light);
+}
+
+/* Dropdowns / filters bovenaan */
+.compare-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.4rem;
+}
+
+.compare-filters select {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft-light);
+  background: #ffffff;
+  font-size: 0.9rem;
+}
+
+/* ============================
+   4. ATLAS AI PAGE BASIS
+   ============================ */
+
+.page-assistant .page-header {
+  margin-bottom: 1.6rem;
+}
+
+.assistant-shell {
+  background: var(--bg-surface-dark);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: var(--shadow-soft);
+  padding: 1.4rem 1.5rem;
+}
+
+.assistant-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr);
+}
+
+/* Frame waarin de Voiceflow-widget hangt */
+.assistant-frame {
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  min-height: 420px;
+  overflow: hidden;
+}
+
+/* Kleine tekst naast/boven de widget (uitleg voor gebruiker) */
+.assistant-meta {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  max-width: 40rem;
+}
+
+/* ============================
+   5. MOBILE FINETUNE
+   ============================ */
+
+@media (max-width: 900px) {
+  .header-inner {
+    gap: 0.9rem;
+  }
+
+  .main-nav a {
+    font-size: 0.9rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .section {
+    padding: 2.1rem 0;
+  }
+
+  .country-layout,
+  .feature-grid,
+  .compare-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .assistant-shell {
+    padding: 1.1rem 1.1rem 1.3rem;
+  }
+
+  .assistant-frame {
+    min-height: 360px;
+  }
+}
+

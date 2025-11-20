@@ -191,15 +191,77 @@ h1, h2, h3, h4 {
   gap: 0.75rem;
 }
 
-/* Simple card helper, handig voor later */
+/* Components: cards */
 
-.card {
+.card,
+.feature-card,
+.country-card,
+.compare-panel {
   background: var(--bg-light-soft);
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
   border: 1px solid var(--border-soft-light);
-  padding: 1.25rem 1.4rem;
+  padding: 1.35rem 1.5rem;
   box-shadow: var(--shadow-soft-light);
-  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.card h2,
+.card h3,
+.card h4,
+.feature-card h2,
+.country-card h2,
+.compare-panel h2 {
+  margin: 0 0 0.25rem;
+  color: var(--text-on-light);
+}
+
+.card p,
+.feature-card p,
+.country-card p,
+.compare-panel p {
+  margin: 0;
+  color: var(--text-muted-light);
+}
+
+.card--pillars,
+.feature-card,
+.country-layout .card {
+  gap: 0.4rem;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+.card--pillars:hover,
+.feature-card:hover,
+.country-layout .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.6);
+  background-color: #f9fbff;
+}
+
+.card--country,
+.country-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.card--country:hover,
+.country-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.55);
+  background-color: #f9fbff;
+}
+
+.card--compare,
+.compare-panel {
+  gap: 0.5rem;
 }
 
 /* Hero split layout (home) */
@@ -371,27 +433,6 @@ h1, h2, h3, h4 {
   gap: 1.3rem;
 }
 
-.country-card {
-  background: var(--bg-light-soft);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft-light);
-  padding: 1.2rem 1.3rem;
-  text-decoration: none;
-  color: inherit;
-  box-shadow: var(--shadow-soft-light);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
-}
-
-.country-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-  border-color: rgba(37, 99, 235, 0.55);
-  background-color: #f9fbff;
-}
-
 .country-eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -461,29 +502,15 @@ h1, h2, h3, h4 {
 /* Individuele card */
 
 .feature-card {
-  background: var(--bg-light-soft);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft-light);
-  padding: 1.3rem 1.4rem;
-  box-shadow: var(--shadow-soft-light);
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  transition: transform var(--transition-fast),
-              box-shadow var(--transition-fast),
-              border-color var(--transition-fast),
-              background-color var(--transition-fast);
+  padding: 1.35rem 1.55rem;
 }
 
 .feature-card h2 {
   font-size: 1.1rem;
-  margin: 0 0 0.15rem;
 }
 
 .feature-card p {
-  color: var(--text-muted-light);
   font-size: 0.94rem;
-  margin: 0;
 }
 
 /* Icon-bolletje linksboven */
@@ -502,15 +529,6 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(37, 99, 235, 0.5);
   color: #003399;
   margin-bottom: 0.4rem;
-}
-
-/* Hoverstate: iets meer premium */
-
-.feature-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
-  border-color: rgba(37, 99, 235, 0.6);
-  background-color: #f9fbff;
 }
 
 /* About page */
@@ -630,26 +648,9 @@ h1, h2, h3, h4 {
 
 /* Kaarten zelf – nette witte tegels op donkerblauwe achtergrond */
 .country-layout .card {
-  background: var(--bg-light-soft);
-  border-radius: 18px;
-  border: 1px solid var(--border-soft-light);
   padding: 1.4rem 1.6rem 1.5rem;
-  box-shadow: var(--shadow-soft-light);
   position: relative;
   overflow: hidden;
-  transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast),
-    border-color var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-/* Hover: subtiele lift + blauwe rand */
-.country-layout .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
-  border-color: rgba(37, 99, 235, 0.55);
-  background-color: #f9fbff;
 }
 
 /* Kleine label / badge rechtsboven: PC, MS, CP, AP, enz. */
@@ -704,11 +705,7 @@ h1, h2, h3, h4 {
 }
 
 .compare-panel {
-  background: var(--bg-light-soft);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft-light);
   padding: 1.3rem 1.5rem;
-  box-shadow: var(--shadow-soft-light);
 }
 
 /* Dropdowns / filters bovenaan */

@@ -718,6 +718,196 @@ h1, h2, h3, h4 {
   color: #b3261e;
 }
 
+/* Compare – controls card */
+
+.compare-controls {
+  margin-bottom: 2rem;
+}
+
+.compare-controls-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1.25rem 1.5rem 1.4rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.compare-controls-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.compare-controls-text {
+  max-width: 420px;
+}
+
+.compare-controls-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #4b5563;
+  margin-bottom: 0.15rem;
+}
+
+.compare-controls-helper {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.compare-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: flex-end;
+}
+
+/* we hadden eerder al .compare-select-group select gestyled;
+   deze regels bouwen daarop voort */
+
+.compare-controls-summary {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.compare-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  font-size: 0.9rem;
+}
+
+.compare-pill-a {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.compare-pill-b {
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.compare-pill-label {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+.compare-pill-value {
+  font-weight: 500;
+  color: #111827;
+}
+
+.compare-controls-divider {
+  flex: 1;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #10b981);
+  opacity: 0.6;
+}
+
+/* foutmelding in context van de card */
+
+.compare-error {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #b3261e;
+}
+
+/* Compare – panel meta */
+
+.compare-panel-header {
+  margin-bottom: 1rem;
+}
+
+.compare-panel-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.compare-panel-title-row h2 {
+  margin: 0;
+}
+
+.compare-country-label {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.compare-meta {
+  margin-top: 0.35rem;
+}
+
+.compare-meta-line {
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.compare-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.compare-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.04);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Compare – section icons */
+
+.compare-section-icon {
+  display: inline-flex;
+  width: 1.4rem;
+  justify-content: center;
+  margin-right: 0.35rem;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Kleine responsive tweaken */
+
+@media (max-width: 768px) {
+  .compare-controls-card {
+    padding: 1rem 1rem 1.2rem;
+  }
+
+  .compare-controls-header {
+    align-items: flex-start;
+  }
+
+  .compare-controls-text {
+    max-width: 100%;
+  }
+
+  .compare-controls-summary {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .compare-controls-divider {
+    width: 100%;
+  }
+}
+
 /* ============================
    4. ATLAS AI PAGE BASIS
    ============================ */

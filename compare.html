@@ -42,27 +42,50 @@
       </header>
 
       <div class="compare-controls">
-        <form class="compare-form" aria-label="Compare countries form">
-          <div class="compare-select-group">
-            <label for="compare-country-a">Country A</label>
-            <select id="compare-country-a" name="countryA">
-              <option value="" selected disabled>Select a country</option>
-              <option value="italy">Italy</option>
-              <option value="germany">Germany</option>
-              <option value="france">France</option>
-            </select>
+        <div class="compare-controls-card">
+          <div class="compare-controls-header">
+            <div class="compare-controls-text">
+              <p class="compare-controls-label">Select countries to compare</p>
+              <p class="compare-controls-helper">
+                Choose two different EU Member States to generate a side-by-side comparison.
+              </p>
+            </div>
+
+            <form class="compare-form" aria-label="Compare countries form">
+              <div class="compare-select-group">
+                <label for="compare-country-a">Country A</label>
+                <select id="compare-country-a" name="countryA">
+                  <option value="" disabled selected>Select a country</option>
+                  <option value="italy">Italy</option>
+                  <option value="germany">Germany</option>
+                  <option value="france">France</option>
+                </select>
+              </div>
+
+              <div class="compare-select-group">
+                <label for="compare-country-b">Country B</label>
+                <select id="compare-country-b" name="countryB">
+                  <option value="" disabled selected>Select a country</option>
+                  <option value="italy">Italy</option>
+                  <option value="germany">Germany</option>
+                  <option value="france">France</option>
+                </select>
+              </div>
+            </form>
           </div>
 
-          <div class="compare-select-group">
-            <label for="compare-country-b">Country B</label>
-            <select id="compare-country-b" name="countryB">
-              <option value="" selected disabled>Select a country</option>
-              <option value="italy">Italy</option>
-              <option value="germany">Germany</option>
-              <option value="france">France</option>
-            </select>
+          <div class="compare-controls-summary">
+            <span class="compare-pill compare-pill-a">
+              <span class="compare-pill-label">Country A</span>
+              <span class="compare-pill-value" id="compare-pill-a">Not selected</span>
+            </span>
+            <span class="compare-controls-divider" aria-hidden="true"></span>
+            <span class="compare-pill compare-pill-b">
+              <span class="compare-pill-label">Country B</span>
+              <span class="compare-pill-value" id="compare-pill-b">Not selected</span>
+            </span>
           </div>
-        </form>
+        </div>
 
         <p class="compare-error" id="compare-error" aria-live="polite"></p>
       </div>
@@ -70,13 +93,25 @@
       <div class="compare-grid">
         <article class="compare-panel compare-panel-a">
           <header class="compare-panel-header">
-            <h2>Country A</h2>
-            <p class="compare-country-label" id="compare-label-a">No country selected yet</p>
+            <div class="compare-panel-title-row">
+              <h2>Country A</h2>
+              <p class="compare-country-label" id="compare-label-a">No country selected yet</p>
+            </div>
+            <div class="compare-meta">
+              <p class="compare-meta-line">
+                Placeholder political label for Country A.
+              </p>
+              <div class="compare-chips">
+                <span class="compare-chip">TBD stance</span>
+                <span class="compare-chip">TBD salience</span>
+                <span class="compare-chip">TBD EU alignment</span>
+              </div>
+            </div>
           </header>
 
           <div class="compare-panel-body">
             <section class="compare-block">
-              <h3>Political climate</h3>
+              <h3><span class="compare-section-icon">🧭</span>Political climate</h3>
               <p>
                 Placeholder text. This section will summarise the broader political context influencing
                 migration policy in the selected country.
@@ -84,7 +119,7 @@
             </section>
 
             <section class="compare-block">
-              <h3>Key migration policies</h3>
+              <h3><span class="compare-section-icon">📊</span>Key migration policies</h3>
               <ul>
                 <li>Asylum and reception</li>
                 <li>Border management</li>
@@ -94,7 +129,7 @@
             </section>
 
             <section class="compare-block">
-              <h3>Alignment with EU frameworks</h3>
+              <h3><span class="compare-section-icon">⚖️</span>Alignment with EU frameworks</h3>
               <p>
                 Short indication of how the national approach relates to CEAS and the EU Pact on
                 Migration and Asylum.
@@ -105,13 +140,25 @@
 
         <article class="compare-panel compare-panel-b">
           <header class="compare-panel-header">
-            <h2>Country B</h2>
-            <p class="compare-country-label" id="compare-label-b">No country selected yet</p>
+            <div class="compare-panel-title-row">
+              <h2>Country B</h2>
+              <p class="compare-country-label" id="compare-label-b">No country selected yet</p>
+            </div>
+            <div class="compare-meta">
+              <p class="compare-meta-line">
+                Placeholder political label for Country B.
+              </p>
+              <div class="compare-chips">
+                <span class="compare-chip">TBD stance</span>
+                <span class="compare-chip">TBD salience</span>
+                <span class="compare-chip">TBD EU alignment</span>
+              </div>
+            </div>
           </header>
 
           <div class="compare-panel-body">
             <section class="compare-block">
-              <h3>Political climate</h3>
+              <h3><span class="compare-section-icon">🧭</span>Political climate</h3>
               <p>
                 Placeholder text for the second country. This will highlight how domestic politics
                 shape migration debates and decisions.
@@ -119,7 +166,7 @@
             </section>
 
             <section class="compare-block">
-              <h3>Key migration policies</h3>
+              <h3><span class="compare-section-icon">📊</span>Key migration policies</h3>
               <ul>
                 <li>Asylum and reception</li>
                 <li>Border management</li>
@@ -129,7 +176,7 @@
             </section>
 
             <section class="compare-block">
-              <h3>Alignment with EU frameworks</h3>
+              <h3><span class="compare-section-icon">⚖️</span>Alignment with EU frameworks</h3>
               <p>
                 Placeholder for a short comparison between national policies and EU-level obligations
                 and objectives.

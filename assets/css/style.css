@@ -111,6 +111,48 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
 }
 
+/* Layout: grids */
+
+.feature-grid,
+.country-grid,
+.compare-grid,
+.country-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.3rem;
+}
+
+.country-layout {
+  gap: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.feature-grid > *,
+.country-grid > *,
+.compare-grid > *,
+.country-layout > * {
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .feature-grid,
+  .country-grid,
+  .compare-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .country-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .feature-grid,
+  .country-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* Header & nav */
 
 .site-header {
@@ -428,8 +470,6 @@ h1, h2, h3, h4 {
 /* Country grid */
 
 .country-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.3rem;
 }
 
@@ -452,18 +492,7 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
 }
 
-.country-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.1rem;
-  margin-bottom: 2.5rem;
-}
 
-@media (min-width: 900px) {
-  .country-layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
 
 /* Feature cards onder de hero (home) */
 
@@ -494,8 +523,6 @@ h1, h2, h3, h4 {
 /* Grid voor de vier pijlers */
 
 .feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 1.3rem;
 }
 
@@ -698,8 +725,6 @@ h1, h2, h3, h4 {
 
 /* Twee kolommen naast elkaar (Country A / Country B) */
 .compare-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.4rem;
   margin-bottom: 2.6rem;
 }
@@ -778,12 +803,6 @@ h1, h2, h3, h4 {
 
   .section {
     padding: 2.1rem 0;
-  }
-
-  .country-layout,
-  .feature-grid,
-  .compare-grid {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .assistant-shell {

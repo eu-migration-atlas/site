@@ -17,13 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const labelA  = document.getElementById('compare-label-a');
   const labelB  = document.getElementById('compare-label-b');
   const errorEl = document.getElementById('compare-error');
+  const pillA   = document.getElementById('compare-pill-a');
+  const pillB   = document.getElementById('compare-pill-b');
 
   let prevA = '';
   let prevB = '';
 
-  function updateLabel(select, label, fallbackText) {
+  function updateLabel(select, label, fallbackText, pill) {
     const option = select.options[select.selectedIndex];
-    label.textContent = option && option.value ? option.textContent : fallbackText;
+    const text = option && option.value ? option.textContent : fallbackText;
+    if (label) label.textContent = text;
+    if (pill)  pill.textContent  = option && option.value ? text : 'Not selected';
   }
 
   function showError(message) {
@@ -38,26 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
     selectA.addEventListener('change', () => {
       if (selectA.value && selectA.value === selectB.value) {
         selectA.value = prevA;
-        updateLabel(selectA, labelA, 'No country selected yet');
+        updateLabel(selectA, labelA, 'No country selected yet', pillA);
         showError('Country A and Country B must be different.');
         return;
       }
-      updateLabel(selectA, labelA, 'No country selected yet');
+      updateLabel(selectA, labelA, 'No country selected yet', pillA);
       showError('');
     });
 
     selectB.addEventListener('change', () => {
       if (selectB.value && selectB.value === selectA.value) {
         selectB.value = prevB;
-        updateLabel(selectB, labelB, 'No country selected yet');
+        updateLabel(selectB, labelB, 'No country selected yet', pillB);
         showError('Country A and Country B must be different.');
         return;
       }
-      updateLabel(selectB, labelB, 'No country selected yet');
+      updateLabel(selectB, labelB, 'No country selected yet', pillB);
       showError('');
     });
 
-    updateLabel(selectA, labelA, 'No country selected yet');
-    updateLabel(selectB, labelB, 'No country selected yet');
+    updateLabel(selectA, labelA, 'No country selected yet', pillA);
+    updateLabel(selectB, labelB, 'No country selected yet', pillB);
   }
 });

@@ -872,6 +872,63 @@ h1, h2, h3, h4 {
   color: #374151;
 }
 
+/* Compare – metric tiles */
+
+.compare-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.compare-metric-tile {
+  background: #f8fafc;
+  border-radius: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+}
+
+.compare-metric-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+  margin-bottom: 0.15rem;
+}
+
+.compare-metric-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Voor later: niveaus met kleurverschil */
+
+.metric-level-low {
+  background: #ecfdf3;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.metric-level-medium {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.metric-level-high {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .compare-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Compare – section icons */
 
 .compare-section-icon {

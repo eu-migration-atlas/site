@@ -432,13 +432,14 @@ h1, h2, h3, h4 {
 
 .country-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.3rem;
+  align-items: stretch;
 }
 
 .country-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.4rem;
   margin-bottom: 2.8rem;
 }

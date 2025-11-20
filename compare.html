@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EU Migration Atlas – Compare</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css" />
+
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body class="page-compare">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-flag"></span>
+        <span class="logo-text">EU Migration Atlas</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" data-page="home">Home</a>
+        <a href="countries.html" data-page="countries">Countries</a>
+        <a href="compare.html" data-page="compare">Compare</a>
+        <a href="assistant.html" data-page="assistant">Atlas AI</a>
+        <a href="about.html" data-page="about">About</a>
+      </nav>
+    </div>
+  </header>
+
+<main class="site-main page-compare">
+  <section class="section section-light">
+    <div class="container">
+      <header class="section-header">
+        <h1>Compare Migration Policies</h1>
+        <p>
+          Use this tool to compare the political climate and migration policies of two EU Member States 
+          side by side. Select two countries to explore differences and similarities across key dimensions.
+        </p>
+      </header>
+
+      <div class="compare-controls">
+        <form class="compare-form" aria-label="Compare countries form">
+          <div class="compare-select-group">
+            <label for="compare-country-a">Country A</label>
+            <select id="compare-country-a" name="countryA">
+              <option value="" selected disabled>Select a country</option>
+              <option value="italy">Italy</option>
+              <option value="germany">Germany</option>
+              <option value="france">France</option>
+            </select>
+          </div>
+
+          <div class="compare-select-group">
+            <label for="compare-country-b">Country B</label>
+            <select id="compare-country-b" name="countryB">
+              <option value="" selected disabled>Select a country</option>
+              <option value="italy">Italy</option>
+              <option value="germany">Germany</option>
+              <option value="france">France</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <div class="compare-grid">
+        <article class="compare-panel compare-panel-a">
+          <header class="compare-panel-header">
+            <h2>Country A</h2>
+            <p class="compare-country-label" id="compare-label-a">No country selected yet</p>
+          </header>
+
+          <div class="compare-panel-body">
+            <section class="compare-block">
+              <h3>Political climate</h3>
+              <p>
+                Placeholder text. This section will summarise the broader political context influencing
+                migration policy in the selected country.
+              </p>
+            </section>
+
+            <section class="compare-block">
+              <h3>Key migration policies</h3>
+              <ul>
+                <li>Asylum and reception</li>
+                <li>Border management</li>
+                <li>Legal migration & labour migration</li>
+                <li>Integration & inclusion measures</li>
+              </ul>
+            </section>
+
+            <section class="compare-block">
+              <h3>Alignment with EU frameworks</h3>
+              <p>
+                Short indication of how the national approach relates to CEAS and the EU Pact on
+                Migration and Asylum.
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <article class="compare-panel compare-panel-b">
+          <header class="compare-panel-header">
+            <h2>Country B</h2>
+            <p class="compare-country-label" id="compare-label-b">No country selected yet</p>
+          </header>
+
+          <div class="compare-panel-body">
+            <section class="compare-block">
+              <h3>Political climate</h3>
+              <p>
+                Placeholder text for the second country. This will highlight how domestic politics
+                shape migration debates and decisions.
+              </p>
+            </section>
+
+            <section class="compare-block">
+              <h3>Key migration policies</h3>
+              <ul>
+                <li>Asylum and reception</li>
+                <li>Border management</li>
+                <li>Legal migration & labour migration</li>
+                <li>Integration & inclusion measures</li>
+              </ul>
+            </section>
+
+            <section class="compare-block">
+              <h3>Alignment with EU frameworks</h3>
+              <p>
+                Placeholder for a short comparison between national policies and EU-level obligations
+                and objectives.
+              </p>
+            </section>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-left">
+        © 2025 EU Migration Atlas – Cross-Border Migration, Governance &amp; Security
+      </p>
+      <p class="footer-right">
+        Fictional project for DG Migration &amp; Home Affairs (DG HOME)
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
+
+

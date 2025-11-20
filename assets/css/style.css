@@ -408,6 +408,95 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Feature cards onder de hero (home) */
+
+.section-features {
+  padding-top: 2.4rem;
+  padding-bottom: 2.8rem;
+}
+
+.feature-intro {
+  max-width: 50rem;
+  margin-bottom: 1.8rem;
+}
+
+.feature-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--eu-blue);
+  margin: 0 0 0.4rem;
+}
+
+.feature-lead {
+  color: var(--text-muted-light);
+  margin: 0.15rem 0 0;
+}
+
+/* Grid voor de vier pijlers */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.3rem;
+}
+
+/* Individuele card */
+
+.feature-card {
+  background: var(--bg-light-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft-light);
+  padding: 1.3rem 1.4rem;
+  box-shadow: var(--shadow-soft-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform var(--transition-fast),
+              box-shadow var(--transition-fast),
+              border-color var(--transition-fast),
+              background-color var(--transition-fast);
+}
+
+.feature-card h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.15rem;
+}
+
+.feature-card p {
+  color: var(--text-muted-light);
+  font-size: 0.94rem;
+  margin: 0;
+}
+
+/* Icon-bolletje linksboven */
+
+.feature-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: rgba(0, 51, 153, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.5);
+  color: #003399;
+  margin-bottom: 0.4rem;
+}
+
+/* Hoverstate: iets meer premium */
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.6);
+  background-color: #f9fbff;
+}
+
 /* About page */
 
 .page-about .about-header {

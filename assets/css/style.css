@@ -341,20 +341,28 @@ body {
   color: var(--text-muted);
 }
 
-.about-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.1rem;
+.about-body {
   max-width: 60rem;
   margin-bottom: 2.5rem;
 }
 
-.page-about .card ul {
-  padding-left: 1.2rem;
-  margin: 0.4rem 0 0;
+.about-body h2 {
+  font-size: 1.25rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.4rem;
 }
 
-.page-about .card li {
-  font-size: 0.95rem;
+.about-body p {
   color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.about-body ul {
+  padding-left: 1.2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+.about-body li {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }

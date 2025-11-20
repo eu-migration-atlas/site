@@ -845,31 +845,10 @@ h1, h2, h3, h4 {
   color: #6b7280;
 }
 
-.compare-meta {
-  margin-top: 0.35rem;
-}
-
 .compare-meta-line {
-  margin: 0 0 0.4rem;
+  margin: 0;
   font-size: 0.9rem;
   color: #6b7280;
-}
-
-.compare-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.compare-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.18rem 0.6rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.04);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #374151;
 }
 
 /* Compare – metric tiles */
@@ -882,25 +861,82 @@ h1, h2, h3, h4 {
 }
 
 .compare-metric-tile {
-  background: #f8fafc;
   border-radius: 0.9rem;
-  padding: 0.6rem 0.8rem;
   border: 1px solid rgba(148, 163, 184, 0.5);
+  background: #f8fafc;
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
+}
+
+.compare-metric-tile:hover {
+  border-color: #cbd5f5;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+}
+
+.compare-metric-trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.8rem 0.55rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .compare-metric-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #6b7280;
-  margin-bottom: 0.15rem;
+  margin: 0 0 0.2rem;
 }
 
 .compare-metric-value {
   font-size: 0.9rem;
   font-weight: 500;
   color: #111827;
+  margin: 0;
+}
+
+/* Expanded detail */
+
+.compare-metric-detail {
+  padding: 0.65rem 0.8rem 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  background: #0f172a; /* dark mode feel */
+  color: #e5e7eb;
+}
+
+.compare-metric-detail p {
+  margin: 0 0 0.4rem;
+}
+
+.compare-metric-detail ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.compare-metric-detail li {
+  margin-bottom: 0.15rem;
+}
+
+/* tile state when expanded */
+
+.compare-metric-tile.is-expanded {
+  border-color: #1d4ed8;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+}
+
+.compare-metric-tile.is-expanded .compare-metric-label {
+  color: #bfdbfe;
+}
+
+.compare-metric-tile.is-expanded .compare-metric-value {
+  color: #e5e7eb;
 }
 
 /* Voor later: niveaus met kleurverschil */

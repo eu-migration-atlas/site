@@ -676,11 +676,12 @@ a {
 }
 
 
+
 .comparison-panel-metrics {
   margin-top: 1.75rem;
 }
 
-.comparison-panel-metrics,
+.compare-card-grid,
 .card-container {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -689,16 +690,15 @@ a {
   align-items: stretch;
 }
 
-.compare-page .metric-card,
 .compare-card {
   background-color: #ffffff;
   border-radius: 16px;
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
-  min-height: 260px;
+  height: 100%;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .compare-page .metric-card {
@@ -720,7 +720,7 @@ a {
   column-count: 1;
 }
 
-.compare-page .metric-card:hover {
+.compare-card:hover {
   background-color: #f3f6ff;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
 }

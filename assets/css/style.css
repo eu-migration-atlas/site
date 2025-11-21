@@ -656,9 +656,10 @@ a {
   max-width: 1150px;
   margin: 2.5rem auto 4rem;
   padding: 0 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
   gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .comparison-panel {
@@ -667,6 +668,10 @@ a {
   padding: 1.9rem 1.8rem 2.2rem;
   box-shadow: 0 22px 55px rgba(15, 23, 42, 0.5);
   color: #e5e7eb;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
 }
 
 .compare-panel {
@@ -692,17 +697,15 @@ a {
 .compare-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
   gap: 1.6rem;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .card-container {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
   gap: 1.6rem;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .compare-card {
@@ -711,17 +714,22 @@ a {
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  justify-content: flex-start;
+  min-height: 260px;
+  height: auto;
+  box-sizing: border-box;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   position: relative;
   z-index: 1;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-.compare-card:hover {
-  transform: scale(1.05);
-  z-index: 10; /* float above neighbours */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+.compare-card:hover,
+.compare-card.cmp-expanded {
+  position: relative;
+  z-index: 10; /* kaart komt naar voren */
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
   background-color: #f5f7ff;
 }
 
@@ -751,7 +759,7 @@ a {
 
 @media (max-width: 900px) {
   .comparison-panels {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 }
 /* Compare – section icons */

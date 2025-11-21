@@ -13,21 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const countrySelects = document.querySelectorAll('.country-select');
-  const labelA  = document.getElementById('compare-label-a');
-  const labelB  = document.getElementById('compare-label-b');
-
   const previousValues = new Map();
-
-  function updateLabel(select) {
-    const side = select.dataset.side;
-    const label = side === 'A' ? labelA : labelB;
-    const option = select.options[select.selectedIndex];
-    const text = option && option.value ? option.textContent : 'No country selected yet';
-
-    if (label) {
-      label.textContent = text;
-    }
-  }
 
   function handleCountryChange(select) {
     const other = Array.from(countrySelects).find(s => s !== select);
@@ -38,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     previousValues.set(select, select.value);
-    updateLabel(select);
   }
 
   if (countrySelects.length) {
@@ -50,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       select.addEventListener('change', () => handleCountryChange(select));
-
-      updateLabel(select);
     });
   }
 
@@ -60,27 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (metricTiles.length) {
     const prefersHover = window.matchMedia('(hover: hover)');
+    const isMobile = window.innerWidth < 768;
 
     function tilesForMetric(metric) {
       return Array.from(metricTiles).filter(tile => tile.dataset.metric === metric);
     }
 
-    function collapseAllTiles() {
-      metricTiles.forEach(tile => tile.classList.remove('is-expanded'));
-    }
-
     function expandMetric(metric) {
-      const group = tilesForMetric(metric);
-      if (!group.length) return;
-      collapseAllTiles();
-      group.forEach(tile => tile.classList.add('is-expanded'));
+      tilesForMetric(metric).forEach(tile => tile.classList.add('is-expanded'));
     }
 
     function collapseMetric(metric) {
       tilesForMetric(metric).forEach(tile => tile.classList.remove('is-expanded'));
     }
 
-    if (prefersHover.matches) {
+    if (!isMobile && prefersHover.matches) {
       metricTiles.forEach(tile => {
         tile.addEventListener('mouseenter', () => {
           const metric = tile.dataset.metric;
@@ -100,13 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
           const metric = tile.dataset.metric;
           if (!metric) return;
 
-          const group = tilesForMetric(metric);
-          const isExpanded = group.every(item => item.classList.contains('is-expanded'));
+          const panel = tile.closest('.compare-panel');
+          const panelTiles = panel ? panel.querySelectorAll('.metric-tile') : [];
+          const alreadyExpanded = tile.classList.contains('is-expanded');
 
-          collapseAllTiles();
+          panelTiles.forEach(item => item.classList.remove('is-expanded'));
 
-          if (!isExpanded) {
-            group.forEach(item => item.classList.add('is-expanded'));
+          if (!alreadyExpanded) {
+            tile.classList.add('is-expanded');
           }
         });
       });

@@ -91,10 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Compare cards – toggle expanded state on click for keyboard users too
-  document.querySelectorAll('.compare-card').forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('cmp-expanded');
-    });
-  });
 });

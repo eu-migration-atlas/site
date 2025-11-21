@@ -76,7 +76,7 @@ body {
 }
 
 body.page-compare {
-  background: #e8ecf5;
+  background: #e6ebf4;
   color: #1f2a44;
 }
 
@@ -269,9 +269,9 @@ h1, h2, h3, h4 {
 
 .country-select-header label {
   font-weight: 700;
-  color: #e7ecf7;
+  color: #eaf0fb;
   letter-spacing: 0.01em;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .panel-intro {
@@ -288,7 +288,7 @@ h1, h2, h3, h4 {
   border: 1px solid #d7dbe8;
   background-color: #f8faff;
   font: inherit;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.3;
   cursor: pointer;
@@ -319,33 +319,44 @@ h1, h2, h3, h4 {
   box-shadow: 0 0 0 1px #1f2a4422, 0 6px 16px rgba(0, 0, 0, 0.14);
 }
 
+.page-compare .section-light {
+  background: #e6ebf4;
+}
+
 .compare-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  align-items: stretch;
   gap: 1.4rem;
-  align-items: start;
   margin-bottom: 2rem;
-  background: #0f192c;
+  background: var(--bg-surface-dark);
   border-radius: 20px;
   padding: 1.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 20px 40px rgba(12, 18, 34, 0.28);
 }
 
 .compare-panel {
-  background: #121f36;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #10203a;
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: 0 14px 32px rgba(10, 15, 30, 0.45);
   padding: 1.7rem;
   border-radius: 18px;
   color: #d6deef;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .metric-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1rem;
   margin-top: 0.5rem;
+  align-items: stretch;
+  align-content: stretch;
+  flex: 1;
 }
 
 .metric-tile {
@@ -356,12 +367,12 @@ h1, h2, h3, h4 {
   background: #f9fbff;
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
   overflow: hidden;
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out;
   min-height: 140px;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  flex: 1 1 calc(50% - 0.5rem);
+  height: 100%;
   color: #1f2a44;
 }
 
@@ -395,8 +406,6 @@ h1, h2, h3, h4 {
   color: #1f2a44;
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
   min-height: 220px;
-  flex-basis: 100%;
-  transform: translateY(-4px);
 }
 
 .metric-tile.is-expanded .metric-title,
@@ -410,9 +419,9 @@ h1, h2, h3, h4 {
 }
 
 .metric-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
-  background: #ffffff;
+  transform: scale(1.02);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+  background: #f0f4ff;
 }
 
 .metric-tile.metric-card--expanded {
@@ -423,18 +432,19 @@ h1, h2, h3, h4 {
 
 @media (max-width: 900px) {
   .compare-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 }
 
 @media (max-width: 768px) {
   .metric-grid {
-    flex-direction: column;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .metric-tile {
-    height: auto;
-    flex-basis: 100%;
+@media (max-width: 640px) {
+  .metric-grid {
+    grid-template-columns: 1fr;
   }
 }
 /* Compare – section icons */

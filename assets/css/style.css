@@ -731,12 +731,10 @@ a {
   grid-column: span 1;
 }
 
-.compare-page .metric-card h3 {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #111827;
-  margin-bottom: 0.5rem;
+@media (max-width: 768px) {
+  .compare-panel-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .compare-page .metric-card p {
@@ -760,6 +758,7 @@ a {
     flex-direction: column;
   }
 }
+
 /* Compare – section icons */
 
 .compare-page .compare-section-icon {

@@ -685,7 +685,7 @@ a {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: 1fr;
-  gap: 1.5rem;
+  gap: 1.6rem;
   align-items: stretch;
 }
 
@@ -720,10 +720,14 @@ a {
   column-count: 1;
 }
 
-.compare-page .metric-card:hover,
 .compare-card:hover {
   background-color: #f3f6ff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+
+.compare-page .metric-card:hover {
+  background-color: #f3f6ff;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
 }
 
 .compare-card p {
@@ -733,7 +737,6 @@ a {
 .compare-page .metric-card.expanded {
   grid-column: span 2;
   background-color: #e5edff;
-  transform: translateY(-4px);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.25);
 }
 

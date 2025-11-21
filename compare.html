@@ -56,7 +56,7 @@
           <p class="panel-intro">No country selected yet. Choose one to view its profile highlights.</p>
 
           <div class="comparison-panel-metrics">
-            <div class="compare-card-grid">
+            <div class="compare-panel-grid">
               <div class="metric-card compare-card" data-metric="stance">
                 <h3>Political stance</h3>
                 <p>
@@ -102,7 +102,7 @@
           <p class="panel-intro">No country selected yet. Choose one to view its profile highlights.</p>
 
           <div class="comparison-panel-metrics">
-            <div class="compare-card-grid">
+            <div class="compare-panel-grid">
               <div class="metric-card compare-card" data-metric="stance">
                 <h3>Political stance</h3>
                 <p>
@@ -155,8 +155,36 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cardsByMetric = {};
+      const metricCards = Array.from(document.querySelectorAll('.metric-card'));
 
-      document.querySelectorAll('.metric-card').forEach(card => {
+      const normalizeCardHeights = () => {
+        const metricGroups = {};
+
+        metricCards.forEach(card => {
+          const metric = card.dataset.metric;
+          if (!metric) return;
+
+          card.style.height = 'auto';
+
+          if (!metricGroups[metric]) metricGroups[metric] = [];
+          metricGroups[metric].push(card);
+        });
+
+        Object.values(metricGroups).forEach(group => {
+          const maxHeight = group.reduce((tallest, card) => {
+            const cardHeight = card.getBoundingClientRect().height;
+            return cardHeight > tallest ? cardHeight : tallest;
+          }, 0);
+
+          group.forEach(card => {
+            card.style.height = `${maxHeight}px`;
+          });
+        });
+      };
+
+      const scheduleHeightSync = () => window.requestAnimationFrame(normalizeCardHeights);
+
+      metricCards.forEach(card => {
         const metric = card.dataset.metric;
         if (!metric) return;
 
@@ -175,6 +203,10 @@
           cardsByMetric[metric].forEach(c => c.classList.remove('expanded'));
         });
       });
+
+      window.addEventListener('resize', scheduleHeightSync);
+      window.addEventListener('load', scheduleHeightSync);
+      scheduleHeightSync();
     });
   </script>
 </body>

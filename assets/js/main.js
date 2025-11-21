@@ -101,36 +101,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Compare cards – expandable tiles
-  const compareCards = document.querySelectorAll('.compare-card');
+  // Compare cards – synced expand across both panels
+  const cards = document.querySelectorAll('.compare-card');
 
-  if (compareCards.length) {
-    const prefersHover = window.matchMedia('(hover: hover)');
+  if (cards.length) {
+    const groups = {};
+
+    // groepeer per metric
+    cards.forEach(card => {
+      const metric = card.dataset.metric;
+      if (!groups[metric]) groups[metric] = [];
+      groups[metric].push(card);
+    });
+
+    const prefersHover = window.matchMedia('(hover: hover)').matches;
     const isMobile = window.innerWidth < 768;
 
-    if (!isMobile && prefersHover.matches) {
-      // Desktop hover expand
-      compareCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          card.classList.add('cmp-expanded');
-        });
-        card.addEventListener('mouseleave', () => {
-          card.classList.remove('cmp-expanded');
-        });
-      });
-    } else {
-      // Mobile click expand
-      compareCards.forEach(card => {
+    function expandGroup(metric) {
+      Object.values(groups).forEach(group =>
+        group.forEach(c => c.classList.remove('cmp-expanded'))
+      );
+      groups[metric].forEach(c => c.classList.add('cmp-expanded'));
+    }
+
+    function collapseGroup(metric) {
+      groups[metric].forEach(c => c.classList.remove('cmp-expanded'));
+    }
+
+    cards.forEach(card => {
+      const metric = card.dataset.metric;
+
+      if (!isMobile && prefersHover) {
+        // Desktop hover
+        card.addEventListener('mouseenter', () => expandGroup(metric));
+        card.addEventListener('mouseleave', () => collapseGroup(metric));
+      } else {
+        // Mobile click
         card.addEventListener('click', () => {
           const already = card.classList.contains('cmp-expanded');
-
-          compareCards.forEach(c => c.classList.remove('cmp-expanded'));
-
-          if (!already) {
-            card.classList.add('cmp-expanded');
-          }
+          Object.values(groups).forEach(g =>
+            g.forEach(c => c.classList.remove('cmp-expanded'))
+          );
+          if (!already) expandGroup(metric);
         });
-      });
-    }
+      }
+    });
   }
 });

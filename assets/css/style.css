@@ -701,45 +701,51 @@ a {
   gap: 1.75rem;
 }
 
-/* basis: alle kaarten even hoog, samenvatting zichtbaar */
+/* basis: alle kaarten groter en even hoog */
 .compare-card {
   background-color: var(--cmp-card-bg);
-  border-radius: 16px;
-  padding: 1.6rem;
+  border-radius: 20px;
+  padding: 1.8rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 230px;          /* gelijke hoogte in rust */
-  max-height: 230px;
+
+  /* grotere basis-hoogte */
+  min-height: 320px;
+  max-height: 320px;
+
+  overflow: hidden;
   box-sizing: border-box;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0,0,0,0);
   position: relative;
   z-index: 0;
-  overflow: hidden;           /* extra tekst verbergen in samenvattingsstaat */
-  transform-origin: center top;
+
+  transform-origin: top center;
   transition:
-    transform 0.22s ease-out,
-    box-shadow 0.22s ease-out,
-    background-color 0.22s ease-out;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
-/* lichte hover, nog binnen eigen kolom */
+/* subtiel hover-effect */
 .compare-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.35);
 }
 
-/* uitgeklapte staat: hele paneelbreedte + alle tekst zichtbaar */
+/* uitgeklapte staat: beide panelen tonen volledige tekst */
 .compare-card.cmp-expanded {
-  grid-column: 1 / -1;                /* volledige breedte paneel */
+  grid-column: 1 / -1;
   min-height: auto;
-  max-height: none;                   /* hoogte niet meer begrenzen */
+  max-height: none;
   overflow: visible;
-  padding: 2rem 2rem 2.1rem;
+
+  padding: 2.2rem 2rem 2.5rem;
   background-color: var(--cmp-card-expanded-bg);
-  transform: translateY(-4px);
-  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.5);
-  z-index: 3;
+
+  transform: translateY(-6px);
+  box-shadow: 0 28px 50px rgba(0,0,0,0.55);
+  z-index: 5;
 }
 
 .compare-page .metric-card {

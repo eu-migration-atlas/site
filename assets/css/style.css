@@ -701,7 +701,7 @@ a {
   gap: 1.75rem;
 }
 
-/* basiskaart */
+/* basis: alle kaarten even hoog, samenvatting zichtbaar */
 .compare-card {
   background-color: var(--cmp-card-bg);
   border-radius: 16px;
@@ -709,11 +709,13 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100%;
+  min-height: 230px;          /* gelijke hoogte in rust */
+  max-height: 230px;
   box-sizing: border-box;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   position: relative;
   z-index: 0;
+  overflow: hidden;           /* extra tekst verbergen in samenvattingsstaat */
   transform-origin: center top;
   transition:
     transform 0.22s ease-out,
@@ -721,22 +723,22 @@ a {
     background-color 0.22s ease-out;
 }
 
-/* hover: lichte lift, blijft binnen eigen kolom */
+/* lichte hover, nog binnen eigen kolom */
 .compare-card:hover {
-  transform: translateY(-6px);
-  background-color: var(--cmp-card-expanded-bg);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  z-index: 1;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
 }
 
-/* geselecteerd: kaart pakt hele paneelbreedte */
+/* uitgeklapte staat: hele paneelbreedte + alle tekst zichtbaar */
 .compare-card.cmp-expanded {
-  grid-column: 1 / -1;           /* hele rij / paneel */
-  height: auto !important;       /* mag zo hoog worden als nodig */
-  padding: 2rem 2rem 2.1rem;     /* iets meer ruimte */
-  transform: translateY(-4px);   /* subtiele lift, geen schaal */
+  grid-column: 1 / -1;                /* volledige breedte paneel */
+  min-height: auto;
+  max-height: none;                   /* hoogte niet meer begrenzen */
+  overflow: visible;
+  padding: 2rem 2rem 2.1rem;
   background-color: var(--cmp-card-expanded-bg);
-  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.5);
   z-index: 3;
 }
 
@@ -758,12 +760,6 @@ a {
 
 
 .compare-card p {
-}
-
-@media (max-width: 768px) {
-  .compare-panel-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 900px) {

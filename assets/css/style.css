@@ -389,10 +389,13 @@ h1, h2, h3, h4 {
     box-shadow 0.18s ease,
     transform 0.18s ease,
     border-color 0.18s ease;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
   gap: 0.6rem;
   min-height: 180px;
+  position: relative;
+  overflow: hidden;
 }
 
 .compare-page .metric-title {
@@ -408,13 +411,13 @@ h1, h2, h3, h4 {
   font-size: 0.9rem;
   line-height: 1.5;
   color: var(--cmp-card-muted);
+  grid-row: 2;
+  transition: opacity var(--transition-fast);
 }
 
 .compare-page .metric-expanded {
   opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity var(--transition-fast);
+  pointer-events: none;
 }
 
 .compare-page .metric-card:hover,
@@ -435,7 +438,13 @@ h1, h2, h3, h4 {
 .compare-page .metric-tile.is-expanded .metric-expanded,
 .compare-page .metric-card.metric-card--expanded .metric-expanded {
   opacity: 1;
-  max-height: 480px;
+  pointer-events: auto;
+}
+
+.compare-page .metric-card.metric-card--expanded .metric-summary,
+.compare-page .metric-tile.is-expanded .metric-summary {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .compare-page .metric-tile.is-expanded .metric-title,

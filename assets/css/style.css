@@ -696,9 +696,8 @@ a {
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 260px;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .compare-page .metric-card {

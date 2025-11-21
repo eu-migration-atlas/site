@@ -8,20 +8,21 @@
   --eu-gold: #ffcc00;
 
   /* Dark theme basis (page & header) */
-  --bg-page: #0b1624;           /* algemene paginabackground */
+  --bg-page: #f5f7fb;           /* standaard paginabackground */
   --bg-surface-dark: #0f192a;  /* header/hero/footers */
-  --bg-surface-elevated: #111827;
+  --bg-surface-elevated: #0b1624;
 
   /* Light surfaces voor hybride blokken */
   --bg-light: #f5f7fb;
   --bg-light-soft: #ffffff;
 
   /* Tekstkleuren */
-  --text-main: #e5e9f5;         /* tekst op donker */
-  --text-muted: #a3adc4;
-  --text-strong: #ffffff;
-  --text-on-light: #222;
-  --text-muted-light: #666;
+  --text-main: #0f172a;         /* primaire tekstkleur op licht */
+  --text-muted: #4b5563;
+  --text-strong: #0b1624;
+  --text-on-light: #0f172a;
+  --text-muted-light: #4b5563;
+  --text-invert: #f5f7fb;
 
   /* Borders & schaduwen */
   --border-soft: #1f2937;
@@ -70,7 +71,7 @@
 body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text-main);
+  color: var(--text-on-light);
   background-color: var(--bg-page);
   line-height: 1.6;
 }
@@ -100,6 +101,56 @@ h1, h2, h3, h4 {
   color: var(--text-strong);
 }
 
+p {
+  color: var(--text-muted);
+}
+
+a {
+  color: inherit;
+}
+
+/* ========================================
+   CTA buttons
+   ======================================== */
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--eu-gold);
+  color: #0a1120;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  background: #ffdb4d;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-invert);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
 /* ========================================
    Layout: containers & page structure
    ======================================== */
@@ -120,10 +171,6 @@ h1, h2, h3, h4 {
 .site-main h1 {
   font-size: 1.9rem;
   margin-bottom: 0.5rem;
-}
-
-.site-main p {
-  color: var(--text-muted);
 }
 
 .section {
@@ -214,12 +261,12 @@ h1, h2, h3, h4 {
 .logo-text {
   font-weight: 650;
   letter-spacing: 0.01em;
-  color: var(--text-strong);
+  color: var(--text-invert);
 }
 
 .main-nav a {
   text-decoration: none;
-  color: var(--text-muted);
+  color: #cbd5e1;
   font-size: 0.95rem;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
@@ -230,11 +277,11 @@ h1, h2, h3, h4 {
 .main-nav a:hover {
   border-color: rgba(148, 163, 184, 0.35);
   background-color: rgba(15, 23, 42, 0.8);
-  color: var(--text-main);
+  color: #f1f5f9;
 }
 
 .main-nav a.is-active {
-  color: var(--text-strong);
+  color: #f8fafc;
   border-color: rgba(37, 99, 235, 0.7);
   background-color: rgba(37, 99, 235, 0.18);
 }
@@ -244,7 +291,7 @@ h1, h2, h3, h4 {
   background: var(--bg-surface-dark);
   padding: 0.9rem 0;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #cbd5e1;
 }
 
 .footer-inner {
@@ -252,6 +299,212 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.75rem;
+}
+
+/* ========================================
+   Homepage hero
+   ======================================== */
+
+.hero {
+  background: linear-gradient(135deg, #0f1b34 0%, #0b1224 45%, #0d1430 100%);
+  color: var(--text-invert);
+  padding: 4rem 0 3.5rem;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 0.65rem;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin: 0 0 0.8rem;
+  color: var(--text-invert);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 34rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.hero-image-placeholder {
+  background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.08), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.06), transparent 40%),
+    rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  padding: 3.2rem 2.4rem;
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* ========================================
+   Homepage feature grid
+   ======================================== */
+
+.section-features {
+  padding: 3.2rem 0 3.6rem;
+}
+
+.feature-intro {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.feature-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #334155;
+  margin: 0 0 0.5rem;
+}
+
+.feature-lead {
+  margin: 0 auto;
+  max-width: 46rem;
+  color: var(--text-muted);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.feature-card {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+}
+
+.feature-card h2 {
+  margin: 0;
+}
+
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #e0e7ff;
+  color: #111827;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.feature-card p {
+  margin: 0;
+}
+
+/* ========================================
+   Countries list
+   ======================================== */
+
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.country-card {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.country-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.12);
+}
+
+.country-card h2 {
+  margin: 0;
+}
+
+.country-card p {
+  margin: 0;
+}
+
+.country-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #e5e7eb;
+  color: #111827;
+  font-weight: 800;
+}
+
+.country-more {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.country-card--placeholder {
+  background: #f8fafc;
+}
+
+/* ========================================
+   Responsive tweaks
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 3.2rem 0 3rem;
+  }
+
+  .hero-image-placeholder {
+    min-height: 220px;
+  }
+
+  .feature-grid,
+  .country-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-grid,
+  .country-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
 }
 
 /* ========================================

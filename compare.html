@@ -193,14 +193,14 @@
 
         card.addEventListener('mouseenter', () => {
           Object.values(cardsByMetric).forEach(group =>
-            group.forEach(c => c.classList.remove('expanded'))
+            group.forEach(c => c.classList.remove('cmp-expanded'))
           );
 
-          cardsByMetric[metric].forEach(c => c.classList.add('expanded'));
+          cardsByMetric[metric].forEach(c => c.classList.add('cmp-expanded'));
         });
 
         card.addEventListener('mouseleave', () => {
-          cardsByMetric[metric].forEach(c => c.classList.remove('expanded'));
+          cardsByMetric[metric].forEach(c => c.classList.remove('cmp-expanded'));
         });
       });
 

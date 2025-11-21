@@ -50,11 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function expandMetric(metric) {
-      tilesForMetric(metric).forEach(tile => tile.classList.add('is-expanded'));
+      tilesForMetric(metric).forEach(tile => tile.classList.add('is-expanded', 'metric-card--expanded'));
     }
 
     function collapseMetric(metric) {
-      tilesForMetric(metric).forEach(tile => tile.classList.remove('is-expanded'));
+      tilesForMetric(metric).forEach(tile => tile.classList.remove('is-expanded', 'metric-card--expanded'));
     }
 
     if (!isMobile && prefersHover.matches) {
@@ -81,10 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const panelTiles = panel ? panel.querySelectorAll('.metric-tile') : [];
           const alreadyExpanded = tile.classList.contains('is-expanded');
 
-          panelTiles.forEach(item => item.classList.remove('is-expanded'));
+          panelTiles.forEach(item => item.classList.remove('is-expanded', 'metric-card--expanded'));
 
           if (!alreadyExpanded) {
-            tile.classList.add('is-expanded');
+            tile.classList.add('is-expanded', 'metric-card--expanded');
           }
         });
       });

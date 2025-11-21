@@ -251,8 +251,7 @@ h1, h2, h3, h4 {
 
 .card,
 .feature-card,
-.country-card,
-.compare-panel {
+.country-card {
   padding: 1.3rem 1.5rem;
   background: #ffffff;
   border-radius: 18px;
@@ -260,17 +259,25 @@ h1, h2, h3, h4 {
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
 }
 
-.panel-title-select {
+.country-select-header {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
-  margin-bottom: 1.6rem;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+  padding: 0.25rem 0.1rem 0.5rem;
 }
 
-.panel-title-select label {
+.country-select-header label {
   font-weight: 700;
-  color: #1f2a44;
+  color: #e7ecf7;
   letter-spacing: 0.01em;
+  font-size: 0.95rem;
+}
+
+.panel-intro {
+  margin: 0 0 1.2rem;
+  color: #c8d3e8;
+  font-size: 0.95rem;
 }
 
 .country-select {
@@ -279,7 +286,7 @@ h1, h2, h3, h4 {
   padding: 0.9rem 3rem 0.9rem 1.1rem;
   border-radius: 16px;
   border: 1px solid #d7dbe8;
-  background-color: #ffffff;
+  background-color: #f8faff;
   font: inherit;
   font-size: 1.05rem;
   font-weight: 700;
@@ -296,7 +303,8 @@ h1, h2, h3, h4 {
   background-size: 12px 8px;
 
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  transition: all 0.25s ease;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .country-select:hover {
@@ -317,13 +325,20 @@ h1, h2, h3, h4 {
   gap: 1.4rem;
   align-items: start;
   margin-bottom: 2rem;
+  background: #0f192c;
+  border-radius: 20px;
+  padding: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 20px 40px rgba(12, 18, 34, 0.28);
 }
 
 .compare-panel {
-  background: #f0f3fb;
-  border: 1px solid #d7dbe8;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  padding: 2rem;
+  background: #121f36;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 14px 32px rgba(10, 15, 30, 0.45);
+  padding: 1.7rem;
+  border-radius: 18px;
+  color: #d6deef;
 }
 
 .metric-grid {
@@ -335,18 +350,19 @@ h1, h2, h3, h4 {
 
 .metric-tile {
   position: relative;
-  padding: 1.1rem 1.15rem;
-  border: 1px solid #d7dbe8;
+  padding: 1.2rem 1.25rem;
+  border: 1px solid #d6deed;
   border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background: #f9fbff;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
   overflow: hidden;
-  transition: all 0.35s ease-in-out 0.12s;
-  height: 120px;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  flex: 1 1 45%;
+  flex: 1 1 calc(50% - 0.5rem);
+  color: #1f2a44;
 }
 
 .metric-title {
@@ -358,37 +374,51 @@ h1, h2, h3, h4 {
 }
 
 .metric-summary {
-  color: #384152;
+  color: #2c3550;
   font-size: 0.95rem;
   line-height: 1.6;
 }
 
 .metric-expanded {
   margin-top: 0.25rem;
-  color: #e8edfa;
+  color: #2d3a5a;
   line-height: 1.6;
   opacity: 0;
   max-height: 0;
-  transition: opacity 0.35s ease-in-out 0.12s, max-height 0.35s ease-in-out 0.12s;
+  overflow: hidden;
+  transition: opacity var(--transition-fast);
 }
 
 .metric-tile.is-expanded {
-  background: linear-gradient(180deg, #1f2a44 0%, #2a3a57 100%);
-  border-color: #1f2a44;
-  color: #ffffff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  height: 280px;
-  flex-basis: 95%;
+  background: #eef3ff;
+  border-color: #b8c5e6;
+  color: #1f2a44;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.14);
+  min-height: 220px;
+  flex-basis: 100%;
+  transform: translateY(-4px);
 }
 
 .metric-tile.is-expanded .metric-title,
 .metric-tile.is-expanded .metric-summary {
-  color: #ffffff;
+  color: #1f2a44;
 }
 
 .metric-tile.is-expanded .metric-expanded {
   opacity: 1;
-  max-height: 260px;
+  max-height: 480px;
+}
+
+.metric-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+}
+
+.metric-tile.metric-card--expanded {
+  background: #e6edfb;
+  border-color: #a9b8db;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.16);
 }
 
 @media (max-width: 900px) {

@@ -12,116 +12,104 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const selectA = document.getElementById('compare-country-a');
-  const selectB = document.getElementById('compare-country-b');
+  const countrySelects = document.querySelectorAll('.country-select');
   const labelA  = document.getElementById('compare-label-a');
   const labelB  = document.getElementById('compare-label-b');
-  const errorEl = document.getElementById('compare-error');
-  const pillA   = document.getElementById('compare-pill-a');
-  const pillB   = document.getElementById('compare-pill-b');
 
-  let prevA = '';
-  let prevB = '';
+  const previousValues = new Map();
 
-  function updateLabel(select, label, fallbackText, pill) {
+  function updateLabel(select) {
+    const side = select.dataset.side;
+    const label = side === 'A' ? labelA : labelB;
     const option = select.options[select.selectedIndex];
-    const text = option && option.value ? option.textContent : fallbackText;
-    if (label) label.textContent = text;
-    if (pill)  pill.textContent  = option && option.value ? text : 'Not selected';
+    const text = option && option.value ? option.textContent : 'No country selected yet';
+
+    if (label) {
+      label.textContent = text;
+    }
   }
 
-  function showError(message) {
-    if (!errorEl) return;
-    errorEl.textContent = message || '';
+  function handleCountryChange(select) {
+    const other = Array.from(countrySelects).find(s => s !== select);
+    const previous = previousValues.get(select) || '';
+
+    if (other && select.value && select.value === other.value) {
+      select.value = previous;
+    }
+
+    previousValues.set(select, select.value);
+    updateLabel(select);
   }
 
-  if (selectA && selectB) {
-    selectA.addEventListener('focus', () => { prevA = selectA.value; });
-    selectB.addEventListener('focus', () => { prevB = selectB.value; });
+  if (countrySelects.length) {
+    countrySelects.forEach(select => {
+      previousValues.set(select, select.value);
 
-    selectA.addEventListener('change', () => {
-      if (selectA.value && selectA.value === selectB.value) {
-        selectA.value = prevA;
-        updateLabel(selectA, labelA, 'No country selected yet', pillA);
-        showError('Country A and Country B must be different.');
-        return;
-      }
-      updateLabel(selectA, labelA, 'No country selected yet', pillA);
-      showError('');
+      select.addEventListener('focus', () => {
+        previousValues.set(select, select.value);
+      });
+
+      select.addEventListener('change', () => handleCountryChange(select));
+
+      updateLabel(select);
     });
-
-    selectB.addEventListener('change', () => {
-      if (selectB.value && selectB.value === selectA.value) {
-        selectB.value = prevB;
-        updateLabel(selectB, labelB, 'No country selected yet', pillB);
-        showError('Country A and Country B must be different.');
-        return;
-      }
-      updateLabel(selectB, labelB, 'No country selected yet', pillB);
-      showError('');
-    });
-
-    updateLabel(selectA, labelA, 'No country selected yet', pillA);
-    updateLabel(selectB, labelB, 'No country selected yet', pillB);
   }
 
   // Compare metric tiles – synced expand/collapse between countries
-  const metricTiles = document.querySelectorAll('.compare-metric-tile');
+  const metricTiles = document.querySelectorAll('.metric-tile');
 
   if (metricTiles.length) {
-    const triggers = document.querySelectorAll('.compare-metric-trigger');
+    const prefersHover = window.matchMedia('(hover: hover)');
 
-    function setTileExpanded(tile, expanded) {
-      const detail = tile.querySelector('.compare-metric-detail');
-      const trigger = tile.querySelector('.compare-metric-trigger');
-
-      tile.classList.toggle('is-expanded', expanded);
-
-      if (detail) {
-        detail.hidden = !expanded;
-      }
-      if (trigger) {
-        trigger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      }
+    function tilesForMetric(metric) {
+      return Array.from(metricTiles).filter(tile => tile.dataset.metric === metric);
     }
 
     function collapseAllTiles() {
-      metricTiles.forEach(tile => setTileExpanded(tile, false));
+      metricTiles.forEach(tile => tile.classList.remove('is-expanded'));
     }
 
-    function toggleTopic(topic) {
-      const topicTiles = Array.from(metricTiles).filter(
-        tile => tile.dataset.topic === topic
-      );
-
-      if (!topicTiles.length) return;
-
-      const isCurrentlyExpanded = topicTiles.every(tile =>
-        tile.classList.contains('is-expanded')
-      );
-
-      // Eerst alles dicht
+    function expandMetric(metric) {
+      const group = tilesForMetric(metric);
+      if (!group.length) return;
       collapseAllTiles();
-
-      // Als het al open stond: nu gewoon alles dicht laten
-      if (isCurrentlyExpanded) {
-        return;
-      }
-
-      // Anders dit onderwerp in beide landen openen
-      topicTiles.forEach(tile => setTileExpanded(tile, true));
+      group.forEach(tile => tile.classList.add('is-expanded'));
     }
 
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const tile = trigger.closest('.compare-metric-tile');
-        if (!tile) return;
+    function collapseMetric(metric) {
+      tilesForMetric(metric).forEach(tile => tile.classList.remove('is-expanded'));
+    }
 
-        const topic = tile.dataset.topic;
-        if (!topic) return;
+    if (prefersHover.matches) {
+      metricTiles.forEach(tile => {
+        tile.addEventListener('mouseenter', () => {
+          const metric = tile.dataset.metric;
+          if (!metric) return;
+          expandMetric(metric);
+        });
 
-        toggleTopic(topic);
+        tile.addEventListener('mouseleave', () => {
+          const metric = tile.dataset.metric;
+          if (!metric) return;
+          collapseMetric(metric);
+        });
       });
-    });
+    } else {
+      metricTiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+          const metric = tile.dataset.metric;
+          if (!metric) return;
+
+          const group = tilesForMetric(metric);
+          const isExpanded = group.every(item => item.classList.contains('is-expanded'));
+
+          collapseAllTiles();
+
+          if (!isExpanded) {
+            group.forEach(item => item.classList.add('is-expanded'));
+          }
+        });
+      });
+    }
   }
 });

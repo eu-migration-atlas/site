@@ -30,7 +30,7 @@
     </div>
   </header>
 
-<main class="site-main">
+<main class="site-main main-content">
   <section class="section section-light">
     <div class="container">
       <header class="section-header">
@@ -41,8 +41,8 @@
         </p>
       </header>
 
-      <div class="compare-grid compare-panels">
-        <article class="compare-panel compare-panel-a">
+      <div class="comparison-panels">
+        <article class="comparison-panel compare-panel-a">
           <div class="country-select-header">
             <label for="compare-country-a">Select country</label>
             <select class="country-select" id="compare-country-a" data-side="A" name="countryA">
@@ -55,50 +55,38 @@
 
           <p class="panel-intro">No country selected yet. Choose one to view its profile highlights.</p>
 
-          <div class="metric-grid">
-            <div class="metric-tile metric-card" data-metric="stance">
-              <div class="metric-title">POLITICAL STANCE</div>
-              <div class="metric-summary">
+          <div class="comparison-panel-metrics">
+            <div class="metric-card" data-metric="stance">
+              <h3>Political stance</h3>
+              <p>
                 The country's current migration stance leans toward balanced cooperation, blending national security considerations with humanitarian obligations. Narrative shifts over election cycles keep the debate active and nuanced within cabinet discussions.
-              </div>
-              <div class="metric-expanded">
-                Longer analysis describing coalition tensions, parliamentary votes, and regional perspectives on migration. Details highlight how rhetoric aligns with policy delivery and where compromises emerge across parties.
-              </div>
+              </p>
             </div>
 
-            <div class="metric-tile metric-card" data-metric="salience">
-              <div class="metric-title">SALIENCE IN DOMESTIC POLITICS</div>
-              <div class="metric-summary">
+            <div class="metric-card" data-metric="salience">
+              <h3>Salience in domestic politics</h3>
+              <p>
                 Migration regularly features in talk shows, parliamentary questions, and civic forums. Peaks occur around border incidents or labour market reforms, prompting rapid responses from leading parties and media commentators.
-              </div>
-              <div class="metric-expanded">
-                Expanded narrative on election-season framing, public opinion shifts, and the role of local elections in elevating migration. Notes how agenda-setting actors influence the tempo of national debate.
-              </div>
+              </p>
             </div>
 
-            <div class="metric-tile metric-card" data-metric="eu-alignment">
-              <div class="metric-title">EU ALIGNMENT</div>
-              <div class="metric-summary">
+            <div class="metric-card" data-metric="eu-alignment">
+              <h3>EU alignment</h3>
+              <p>
                 Implementation of EU migration and asylum rules generally tracks common standards, with ongoing adjustments to meet new pact obligations. Cooperation with agencies remains steady, supported by technical assistance.
-              </div>
-              <div class="metric-expanded">
-                Additional context on transposition timelines, temporary derogations, and collaborative pilots with EU partners. Notes where national provisions exceed or diverge from agreed frameworks.
-              </div>
+              </p>
             </div>
 
-            <div class="metric-tile metric-card" data-metric="capacity">
-              <div class="metric-title">IMPLEMENTATION CAPACITY</div>
-              <div class="metric-summary">
+            <div class="metric-card" data-metric="capacity">
+              <h3>Implementation capacity</h3>
+              <p>
                 Administrative structures coordinate across ministries and regional authorities, with dedicated budgets for reception and integration. Workforce planning and digital tools are being scaled to manage fluctuating arrivals.
-              </div>
-              <div class="metric-expanded">
-                Further explanation of staffing models, contingency planning, and procurement pipelines. Highlights training initiatives and data-sharing protocols that underpin day-to-day operations.
-              </div>
+              </p>
             </div>
           </div>
         </article>
 
-        <article class="compare-panel compare-panel-b">
+        <article class="comparison-panel compare-panel-b">
           <div class="country-select-header">
             <label for="compare-country-b">Select country</label>
             <select class="country-select" id="compare-country-b" data-side="B" name="countryB">
@@ -111,45 +99,33 @@
 
           <p class="panel-intro">No country selected yet. Choose one to view its profile highlights.</p>
 
-          <div class="metric-grid">
-            <div class="metric-tile metric-card" data-metric="stance">
-              <div class="metric-title">POLITICAL STANCE</div>
-              <div class="metric-summary">
+          <div class="comparison-panel-metrics">
+            <div class="metric-card" data-metric="stance">
+              <h3>Political stance</h3>
+              <p>
                 The government frames migration through stability and partnership, balancing border management with international protection duties. Statements from key ministers emphasise predictability and cooperation with neighbouring states.
-              </div>
-              <div class="metric-expanded">
-                Detailed look at party manifestos, coalition agreements, and administrative circulars guiding implementation. Reviews the durability of current commitments amid shifting regional dynamics.
-              </div>
+              </p>
             </div>
 
-            <div class="metric-tile metric-card" data-metric="salience">
-              <div class="metric-title">SALIENCE IN DOMESTIC POLITICS</div>
-              <div class="metric-summary">
-                Media coverage intensifies around legislative updates and migration-related court rulings. Civil society forums and academic reports feed into televised debates that shape voter perceptions throughout the year.
-              </div>
-              <div class="metric-expanded">
-                Longer analysis of issue cycles, including election debates and regional referenda that amplify attention. Explores how opposition narratives influence agenda-setting and policy revisions.
-              </div>
+            <div class="metric-card" data-metric="salience">
+              <h3>Salience in domestic politics</h3>
+              <p>
+                Media coverage intensifies around legislative updates and migration-related court rulings. Civil society forumsand academic reports feed into televised debates that shape voter perceptions throughout the year.
+              </p>
             </div>
 
-            <div class="metric-tile metric-card" data-metric="eu-alignment">
-              <div class="metric-title">EU ALIGNMENT</div>
-              <div class="metric-summary">
+            <div class="metric-card" data-metric="eu-alignment">
+              <h3>EU alignment</h3>
+              <p>
                 Compliance with EU frameworks is actively managed through inter-ministerial taskforces. Pilot projects with EU agencies test new screening approaches and improve interoperability with partner systems.
-              </div>
-              <div class="metric-expanded">
-                Additional insight into legislative transposition, information-sharing standards, and contingency clauses. Notes coordination with neighbouring states on return and reception efforts.
-              </div>
+              </p>
             </div>
 
-            <div class="metric-tile metric-card" data-metric="capacity">
-              <div class="metric-title">IMPLEMENTATION CAPACITY</div>
-              <div class="metric-summary">
+            <div class="metric-card" data-metric="capacity">
+              <h3>Implementation capacity</h3>
+              <p>
                 Reception networks leverage municipal facilities and partnerships with NGOs. Investment in digital case management aims to streamline procedures and reduce processing backlogs during peak periods.
-              </div>
-              <div class="metric-expanded">
-                Expanded description of budget allocations, training cycles, and surge mechanisms. Notes how logistics hubs and data systems support rapid scaling when migration patterns shift suddenly.
-              </div>
+              </p>
             </div>
           </div>
         </article>
@@ -171,5 +147,31 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cardsByMetric = {};
+
+      document.querySelectorAll('.metric-card').forEach(card => {
+        const metric = card.dataset.metric;
+        if (!metric) return;
+
+        if (!cardsByMetric[metric]) cardsByMetric[metric] = [];
+        cardsByMetric[metric].push(card);
+
+        card.addEventListener('mouseenter', () => {
+          Object.values(cardsByMetric).forEach(group =>
+            group.forEach(c => c.classList.remove('expanded'))
+          );
+
+          cardsByMetric[metric].forEach(c => c.classList.add('expanded'));
+        });
+
+        card.addEventListener('mouseleave', () => {
+          cardsByMetric[metric].forEach(c => c.classList.remove('expanded'));
+        });
+      });
+    });
+  </script>
 </body>
 </html>

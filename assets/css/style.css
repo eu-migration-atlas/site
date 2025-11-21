@@ -728,21 +728,8 @@ a {
 }
 
 
-.compare-card:hover {
-  transform: scale(1.05);
-  z-index: 10;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-  background-color: #f5f7ff;
-}
-
 .compare-card p {
   column-count: 1;
-}
-
-@media (max-width: 768px) {
-  .compare-card:hover {
-    transform: scale(1.03);
-  }
 }
 
 @media (max-width: 900px) {
@@ -846,7 +833,22 @@ a {
     padding: 1.1rem 1.1rem 1.3rem;
   }
 
-  .assistant-frame {
-    min-height: 360px;
-  }
+.assistant-frame {
+  min-height: 360px;
+}
+}
+
+/* Hover overlay for compare cards */
+.compare-card {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  transform-origin: center center;
+}
+
+.compare-card:hover {
+  transform: scale(1.05);
+  z-index: 10; /* float above other cards */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  background-color: #f5f7ff; /* subtle highlight */
 }

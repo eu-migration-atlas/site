@@ -241,6 +241,25 @@ a {
   );
 }
 
+.flag-spain { /* no background here */ }
+
+.flag-spain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* Spanish flag: red – yellow – red (horizontal) */
+  background: linear-gradient(
+    180deg,
+    #aa151b 0%,
+    #aa151b 25%,
+    #f1bf00 25%,
+    #f1bf00 75%,
+    #aa151b 75%,
+    #aa151b 100%
+  );
+}
+
 .country-section-list {
   margin-top: 2.5rem;
   display: flex;

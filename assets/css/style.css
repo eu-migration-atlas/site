@@ -265,6 +265,32 @@ a {
   );
 }
 
+/* basis map: all light grey */
+svg path {
+  fill: #ececec;
+  stroke: #000;
+  stroke-width: 0.1;
+}
+
+/* active countries per page */
+.country-it #IT {
+  fill: #2563eb;
+  stroke: #1e293b;
+  stroke-width: 1;
+}
+
+.country-es #ES {
+  fill: #2563eb;
+  stroke: #1e293b;
+  stroke-width: 1;
+}
+
+.country-pt #PT {
+  fill: #2563eb;
+  stroke: #1e293b;
+  stroke-width: 1;
+}
+
 .country-section-list {
   margin-top: 2.5rem;
   display: flex;

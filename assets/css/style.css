@@ -201,12 +201,44 @@ a {
   width: 42px;
   height: 28px;
   border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+  border: 2px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+
+  /* prevents the border from picking up the gradient colors */
+  background-origin: border-box;
+  background-clip: padding-box;
+
+  position: relative;
 }
 
-.flag-italy {
-  background: linear-gradient(90deg, #009246 0%, #009246 33.33%, #ffffff 33.33%, #ffffff 66.66%, #ce2b37 66.66%, #ce2b37 100%);
+.flag-italy { /* no more background here */ }
+.flag-italy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #009246 0%,
+    #009246 33.33%,
+    #ffffff 33.33%,
+    #ffffff 66.66%,
+    #ce2b37 66.66%,
+    #ce2b37 100%
+  );
+}
+
+.flag-portugal { /* no background here either */ }
+.flag-portugal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #006600 0%,
+    #006600 40%,
+    #ff0000 40%,
+    #ff0000 100%
+  );
 }
 
 .country-section-list {

@@ -8,23 +8,23 @@
   --eu-gold: #ffcc00;
 
   /* Dark theme basis (page & header) */
-  --bg-page: #f5f7fb;           /* standaard paginabackground */
+  --bg-page: #f5f7fb;           /* standard pagebackground */
   --bg-surface-dark: #0f192a;  /* header/hero/footers */
   --bg-surface-elevated: #0b1624;
 
-  /* Light surfaces voor hybride blokken */
+  /* Light surfaces for hybride blocks */
   --bg-light: #f5f7fb;
   --bg-light-soft: #ffffff;
 
-  /* Tekstkleuren */
-  --text-main: #0f172a;         /* primaire tekstkleur op licht */
+  /* Textcolors */
+  --text-main: #0f172a;         /* primary textcolor on light */
   --text-muted: #4b5563;
   --text-strong: #0b1624;
   --text-on-light: #0f172a;
   --text-muted-light: #4b5563;
   --text-invert: #f5f7fb;
 
-  /* Borders & schaduwen */
+  /* Borders & shadows */
   --border-soft: #1f2937;
   --border-soft-light: #e0e4ef;
   --shadow-soft: 0 4px 10px rgba(15, 23, 42, 0.3);
@@ -55,7 +55,7 @@
     #5a78e7 100%
   );
 
-  /* Animatie */
+  /* Animation */
   --transition-fast: 0.15s ease-out;
 }
 
@@ -78,13 +78,13 @@ body {
 
 /* === Compare page theme === */
 .compare-page {
-  --cmp-page-bg: #e5edf5;         /* zachte achtergrond */
-  --cmp-panel-bg: #111827;        /* donker paneel */
-  --cmp-panel-inner-bg: #0b1220;  /* subtiel donkerder randlaag */
-  --cmp-card-bg: #f9fafb;         /* tegels */
+  --cmp-page-bg: #e5edf5;         /* soft background */
+  --cmp-panel-bg: #111827;        /* dark panel */
+  --cmp-panel-inner-bg: #0b1220;  /* subtle darker edge layer */
+  --cmp-card-bg: #f9fafb;         /* tiles */
   --cmp-card-text: #0f172a;
   --cmp-card-muted: #6b7280;
-  --cmp-card-expanded-bg: #dde7ff; /* lichte blauwe highlight */
+  --cmp-card-expanded-bg: #dde7ff; /* light blue highlight */
   --cmp-border-subtle: rgba(15, 23, 42, 0.35);
   --cmp-shadow-panel: 0 18px 40px rgba(15, 23, 42, 0.4);
   --cmp-shadow-card: 0 10px 22px rgba(15, 23, 42, 0.22);
@@ -724,7 +724,7 @@ a {
   gap: 1.75rem;
 }
 
-/* basis: alle kaarten groter en even hoog */
+/* basis: all cards larger and equal height */
 .compare-card {
   background-color: var(--cmp-card-bg);
   border-radius: 20px;
@@ -733,7 +733,7 @@ a {
   flex-direction: column;
   justify-content: flex-start;
 
-  /* grotere basis-hoogte */
+  /* larger basis-height */
   min-height: 320px;
   max-height: 320px;
 
@@ -750,13 +750,13 @@ a {
     background-color 0.25s ease;
 }
 
-/* subtiel hover-effect */
+/* subtle hover-effect */
 .compare-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(0,0,0,0.35);
 }
 
-/* uitgeklapte staat: beide panelen tonen volledige tekst */
+/* expanded state: both panels show full text */
 .compare-card.cmp-expanded {
   grid-column: 1 / -1;
   min-height: auto;
@@ -808,7 +808,7 @@ a {
   opacity: 0.9;
 }
 
-/* Kleine responsive tweaken */
+/* Small responsive tweak */
 
 @media (max-width: 768px) {
   .compare-page .compare-controls-card {
@@ -854,7 +854,7 @@ a {
   grid-template-columns: minmax(0, 1.05fr);
 }
 
-/* Frame waarin de Voiceflow-widget hangt */
+/* Frame containing the Voiceflow widget */
 .assistant-frame {
   border-radius: 14px;
   background: rgba(15, 23, 42, 0.9);
@@ -863,7 +863,7 @@ a {
   overflow: hidden;
 }
 
-/* Kleine tekst naast/boven de widget (uitleg voor gebruiker) */
+/* Small text next to/above the widget (user explanation) */
 .assistant-meta {
   margin-top: 1rem;
   color: var(--text-muted);

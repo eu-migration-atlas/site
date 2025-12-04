@@ -216,6 +216,135 @@ a {
   gap: 1.25rem;
 }
 
+.country-map-block {
+  margin-top: 2.3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.country-map {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 2rem;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #f5f7fb, #e0e7ff);
+  align-items: center;
+}
+
+.country-map-text h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.country-map-text p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.country-map-visual {
+  background: #e0e7ff;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.country-map-visual img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.europe-map {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map-copy h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.45rem;
+}
+
+.map-copy p {
+  margin: 0 0 0.85rem;
+  color: #334155;
+}
+
+.map-legend {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.6rem;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  width: fit-content;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.legend-italy {
+  background: #2563eb;
+}
+
+.legend-europe {
+  background: #cfd8ec;
+}
+
+.map-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+.europe-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-land {
+  fill: #d8e0f3;
+  stroke: #97a7c7;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.map-italy {
+  fill: #2563eb;
+  stroke: #0f3e9e;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.map-markers circle {
+  fill: #0f172a;
+}
+
+.map-markers text {
+  font-size: 13px;
+  fill: #0f172a;
+  font-weight: 600;
+  text-shadow: 0 2px 6px rgba(255, 255, 255, 0.6);
+}
+
 .country-section-card {
   background: #ffffff;
   border-radius: 1.5rem;

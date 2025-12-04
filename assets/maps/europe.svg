@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Europe map highlighting Italy</title>
+  <desc id="desc">Stylised map of Europe with Italy shown in blue and neighbouring countries in light grey.</desc>
+  <defs>
+    <style>
+      .country { fill: #e5e7eb; stroke: #cbd5e1; stroke-width: 2; }
+      #IT, [title~="Italy"] { fill: #2563eb; stroke: #1d4ed8; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="800" height="600" rx="24" fill="#f8fafc" />
+  <g transform="translate(60 40)">
+    <path id="PT" class="country" d="M40 360 h70 v110 h-70 z" />
+    <path id="ES" class="country" d="M70 260 h190 v110 h-190 z" />
+    <path id="FR" class="country" d="M190 200 h160 v140 h-160 z" />
+    <path id="GB" class="country" d="M170 130 h70 v100 h-70 z" />
+    <path id="IE" class="country" d="M110 170 h50 v80 h-50 z" />
+    <path id="BE" class="country" d="M300 190 h60 v50 h-60 z" />
+    <path id="NL" class="country" d="M300 150 h60 v40 h-60 z" />
+    <path id="DE" class="country" d="M350 160 h140 v140 h-140 z" />
+    <path id="CH" class="country" d="M330 220 h70 v50 h-70 z" />
+    <path id="AT" class="country" d="M390 230 h100 v50 h-100 z" />
+    <path id="PL" class="country" d="M430 130 h150 v120 h-150 z" />
+    <path id="CZ" class="country" d="M420 190 h100 v40 h-100 z" />
+    <path id="SK" class="country" d="M450 230 h100 v30 h-100 z" />
+    <path id="HU" class="country" d="M450 260 h100 v40 h-100 z" />
+    <path id="SI" class="country" d="M420 260 h60 v30 h-60 z" />
+    <path id="HR" class="country" d="M440 290 h70 v60 h-70 z" />
+    <path id="BA" class="country" d="M480 310 h60 v60 h-60 z" />
+    <path id="RS" class="country" d="M520 270 h70 v80 h-70 z" />
+    <path id="ME" class="country" d="M500 330 h50 v40 h-50 z" />
+    <path id="BG" class="country" d="M540 320 h120 v60 h-120 z" />
+    <path id="RO" class="country" d="M570 250 h110 v80 h-110 z" />
+    <path id="MD" class="country" d="M660 240 h40 v60 h-40 z" />
+    <path id="UA" class="country" d="M590 150 h160 v120 h-160 z" />
+    <path id="BY" class="country" d="M540 100 h130 v90 h-130 z" />
+    <path id="LT" class="country" d="M520 70 h80 v60 h-80 z" />
+    <path id="LV" class="country" d="M540 40 h80 v50 h-80 z" />
+    <path id="EE" class="country" d="M540 10 h80 v40 h-80 z" />
+    <path id="FI" class="country" d="M620 0 h100 v150 h-100 z" />
+    <path id="SE" class="country" d="M550 0 h70 v200 h-70 z" />
+    <path id="NO" class="country" d="M490 0 h60 v200 h-60 z" />
+    <path id="DK" class="country" d="M450 80 h50 v60 h-50 z" />
+    <path id="IS" class="country" d="M20 40 h80 v60 h-80 z" />
+    <path id="IT" title="Italy" class="country" d="M360 300 l40 -80 h40 l-30 70 l20 70 l-30 20 h-40 l-10 -30 z" />
+    <path id="SIC" class="country" d="M380 380 h60 v25 h-60 z" />
+    <path id="MT" class="country" d="M450 410 h25 v18 h-25 z" />
+    <path id="GR" class="country" d="M520 380 h100 v90 h-100 z" />
+    <path id="TR" class="country" d="M640 360 h160 v80 h-160 z" />
+  </g>
+</svg>

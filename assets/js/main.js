@@ -162,7 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!src) return;
 
-      fetch(src)
+      const mapSrc = new URL(src, window.location.href).toString();
+
+      fetch(mapSrc)
         .then(resp => resp.text())
         .then(svgMarkup => {
           map.insertAdjacentHTML('afterbegin', svgMarkup);

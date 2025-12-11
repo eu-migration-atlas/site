@@ -265,30 +265,97 @@ a {
   );
 }
 
-/* basis map: all light grey */
-svg path {
-  fill: #ececec;
-  stroke: #000;
-  stroke-width: 0.1;
+.country-overview {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.overview-map {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  padding: 1rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+.interactive-map {
+  position: relative;
+  background: radial-gradient(circle at 30% 20%, #f4f6ff, #e3e8f6 45%, #d6def1);
+  border-radius: 1rem;
+  border: 1px solid #e0e4ef;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.interactive-map svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.interactive-map svg path {
+  fill: #e7eaf3;
+  stroke: #111827;
+  stroke-width: 0.4;
+  transition: fill var(--transition-fast), stroke var(--transition-fast), stroke-width var(--transition-fast);
+  cursor: pointer;
+}
+
+.interactive-map svg path.is-hovered {
+  fill: var(--eu-gold);
+  stroke: #0f172a;
+  stroke-width: 0.8;
+}
+
+.interactive-map .map-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.65rem;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+  opacity: 0;
+  transform: translate(-50%, -110%);
+  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.interactive-map .map-tooltip.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -130%);
+}
+
+@media (max-width: 900px) {
+  .country-overview {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* active countries per page */
-.country-it #IT {
+.country-it #IT,
+.interactive-map.country-it #IT {
   fill: #2563eb;
   stroke: #1e293b;
-  stroke-width: 1;
+  stroke-width: 1.2;
 }
 
-.country-es #ES {
+.country-es #ES,
+.interactive-map.country-es #ES {
   fill: #2563eb;
   stroke: #1e293b;
-  stroke-width: 1;
+  stroke-width: 1.2;
 }
 
-.country-pt #PT {
+.country-pt #PT,
+.interactive-map.country-pt #PT {
   fill: #2563eb;
   stroke: #1e293b;
-  stroke-width: 1;
+  stroke-width: 1.2;
 }
 
 .country-section-list {

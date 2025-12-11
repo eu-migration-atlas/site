@@ -147,4 +147,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Interactive Europe map with hover tooltips
+  const mapContainers = document.querySelectorAll('.interactive-map[data-map-src]');
+
+  if (mapContainers.length) {
+    mapContainers.forEach(map => {
+      const src = map.dataset.mapSrc;
+      const highlight = (map.dataset.highlight || '').toLowerCase();
+
+      if (highlight) {
+        map.classList.add(`country-${highlight}`);
+      }
+
+      if (!src) return;
+
+      fetch(src)
+        .then(resp => resp.text())
+        .then(svgMarkup => {
+          map.insertAdjacentHTML('afterbegin', svgMarkup);
+
+          const svg = map.querySelector('svg');
+          if (!svg) return;
+
+          const tooltip = document.createElement('div');
+          tooltip.className = 'map-tooltip';
+          map.appendChild(tooltip);
+
+          const paths = svg.querySelectorAll('path[id]');
+
+          function hideTooltip() {
+            tooltip.classList.remove('is-visible');
+            paths.forEach(path => path.classList.remove('is-hovered'));
+          }
+
+          paths.forEach(path => {
+            const countryName = path.getAttribute('name') || path.id;
+
+            path.addEventListener('mouseenter', () => {
+              tooltip.textContent = countryName;
+              tooltip.classList.add('is-visible');
+              path.classList.add('is-hovered');
+            });
+
+            path.addEventListener('mouseleave', hideTooltip);
+
+            path.addEventListener('mousemove', event => {
+              const rect = map.getBoundingClientRect();
+              tooltip.style.left = `${event.clientX - rect.left + 12}px`;
+              tooltip.style.top = `${event.clientY - rect.top + 12}px`;
+            });
+          });
+
+          map.addEventListener('mouseleave', hideTooltip);
+        })
+        .catch(() => {
+          map.classList.add('is-error');
+          map.textContent = 'Map could not be loaded.';
+        });
+    });
+  }
 });

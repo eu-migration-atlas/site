@@ -176,12 +176,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const paths = svg.querySelectorAll('path[id]');
           const countryLinks = {
-            it: '/countries/italy.html',
-            es: '/countries/spain.html',
-            pt: '/countries/portugal.html',
-            lu: '/countries/luxembourg.html',
-            pl: '/countries/poland.html'
+            it: 'countries/italy.html',
+            es: 'countries/spain.html',
+            pt: 'countries/portugal.html',
+            lu: 'countries/luxembourg.html',
+            pl: 'countries/poland.html'
           };
+
+          // Resolve the correct base path so map clicks work on GitHub Pages and local dev
+          const baseHref = (() => {
+            const baseTag = document.querySelector('base');
+            if (baseTag && baseTag.href) return baseTag.href;
+
+            const { origin, pathname } = window.location;
+            const path = pathname.endsWith('/') ? pathname : pathname.replace(/[^/]*$/, '');
+            return `${origin}${path}`;
+          })();
 
           function hideTooltip() {
             tooltip.classList.remove('is-visible');
@@ -211,8 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
               path.classList.add('is-clickable');
               path.setAttribute('role', 'link');
               path.setAttribute('tabindex', '0');
+              const destination = new URL(target, baseHref).toString();
+
               path.addEventListener('click', () => {
-                window.location.href = target;
+                window.location.href = destination;
               });
 
               path.addEventListener('keydown', event => {

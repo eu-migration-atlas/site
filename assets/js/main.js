@@ -175,6 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
           map.appendChild(tooltip);
 
           const paths = svg.querySelectorAll('path[id]');
+          const countryLinks = {
+            it: '/countries/italy.html',
+            es: '/countries/spain.html',
+            pt: '/countries/portugal.html'
+          };
 
           function hideTooltip() {
             tooltip.classList.remove('is-visible');
@@ -183,6 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           paths.forEach(path => {
             const countryName = path.getAttribute('name') || path.id;
+            const countryCode = (path.id || '').toLowerCase();
+            const target = countryLinks[countryCode];
 
             path.addEventListener('mouseenter', () => {
               tooltip.textContent = countryName;
@@ -197,6 +204,22 @@ document.addEventListener('DOMContentLoaded', () => {
               tooltip.style.left = `${event.clientX - rect.left + 12}px`;
               tooltip.style.top = `${event.clientY - rect.top + 12}px`;
             });
+
+            if (target) {
+              path.classList.add('is-clickable');
+              path.setAttribute('role', 'link');
+              path.setAttribute('tabindex', '0');
+              path.addEventListener('click', () => {
+                window.location.href = target;
+              });
+
+              path.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  path.click();
+                }
+              });
+            }
           });
 
           map.addEventListener('mouseleave', hideTooltip);

@@ -281,18 +281,22 @@ a {
 }
 
 .interactive-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   background: radial-gradient(circle at 30% 20%, #f4f6ff, #e3e8f6 45%, #d6def1);
   border-radius: 1rem;
   border: 1px solid #e0e4ef;
   overflow: hidden;
-  min-height: 260px;
+  min-height: 400px;
 }
 
 .interactive-map svg {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  max-height: 95%;
+  height: auto;
 }
 
 .interactive-map svg path {
@@ -569,9 +573,9 @@ a {
 
 .hero-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.85fr);
   align-items: center;
-  gap: 3rem;
+  gap: 4.2rem;
 }
 
 .hero-eyebrow {
@@ -608,8 +612,8 @@ a {
   border-radius: 18px;
   padding: 1.75rem;
   box-shadow: 0 18px 48px rgba(6, 10, 20, 0.4);
-  min-height: 460px;
-  padding: 1.5rem;
+  min-height: 820px;
+  padding: 1.8rem;
   box-shadow: 0 18px 48px rgba(6, 10, 20, 0.4);
 }
 
@@ -618,8 +622,7 @@ a {
     radial-gradient(circle at 80% 24%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 48%),
     rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.16);
-  min-height: 440px;
-  min-height: 320px;
+  min-height: 720px;
 }
 
 .map-cta {

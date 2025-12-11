@@ -179,6 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
             it: 'countries/italy.html',
             es: 'countries/spain.html',
             pt: 'countries/portugal.html'
+            it: '/countries/italy.html',
+            es: '/countries/spain.html',
+            pt: '/countries/portugal.html'
           };
 
           function hideTooltip() {

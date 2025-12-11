@@ -569,9 +569,9 @@ a {
 
 .hero-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.45fr);
   align-items: center;
-  gap: 3rem;
+  gap: 3.4rem;
 }
 
 .hero-eyebrow {

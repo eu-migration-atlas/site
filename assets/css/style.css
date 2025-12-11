@@ -281,6 +281,9 @@ a {
 }
 
 .interactive-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   background: radial-gradient(circle at 30% 20%, #f4f6ff, #e3e8f6 45%, #d6def1);
   border-radius: 1rem;
@@ -291,8 +294,9 @@ a {
 
 .interactive-map svg {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  max-height: 95%;
+  height: auto;
 }
 
 .interactive-map svg path {

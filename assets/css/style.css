@@ -608,8 +608,8 @@ a {
   border-radius: 18px;
   padding: 1.75rem;
   box-shadow: 0 18px 48px rgba(6, 10, 20, 0.4);
-  min-height: 640px;
-  padding: 1.8rem;
+  min-height: 560px;
+  padding: 1.5rem;
   box-shadow: 0 18px 48px rgba(6, 10, 20, 0.4);
 }
 
@@ -618,7 +618,7 @@ a {
     radial-gradient(circle at 80% 24%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 48%),
     rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.16);
-  min-height: 600px;
+  min-height: 520px;
 }
 
 .map-cta {

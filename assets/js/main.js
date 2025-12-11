@@ -176,11 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const paths = svg.querySelectorAll('path[id]');
           const countryLinks = {
-            it: '/countries/italy.html',
-            es: '/countries/spain.html',
-            pt: '/countries/portugal.html',
-            lu: '/countries/luxembourg.html',
-            pl: '/countries/poland.html'
+            it: 'countries/italy.html',
+            es: 'countries/spain.html',
+            pt: 'countries/portugal.html',
+            lu: 'countries/luxembourg.html',
+            pl: 'countries/poland.html'
           };
 
           function hideTooltip() {

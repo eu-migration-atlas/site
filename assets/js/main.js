@@ -162,7 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!src) return;
 
-      fetch(src)
+      const mapSrc = new URL(src, window.location.href).toString();
+
+      fetch(mapSrc)
         .then(resp => resp.text())
         .then(svgMarkup => {
           map.insertAdjacentHTML('afterbegin', svgMarkup);
@@ -184,11 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
           };
 
           // Resolve the correct base path so map clicks work on GitHub Pages and local dev
-          const basePath = (() => {
+          const baseHref = (() => {
             const baseTag = document.querySelector('base');
             if (baseTag && baseTag.href) return baseTag.href;
-            const path = window.location.pathname;
-            return path.endsWith('/') ? path : path.replace(/[^/]*$/, '');
+
+            const { origin, pathname } = window.location;
+            const path = pathname.endsWith('/') ? pathname : pathname.replace(/[^/]*$/, '');
+            return `${origin}${path}`;
           })();
 
           function hideTooltip() {
@@ -219,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
               path.classList.add('is-clickable');
               path.setAttribute('role', 'link');
               path.setAttribute('tabindex', '0');
-              const destination = new URL(target, basePath).toString();
+              const destination = new URL(target, baseHref).toString();
 
               path.addEventListener('click', () => {
                 window.location.href = destination;

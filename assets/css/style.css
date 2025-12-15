@@ -1181,7 +1181,7 @@ body.index .hero-visual .interactive-map {
               rgba(255,255,255,0.04);
   border: none;                     /* geen grenslijn rond de kaart */
   border-radius: 18px;              /* matcht de hero-visual */
-  box-shadow: 0 16px 40px rgba(255,255,255,0.10); /* licht schaduw-effect op donkere pagina */
+  box-shadow: 0 12px 32px rgba(255,255,255,0.08); /* licht schaduw-effect op donkere pagina */
   min-height: 600px;                /* pas de hoogte eventueel aan */
 }
 

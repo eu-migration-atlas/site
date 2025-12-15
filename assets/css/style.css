@@ -1523,7 +1523,7 @@ body.index .hero-visual .interactive-map {
 /* Maak een volledig afgeronde omhulling voor de regioselectie */
 .country-filter-panel .region-select-wrapper {
   position: relative;
-  z-index: 25;
+  z-index: 120;
   display: inline-block;
   border-radius: 18px;
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
@@ -1573,7 +1573,7 @@ body.index .hero-visual .interactive-map {
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
   list-style: none;
   padding: 0.5rem 0;
-  z-index: 60;
+  z-index: 200;
 }
 
 .country-filter-panel .region-select-list li:first-child {
@@ -1598,6 +1598,12 @@ body.index .hero-visual .interactive-map {
   color: #2563eb;
 }
 
+.country-filter-panel .region-select-list li[aria-selected="true"] {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+  border-radius: 12px;
+}
+
 /* filtershell en children vormen een hogere laag */
 .page-countries .filters-shell {
   position: relative;
@@ -1614,6 +1620,7 @@ body.index .hero-visual .interactive-map {
 /* plaats de select-laag boven de overige controls */
 .country-filter-panel .filters-controls {
   position: relative;
-  z-index: 10;
+  z-index: 90;
+  overflow: visible;
 }
 

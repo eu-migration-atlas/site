@@ -1516,3 +1516,43 @@ body.index .hero-visual .interactive-map {
   margin-left: 0.1rem;
 }
 
+/* ----------------------------------------
+   Countries page: select styling and stack
+   ---------------------------------------- */
+
+/* regioselectie heeft dezelfde vorm als het filterpaneel */
+.page-countries .custom-select,
+.page-countries .custom-select .select-toggle {
+  border-radius: 18px;
+}
+
+/* ook de dropdownlijst past zich aan de radius aan */
+.page-countries .custom-select .select-options {
+  border-radius: 18px;
+  margin-top: 0.3rem;
+}
+
+/* filtershell en children vormen een hogere laag */
+.page-countries .filters-shell {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+}
+
+/* de select-wrapper krijgt een hogere z-index */
+.page-countries .custom-select {
+  position: relative;
+  z-index: 10;
+}
+
+/* de dropdownlijst wordt nog hoger geplaatst */
+.page-countries .custom-select .select-options {
+  z-index: 20;
+}
+
+/* verlaag de z-index van de topicchips zodat ze onder de dropdown blijven */
+.page-countries .topic-filter .filter-chips {
+  position: relative;
+  z-index: 1;
+}
+

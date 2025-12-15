@@ -509,19 +509,10 @@ a {
   text-decoration: none;
 }
 
-.logo-flag {
-  width: 28px;
-  height: 18px;
-  border-radius: 3px;
-  background: radial-gradient(circle at 30% 30%, #fff 0, #fff 2px, transparent 2px),
-              var(--eu-blue);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-
-.logo-text {
-  font-weight: 650;
-  letter-spacing: 0.01em;
-  color: var(--text-invert);
+.logo-image {
+  display: block;
+  height: 48px;
+  width: auto;
 }
 
 .main-nav a {

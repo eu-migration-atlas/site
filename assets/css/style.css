@@ -1371,7 +1371,7 @@ body.index .hero-visual .interactive-map {
   top: calc(100% + 0.2rem);
   width: 100%;
   margin: 0;
-  padding: 0.35rem 0;
+  padding: 0;
   background: #ffffff;
   border: 1px solid #e4e8ed;
   border-radius: 18px;
@@ -1379,6 +1379,7 @@ body.index .hero-visual .interactive-map {
   list-style: none;
   display: none;
   z-index: 50;
+  overflow: hidden;
 }
 
 .custom-select.open .select-options {

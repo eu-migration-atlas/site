@@ -43,33 +43,41 @@
 
       <!-- Filters: vervangt de kaart -->
       <div class="filters-section">
-        <p class="filters-eyebrow">Find a country</p>
-        <h2>Search by name or region</h2>
-        <div class="filters-controls">
-          <!-- Zoekveld -->
-          <input
-            type="text"
-            class="filter-search-input"
-            placeholder="Search countries…"
-            aria-label="Search countries"
-          >
-          <!-- Regio-filter -->
-          <select class="filter-select" aria-label="Filter by region">
-            <option value="">All regions</option>
-            <option value="northern">Northern Europe</option>
-            <option value="southern">Southern Europe</option>
-            <option value="eastern">Eastern Europe</option>
-            <option value="western">Western Europe</option>
-          </select>
-        </div>
+        <div class="filters-shell">
+          <div class="filters-heading">
+            <span class="filters-eyebrow">Find a country</span>
+            <h2 class="filters-title">Search by name or region</h2>
+          </div>
 
-        <div class="topic-filter">
-          <span class="filter-eyebrow">Filter by topic</span>
-          <div class="filter-chips">
-            <button type="button" class="filter-chip" data-topic="high-recognition">High recognition rate</button>
-            <button type="button" class="filter-chip" data-topic="strict-policy">Strict asylum policy</button>
-            <button type="button" class="filter-chip" data-topic="labour-migration">High labour migration</button>
-            <button type="button" class="filter-chip" data-topic="humanitarian-focus">Humanitarian focus</button>
+          <div class="filters-controls">
+            <div class="filters-inputs">
+              <!-- Zoekveld -->
+              <input
+                type="text"
+                class="filter-search-input"
+                placeholder="Search countries…"
+                aria-label="Search countries"
+              >
+              <!-- Regio-filter -->
+              <select class="filter-select" aria-label="Filter by region">
+                <option value="">All regions</option>
+                <option value="northern">Northern Europe</option>
+                <option value="southern">Southern Europe</option>
+                <option value="eastern">Eastern Europe</option>
+                <option value="western">Western Europe</option>
+              </select>
+            </div>
+            <button type="button" class="filter-reset" aria-label="Clear filters">Clear filters</button>
+          </div>
+
+          <div class="topic-filter">
+            <span class="filter-eyebrow">Filter by topic</span>
+            <div class="filter-chips">
+              <button type="button" class="filter-chip" data-topic="high-recognition">High recognition rate</button>
+              <button type="button" class="filter-chip" data-topic="strict-policy">Strict asylum policy</button>
+              <button type="button" class="filter-chip" data-topic="labour-migration">High labour migration</button>
+              <button type="button" class="filter-chip" data-topic="humanitarian-focus">Humanitarian focus</button>
+            </div>
           </div>
         </div>
       </div>

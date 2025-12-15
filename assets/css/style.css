@@ -1234,3 +1234,42 @@ body.index .hero-visual .interactive-map {
   color: var(--text-muted);
 }
 
+/* filter-chips styling */
+.topic-filter {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.topic-filter .filter-eyebrow {
+  font-size: 0.85rem;
+  color: #5a6f8a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.topic-filter .filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-chip {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #e5edff;
+  color: #1d4ed8;
+  border: 1px solid #cdd8f3;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+  background: #1d4ed8;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+

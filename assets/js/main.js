@@ -246,4 +246,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
   }
+
+  // Country search, region and topic filters
+  const searchInput = document.querySelector('.filter-search-input');
+  const regionSelect = document.querySelector('.filter-select');
+  const topicChips = document.querySelectorAll('.filter-chip');
+  const countryCards = document.querySelectorAll('.country-card');
+
+  function applyCountryFilters() {
+    if (!countryCards.length) return;
+
+    const searchTerm = (searchInput?.value || '').toLowerCase().trim();
+    const regionValue = (regionSelect?.value || '').toLowerCase();
+    const activeTopics = Array.from(topicChips)
+      .filter(chip => chip.classList.contains('active'))
+      .map(chip => chip.dataset.topic)
+      .filter(Boolean);
+
+    countryCards.forEach(card => {
+      const name = (card.querySelector('h2')?.textContent || '').toLowerCase();
+      const cardRegion = (card.dataset.region || '').toLowerCase();
+      const cardTopics = (card.dataset.topic || '').split(/\s+/).filter(Boolean);
+
+      const matchesSearch = !searchTerm || name.includes(searchTerm);
+      const matchesRegion = !regionValue || cardRegion === regionValue;
+      const matchesTopics = activeTopics.every(topic => cardTopics.includes(topic));
+
+      card.style.display = matchesSearch && matchesRegion && matchesTopics ? '' : 'none';
+    });
+  }
+
+  if (countryCards.length) {
+    if (searchInput) {
+      searchInput.addEventListener('input', applyCountryFilters);
+    }
+
+    if (regionSelect) {
+      regionSelect.addEventListener('change', applyCountryFilters);
+    }
+
+    if (topicChips.length) {
+      topicChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chip.classList.toggle('active');
+          applyCountryFilters();
+        });
+      });
+    }
+
+    applyCountryFilters();
+  }
 });

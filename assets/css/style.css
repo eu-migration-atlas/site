@@ -1298,8 +1298,9 @@ body.index .hero-visual .interactive-map {
   flex-wrap: wrap;
 }
 
-.filters-section input.filter-search-input,
-.filters-section select.filter-select {
+
+
+.filters-section input.filter-search-input {
   padding: 0.65rem 1rem 0.65rem 2.75rem;
   border-radius: 999px;
   border: 1px solid #e4e8ed;
@@ -1321,20 +1322,83 @@ body.index .hero-visual .interactive-map {
   background-size: 18px;
 }
 
-.filters-section select.filter-select {
-  appearance: none;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231d4ed8' d='M1.41 0L6 4.58 10.59 0 12 1.41 6 7.41 0 1.41z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1.2rem center;
-  background-size: 12px 8px;
-  color: #1d4ed8;
-  padding: 0.6rem 2.4rem 0.6rem 1rem;
-  outline: none;
+.filters-section .custom-select {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 1px solid #e4e8ed;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  width: 100%;
+  max-width: 320px;
 }
 
-.filters-section select.filter-select:hover,
-.filters-section select.filter-select:focus-visible {
+.custom-select .select-toggle {
+  border: none;
+  border-radius: 999px;
+  background: none;
+  padding: 0.6rem 2.6rem 0.6rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1d4ed8;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+
+.custom-select .select-toggle::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  width: 12px;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231d4ed8' d='M1.41 0L6 4.58 10.59 0 12 1.41 6 7.41 0 1.41z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: translateY(-50%);
+}
+
+.custom-select .select-options {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.2rem);
+  width: 100%;
+  margin: 0;
+  padding: 0.35rem 0;
+  background: #ffffff;
+  border: 1px solid #e4e8ed;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+  list-style: none;
+  display: none;
+  z-index: 10;
+}
+
+.custom-select.open .select-options {
+  display: block;
+}
+
+.custom-select .select-options li {
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  color: #1f2a44;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.custom-select .select-options li:hover,
+.custom-select .select-options li:focus-visible,
+.custom-select .select-options li[aria-selected="true"] {
+  background: #f5f7fb;
+  color: #0f172a;
+}
+
+.custom-select:focus-within .select-toggle,
+.custom-select:hover .select-toggle {
   border-color: #2563eb;
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
 }

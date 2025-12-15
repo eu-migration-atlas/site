@@ -249,7 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Country search, region and topic filters
   const searchInput = document.querySelector('.filter-search-input');
-  const regionSelect = document.querySelector('.filter-select');
+  const customSelect = document.querySelector('.custom-select');
+  const selectToggle = customSelect?.querySelector('.select-toggle');
+  const selectLabel = customSelect?.querySelector('.select-label');
+  const selectOptions = customSelect?.querySelectorAll('.select-options li');
   const topicChips = document.querySelectorAll('.filter-chip');
   const clearFiltersButton = document.querySelector('.filter-reset');
   const countryCards = document.querySelectorAll('.country-card');
@@ -258,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!countryCards.length) return;
 
     const searchTerm = (searchInput?.value || '').toLowerCase().trim();
-    const regionValue = (regionSelect?.value || '').toLowerCase();
+    const regionValue = (customSelect?.dataset.selected || '').toLowerCase();
     const activeTopics = Array.from(topicChips)
       .filter(chip => chip.classList.contains('active'))
       .map(chip => chip.dataset.topic)
@@ -282,8 +285,62 @@ document.addEventListener('DOMContentLoaded', () => {
       searchInput.addEventListener('input', applyCountryFilters);
     }
 
-    if (regionSelect) {
-      regionSelect.addEventListener('change', applyCountryFilters);
+    if (customSelect && selectToggle && selectOptions?.length) {
+      const closeSelect = () => {
+        customSelect.classList.remove('open');
+        selectToggle.setAttribute('aria-expanded', 'false');
+      };
+
+      const openSelect = () => {
+        customSelect.classList.add('open');
+        selectToggle.setAttribute('aria-expanded', 'true');
+      };
+
+      const setRegion = (value, label) => {
+        customSelect.dataset.selected = value;
+        if (selectLabel) {
+          selectLabel.textContent = label;
+        }
+        selectOptions.forEach(option => {
+          option.setAttribute('aria-selected', option.dataset.value === value ? 'true' : 'false');
+        });
+        applyCountryFilters();
+      };
+
+      selectToggle.addEventListener('click', () => {
+        if (customSelect.classList.contains('open')) {
+          closeSelect();
+        } else {
+          openSelect();
+        }
+      });
+
+      selectOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          setRegion(option.dataset.value || '', option.textContent.trim());
+          closeSelect();
+        });
+
+        option.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            option.click();
+          }
+        });
+      });
+
+      document.addEventListener('click', event => {
+        if (!customSelect.contains(event.target)) {
+          closeSelect();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          closeSelect();
+          selectToggle.focus();
+        }
+      });
     }
 
     if (topicChips.length) {
@@ -298,7 +355,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clearFiltersButton) {
       clearFiltersButton.addEventListener('click', () => {
         if (searchInput) searchInput.value = '';
-        if (regionSelect) regionSelect.value = '';
+        if (customSelect && selectLabel && selectOptions?.length) {
+          customSelect.dataset.selected = '';
+          selectLabel.textContent = 'All regions';
+          selectOptions.forEach(option => {
+            option.setAttribute('aria-selected', option.dataset.value === '' ? 'true' : 'false');
+          });
+        }
         topicChips.forEach(chip => chip.classList.remove('active'));
         applyCountryFilters();
       });

@@ -1218,7 +1218,7 @@ body.index .hero-visual .interactive-map {
   flex-direction: column;
   gap: 0.75rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
 }
 
@@ -1376,7 +1376,7 @@ body.index .hero-visual .interactive-map {
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   list-style: none;
   display: none;
-  z-index: 10;
+  z-index: 30;
 }
 
 .custom-select.open .select-options {

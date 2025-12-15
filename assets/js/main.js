@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.querySelector('.filter-search-input');
   const regionSelect = document.querySelector('.filter-select');
   const topicChips = document.querySelectorAll('.filter-chip');
+  const clearFiltersButton = document.querySelector('.filter-reset');
   const countryCards = document.querySelectorAll('.country-card');
 
   function applyCountryFilters() {
@@ -291,6 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
           chip.classList.toggle('active');
           applyCountryFilters();
         });
+      });
+    }
+
+    if (clearFiltersButton) {
+      clearFiltersButton.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (regionSelect) regionSelect.value = '';
+        topicChips.forEach(chip => chip.classList.remove('active'));
+        applyCountryFilters();
       });
     }
 

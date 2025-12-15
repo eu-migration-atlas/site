@@ -41,18 +41,26 @@
         </p>
       </header>
 
-      <div class="map-section">
-        <div class="map-section-text">
-          <p class="map-eyebrow">Interactive access</p>
-          <h2>Click a country to open its profile</h2>
-          <p>
-            Use the map to jump directly to a country page. Highlighted members have
-            a published profile, and new countries will unlock as we add content.
-          </p>
-        </div>
-
-        <div class="map-section-visual">
-          <div class="interactive-map" data-map-src="assets/maps/europe.svg" aria-label="Interactive map of Europe"></div>
+      <!-- Filters: vervangt de kaart -->
+      <div class="filters-section">
+        <p class="filters-eyebrow">Find a country</p>
+        <h2>Search by name or region</h2>
+        <div class="filters-controls">
+          <!-- Zoekveld -->
+          <input
+            type="text"
+            class="filter-search-input"
+            placeholder="Search countries…"
+            aria-label="Search countries"
+          >
+          <!-- Regio-filter -->
+          <select class="filter-select" aria-label="Filter by region">
+            <option value="">All regions</option>
+            <option value="northern">Northern Europe</option>
+            <option value="southern">Southern Europe</option>
+            <option value="eastern">Eastern Europe</option>
+            <option value="western">Western Europe</option>
+          </select>
         </div>
       </div>
 

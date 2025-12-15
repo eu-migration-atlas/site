@@ -1157,3 +1157,31 @@ a {
 }
 }
 
+
+/* ========================================
+   Homepagina: hero-kaart in ‘card’-stijl
+   zonder witte achtergrond
+   ======================================== */
+
+/* Maak de hero-visual op de homepagina kaartachtig,
+   zonder rand en met een lichte schaduw op de donkere achtergrond */
+body.index .hero-visual {
+  background: transparent;          /* geen witte achtergrond */
+  border: none;                     /* verwijder de rand */
+  border-radius: 18px;              /* zelfde afronding als landkaarten */
+  padding: 0;                       /* geen extra witruimte rond de kaart */
+  box-shadow: none;                 /* laat alleen de kaart zelf een schaduw hebben */
+  min-height: auto;
+}
+
+/* Stijl de kaart zelf: donker met subtiele witachtige schaduw */
+body.index .hero-visual .interactive-map {
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.10), rgba(255,255,255,0.04) 45%),
+              radial-gradient(circle at 80% 24%, rgba(255,255,255,0.06), rgba(255,255,255,0.02) 50%),
+              rgba(255,255,255,0.04);
+  border: none;                     /* geen grenslijn rond de kaart */
+  border-radius: 18px;              /* matcht de hero-visual */
+  box-shadow: 0 16px 40px rgba(255,255,255,0.10); /* licht schaduw-effect op donkere pagina */
+  min-height: 600px;                /* pas de hoogte eventueel aan */
+}
+

@@ -1524,6 +1524,7 @@ body.index .hero-visual .interactive-map {
 .country-filter-panel .region-select-wrapper {
   position: relative;
   z-index: 120;
+  z-index: 20;
   display: inline-block;
   border-radius: 18px;
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
@@ -1584,6 +1585,49 @@ body.index .hero-visual .interactive-map {
 .country-filter-panel .region-select-list li:last-child {
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;
+}
+
+/* Het zichtbare deel van de dropdown: als een knop */
+.country-filter-panel .region-select-toggle {
+  padding: 0.7rem 1.5rem 0.7rem 1rem;
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+}
+
+/* Pijltje rechts in de knop */
+.country-filter-panel .region-select-toggle::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  transform: translateY(-50%) rotate(45deg);
+  border-right: 2px solid #2563eb;
+  border-bottom: 2px solid #2563eb;
+  background-image: none;
+}
+
+/* De lijst met regio’s: afgerond en zwevend boven de chips/kaarten */
+.country-filter-panel .region-select-list {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  margin-top: 0.25rem;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  list-style: none;
+  padding: 0.5rem 0;
+  z-index: 30;
 }
 
 /* Items in de open lijst */

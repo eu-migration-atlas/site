@@ -1220,6 +1220,7 @@ body.index .hero-visual .interactive-map {
   position: relative;
   overflow: visible;
   isolation: isolate;
+  z-index: 2;
 }
 
 .filters-shell::after {
@@ -1334,6 +1335,7 @@ body.index .hero-visual .interactive-map {
   position: relative;
   width: 100%;
   max-width: 320px;
+  z-index: 3;
 }
 
 .custom-select .select-toggle {
@@ -1376,7 +1378,7 @@ body.index .hero-visual .interactive-map {
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   list-style: none;
   display: none;
-  z-index: 30;
+  z-index: 50;
 }
 
 .custom-select.open .select-options {

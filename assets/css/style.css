@@ -1636,17 +1636,27 @@ body.index .hero-visual .interactive-map {
   padding: 0.6rem 1rem;
   cursor: pointer;
   white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.country-filter-panel .region-select-list li:hover {
+.country-filter-panel .region-select-list li:hover,
+.country-filter-panel .region-select-list li[aria-selected="true"] {
   background: rgba(37, 99, 235, 0.1);
   color: #2563eb;
+  border-radius: 0;
 }
 
-.country-filter-panel .region-select-list li[aria-selected="true"] {
-  background: rgba(37, 99, 235, 0.12);
-  color: #1d4ed8;
-  border-radius: 12px;
+.country-filter-panel .region-select-list li:first-child:hover,
+.country-filter-panel .region-select-list li:first-child[aria-selected="true"] {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.country-filter-panel .region-select-list li:last-child:hover,
+.country-filter-panel .region-select-list li:last-child[aria-selected="true"] {
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
 }
 
 /* filtershell en children vormen een hogere laag */

@@ -307,11 +307,11 @@ a {
 }
 
 .interactive-map svg path.eu-member {
-  fill: #d9dde7;
+  fill: #c3c9da;
 }
 
 .interactive-map svg path.non-eu {
-  fill: #f7f8fc;
+  fill: rgba(241, 243, 248, 0.45);
 }
 
 .interactive-map svg path.is-clickable {
@@ -385,37 +385,8 @@ a {
   }
 }
 
-/* active countries per page */
-.country-it #IT,
-.interactive-map.country-it #IT {
-  fill: #2563eb;
-  stroke: #1e293b;
-  stroke-width: 1.2;
-}
-
-.country-es #ES,
-.interactive-map.country-es #ES {
-  fill: #2563eb;
-  stroke: #1e293b;
-  stroke-width: 1.2;
-}
-
-.country-pt #PT,
-.interactive-map.country-pt #PT {
-  fill: #2563eb;
-  stroke: #1e293b;
-  stroke-width: 1.2;
-}
-
-.country-lu #LU,
-.interactive-map.country-lu #LU {
-  fill: #2563eb;
-  stroke: #1e293b;
-  stroke-width: 1.2;
-}
-
-.country-pl #PL,
-.interactive-map.country-pl #PL {
+/* active country highlight for any page */
+.interactive-map svg path.is-highlighted {
   fill: #2563eb;
   stroke: #1e293b;
   stroke-width: 1.2;

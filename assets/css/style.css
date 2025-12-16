@@ -284,6 +284,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
   font-size: 1.35rem;
   line-height: 1;
 }

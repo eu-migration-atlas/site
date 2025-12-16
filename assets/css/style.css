@@ -684,6 +684,24 @@ body.theme-light .theme-toggle {
   gap: 0.8rem;
 }
 
+/* Light theme variant for the hero so the homepage starts on a bright canvas */
+body.theme-light .hero {
+  background: linear-gradient(135deg, #e9eef8 0%, #f6f9ff 45%, #ffffff 100%);
+  color: var(--text-main);
+}
+
+body.theme-light .hero h1 {
+  color: var(--text-strong);
+}
+
+body.theme-light .hero-sub {
+  color: var(--text-muted);
+}
+
+body.theme-light .hero-eyebrow {
+  color: rgba(15, 23, 42, 0.65);
+}
+
 /* De hero-visual wraps de interactieve kaart op de homepage.
    Subtielere stijl zonder zware rand of schaduw. */
 .hero-visual {
@@ -1287,9 +1305,29 @@ body.index .hero-visual .interactive-map {
   min-height: 600px;                /* pas de hoogte eventueel aan */
 }
 
+/* Zorg dat het kaartblok ook in de lichte modus visueel afsteekt. */
+body.theme-light.index .hero-visual {
+  background: linear-gradient(160deg, rgba(53, 88, 166, 0.08), rgba(255, 255, 255, 0.95));
+  border: 1px solid var(--border-soft-light);
+  padding: 1rem;
+  box-shadow: var(--shadow-soft-light);
+}
+
+body.theme-light.index .hero-visual .interactive-map {
+  background: radial-gradient(circle at 34% 18%, rgba(37, 99, 235, 0.1), rgba(255, 255, 255, 0.6) 46%),
+              radial-gradient(circle at 80% 26%, rgba(59, 130, 246, 0.08), rgba(255, 255, 255, 0.6) 52%),
+              #ffffff;
+  border: 1px solid rgba(37, 56, 101, 0.16);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
 /* Maak de grenzen van niet-EU-landen wit op de homepage zodat ze zichtbaar blijven */
-body.index .interactive-map svg path.non-eu {
+body.theme-dark.index .interactive-map svg path.non-eu {
   stroke: rgba(255, 255, 255, 0.8);
+}
+
+body.theme-light.index .interactive-map svg path.non-eu {
+  stroke: rgba(30, 41, 59, 0.6);
 }
 
 body.theme-dark .overview-map {

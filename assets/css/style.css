@@ -75,7 +75,7 @@
   --map-eu-fill: rgba(170, 185, 210, 0.85);
   --map-selected-fill: #1f6feb;
   --map-selected-border: rgba(0, 0, 0, 0.35);
-  --map-stroke-width: 1.2;
+  --map-stroke-width: 0.8;
 }
 
 body.theme-dark {

@@ -1685,10 +1685,140 @@ body.index .hero-visual .interactive-map {
   z-index: 1;
 }
 
+/* Country profile filter hand-off */
+.country-filter-panel {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid #dfe3eb;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.country-filter-panel .filter-description {
+  margin: 0 0 1rem;
+  color: #4b5563;
+}
+
+.country-filter-panel .filter-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.country-filter-panel .filter-apply {
+  background: #0d3b66;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.country-filter-panel .filter-apply:hover {
+  background: #0b3258;
+  transform: translateY(-1px);
+}
+
+.country-filter-panel .filter-reset {
+  background: transparent;
+  border: 1px solid #d0d7e2;
+  color: #1f2a44;
+  border-radius: 999px;
+  padding: 0.7rem 1.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.country-filter-panel .filter-reset:hover {
+  background: #eef2f7;
+  transform: translateY(-1px);
+}
+
 /* plaats de select-laag boven de overige controls */
 .country-filter-panel .filters-controls {
   position: relative;
   z-index: 90;
   overflow: visible;
+}
+
+.country-filter-panel .filter-lock {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #dfe3eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.country-filter-panel .filter-lock .lock-icon {
+  font-size: 1.25rem;
+}
+
+.country-filter-panel .filter-lock .lock-label {
+  font-weight: 700;
+  color: #1f2a44;
+}
+
+.country-filter-panel .filter-lock small {
+  display: block;
+  color: #4b5563;
+}
+
+.country-filter-panel .filter-lock .lock-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.country-filter-panel .filter-password-input {
+  flex: 1 1 220px;
+  min-width: 180px;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #cdd5e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.country-filter-panel .filter-lock-toggle {
+  background: #0d3b66;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.country-filter-panel .filter-lock-toggle:hover {
+  background: #0b3258;
+  transform: translateY(-1px);
+}
+
+.country-filter-panel .filter-lock-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #1f2a44;
+  font-weight: 600;
+}
+
+.country-filter-panel.is-locked .filter-chip,
+.country-filter-panel.is-locked .filter-apply,
+.country-filter-panel.is-locked .filter-reset {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.country-filter-panel button:disabled,
+.country-filter-panel .filter-chip:disabled {
+  pointer-events: none;
 }
 

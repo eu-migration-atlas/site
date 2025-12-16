@@ -488,8 +488,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (countryFilterStatus) {
         countryFilterStatus.textContent = locked
-          ? 'Presets and page text are locked. Enter the password to edit and save.'
-          : 'Unlocked. Your filters and text will be saved in this browser.';
+          ? 'Presets and section text are locked. Enter the password to edit and save.'
+          : 'Unlocked. Your filters and section text will be saved in this browser.';
       }
     };
 

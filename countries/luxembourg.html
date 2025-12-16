@@ -50,21 +50,54 @@
    </div>
    </section>
 
+    <section class="country-section-list">
+      <article class="country-section-card">
+        <div class="country-section-tag">PC</div>
+        <h2>Political climate</h2>
+        <p class="section-political">
+          Add text here.
+        </p>
+      </article>
+
+      <article class="country-section-card">
+        <div class="country-section-tag">MS</div>
+        <h2>Migration statistics</h2>
+        <p class="section-migration">
+          Key figures on arrivals, asylum applications, recognitions and return, plus routes that are particularly relevant for the country.
+        </p>
+      </article>
+
+      <article class="country-section-card">
+        <div class="country-section-tag">CP</div>
+        <h2>Current policies</h2>
+        <p class="section-policies">
+          Key national policies, recent reforms, external border control and cooperation with EU agencies or third countries.
+        </p>
+      </article>
+
+      <article class="country-section-card">
+        <div class="country-section-tag">AP</div>
+        <h2>Application possibilities</h2>
+        <p class="section-application">
+          Organisation of reception systems, integration measures and challenges at local and regional level.
+        </p>
+      </article>
+    </section>
+
     <section class="country-filter-panel" data-default-topics="high-recognition humanitarian-focus" data-country-key="luxembourg">
       <div class="filters-heading">
         <span class="filters-eyebrow">Country filter presets</span>
         <h2 class="filters-title">Select the themes that fit Luxembourg</h2>
       </div>
       <p class="filter-description">
-        Choose which topics describe Luxembourg best. We’ll prefill the country overview so you can instantly
-        see other Member States with similar traits.
+        Choose which topics describe Luxembourg best. Once unlocked, you can also edit the section text below. Everything is saved locally.
       </p>
       <div class="filters-controls">
         <div class="filter-lock">
           <span class="lock-icon" aria-hidden="true">🔒</span>
           <div>
             <span class="lock-label">Locked controls</span>
-            <small>Enter the NHL password to edit filters and text. Changes are saved locally.</small>
+            <small>Enter the NHL password to update filters and section copy at the bottom of the page.</small>
           </div>
           <div class="lock-actions">
             <input type="password" class="filter-password-input" placeholder="Password" aria-label="Password to unlock filter and text edits" />
@@ -74,17 +107,25 @@
         </div>
       </div>
       <div class="editable-texts">
-        <span class="filter-eyebrow">Page text (English)</span>
+        <span class="filter-eyebrow">Section text (English)</span>
         <p class="filter-description">
-          Update the intro and overview paragraphs shown on this page. Your changes stay in this browser once unlocked.
+          Adjust the copy for each country section. Changes stay in this browser once the NHL password is entered.
         </p>
         <label class="editable-field">
-          <span>Intro paragraph</span>
-          <textarea data-editable-field="intro" data-target-selector=".page-intro p"></textarea>
+          <span>Political climate</span>
+          <textarea data-editable-field="political" data-target-selector=".section-political"></textarea>
         </label>
         <label class="editable-field">
-          <span>Europe at a glance text</span>
-          <textarea data-editable-field="overview" data-target-selector=".overview-text p"></textarea>
+          <span>Migration statistics</span>
+          <textarea data-editable-field="migration" data-target-selector=".section-migration"></textarea>
+        </label>
+        <label class="editable-field">
+          <span>Current policies</span>
+          <textarea data-editable-field="policies" data-target-selector=".section-policies"></textarea>
+        </label>
+        <label class="editable-field">
+          <span>Application possibilities</span>
+          <textarea data-editable-field="application" data-target-selector=".section-application"></textarea>
         </label>
         <p class="editable-status" aria-live="polite"></p>
       </div>
@@ -101,40 +142,6 @@
         <button type="button" class="filter-apply">Filter countries</button>
         <button type="button" class="filter-reset">Reset to defaults</button>
       </div>
-    </section>
-      
-    <section class="country-section-list">
-      <article class="country-section-card">
-        <div class="country-section-tag">PC</div>
-        <h2>Political climate</h2>
-        <p>
-          Add text here.
-        </p>
-      </article>
-
-      <article class="country-section-card">
-        <div class="country-section-tag">MS</div>
-        <h2>Migration statistics</h2>
-        <p>
-          Key figures on arrivals, asylum applications, recognitions and return, plus routes that are particularly relevant for the country.
-        </p>
-      </article>
-
-      <article class="country-section-card">
-        <div class="country-section-tag">CP</div>
-        <h2>Current policies</h2>
-        <p>
-          Key national policies, recent reforms, external border control and cooperation with EU agencies or third countries.
-        </p>
-      </article>
-
-      <article class="country-section-card">
-        <div class="country-section-tag">AP</div>
-        <h2>Application possibilities</h2>
-        <p>
-          Organisation of reception systems, integration measures and challenges at local and regional level.
-        </p>
-      </article>
     </section>
   </main>
 

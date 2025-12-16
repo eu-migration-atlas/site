@@ -269,6 +269,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const topicChips = document.querySelectorAll('.filter-chip');
   const clearFiltersButton = document.querySelector('.filter-reset');
   const countryCards = document.querySelectorAll('.country-card');
+  const countryFilterPanel = document.querySelector('.country-filter-panel[data-country-key]');
+  const countryFilterChips = countryFilterPanel?.querySelectorAll('.filter-chip');
+  const countryFilterApply = countryFilterPanel?.querySelector('.filter-apply');
+  const countryFilterReset = countryFilterPanel?.querySelector('.filter-reset');
+  const countryFilterPassword = countryFilterPanel?.querySelector('.filter-password-input');
+  const countryFilterToggle = countryFilterPanel?.querySelector('.filter-lock-toggle');
+  const countryFilterStatus = countryFilterPanel?.querySelector('.filter-lock-status');
+  const editableFields = countryFilterPanel?.querySelectorAll('[data-editable-field]');
+  const editableStatus = countryFilterPanel?.querySelector('.editable-status');
 
   function applyCountryFilters() {
     if (!countryCards.length) return;
@@ -294,6 +303,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (countryCards.length) {
+    // Apply topics passed in via URL (e.g. from a country profile)
+    const params = new URLSearchParams(window.location.search);
+    const topicsFromParams = (params.get('topics') || '')
+      .split(',')
+      .map(value => value.trim())
+      .filter(Boolean);
+
+    if (topicsFromParams.length && topicChips.length) {
+      topicChips.forEach(chip => {
+        chip.classList.toggle('active', topicsFromParams.includes(chip.dataset.topic));
+      });
+    }
+
     if (searchInput) {
       searchInput.addEventListener('input', applyCountryFilters);
     }
@@ -381,5 +403,153 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     applyCountryFilters();
+  }
+
+  // Country profile filter setup: lets visitors choose relevant topics and jump back to the
+  // overview page with those filters applied.
+  if (countryFilterPanel && countryFilterChips?.length) {
+    const defaultTopics = (countryFilterPanel.dataset.defaultTopics || '')
+      .split(/\s+/)
+      .filter(Boolean);
+    const countryKey = countryFilterPanel.dataset.countryKey || 'country';
+    const topicsStorageKey = `countryFilterSelections_${countryKey}`;
+    const unlockStorageKey = `countryFilterUnlocked_${countryKey}`;
+    const textStoragePrefix = `countryText_${countryKey}_`;
+    const password = 'NHL';
+
+    const textDefaults = {};
+
+    const syncEditableField = (field, value) => {
+      const targetSelector = field.dataset.targetSelector;
+      const target = targetSelector ? document.querySelector(targetSelector) : null;
+      if (target) {
+        target.textContent = value;
+      }
+      field.value = value;
+    };
+
+    const saveEditableField = field => {
+      const key = `${textStoragePrefix}${field.dataset.editableField}`;
+      localStorage.setItem(key, field.value);
+      if (editableStatus) {
+        editableStatus.textContent = 'Saved locally. Reload to see your text on return.';
+      }
+    };
+
+    const loadEditableFields = () => {
+      if (!editableFields?.length) return;
+      editableFields.forEach(field => {
+        const key = `${textStoragePrefix}${field.dataset.editableField}`;
+        const saved = localStorage.getItem(key);
+        if (!textDefaults[key]) {
+          const targetSelector = field.dataset.targetSelector;
+          const target = targetSelector ? document.querySelector(targetSelector) : null;
+          textDefaults[key] = (target?.textContent || '').trim();
+        }
+        const value = saved !== null ? saved : textDefaults[key] || '';
+        syncEditableField(field, value);
+      });
+    };
+
+    const setActiveTopics = topics => {
+      countryFilterChips.forEach(chip => {
+        chip.classList.toggle('active', topics.includes(chip.dataset.topic));
+      });
+    };
+
+    const saveActiveTopics = () => {
+      const activeTopics = Array.from(countryFilterChips)
+        .filter(chip => chip.classList.contains('active'))
+        .map(chip => chip.dataset.topic)
+        .filter(Boolean);
+
+      localStorage.setItem(topicsStorageKey, activeTopics.join(','));
+      return activeTopics;
+    };
+
+    const loadSavedTopics = () => {
+      const saved = localStorage.getItem(topicsStorageKey) || '';
+      return saved
+        .split(',')
+        .map(value => value.trim())
+        .filter(Boolean);
+    };
+
+    const setLockedState = locked => {
+      countryFilterPanel.classList.toggle('is-locked', locked);
+      countryFilterChips.forEach(chip => {
+        chip.disabled = locked;
+      });
+      if (countryFilterApply) countryFilterApply.disabled = locked;
+      if (countryFilterReset) countryFilterReset.disabled = locked;
+      editableFields?.forEach(field => {
+        field.disabled = locked;
+      });
+
+      if (countryFilterStatus) {
+        countryFilterStatus.textContent = locked
+          ? 'Presets and section text are locked. Enter the password to edit and save.'
+          : 'Unlocked. Your filters and section text will be saved in this browser.';
+      }
+    };
+
+    const savedTopics = loadSavedTopics();
+    setActiveTopics(savedTopics.length ? savedTopics : defaultTopics);
+
+    loadEditableFields();
+
+    const isUnlocked = localStorage.getItem(unlockStorageKey) === 'true';
+    setLockedState(!isUnlocked);
+
+    countryFilterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chip.classList.toggle('active');
+      });
+    });
+
+    if (countryFilterReset) {
+      countryFilterReset.addEventListener('click', () => {
+        setActiveTopics(defaultTopics);
+        saveActiveTopics();
+        loadEditableFields();
+      });
+    }
+
+    if (countryFilterToggle && countryFilterPassword) {
+      countryFilterToggle.addEventListener('click', () => {
+        const value = countryFilterPassword.value.trim();
+        const unlocked = value === password;
+
+        if (unlocked) {
+          localStorage.setItem(unlockStorageKey, 'true');
+        }
+
+        setLockedState(!unlocked);
+
+        if (!unlocked && countryFilterStatus) {
+          countryFilterStatus.textContent = 'Incorrect password. Try again with the NHL code.';
+        }
+      });
+    }
+
+    if (countryFilterApply) {
+      countryFilterApply.addEventListener('click', () => {
+        const activeTopics = saveActiveTopics();
+
+        const destination = new URL('../countries.html', window.location.href);
+        if (activeTopics.length) {
+          destination.searchParams.set('topics', activeTopics.join(','));
+        }
+
+        window.location.href = destination.pathname + destination.search;
+      });
+    }
+
+    editableFields?.forEach(field => {
+      field.addEventListener('input', () => {
+        syncEditableField(field, field.value);
+        saveEditableField(field);
+      });
+    });
   }
 });

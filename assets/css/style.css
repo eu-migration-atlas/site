@@ -512,7 +512,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0;
+  padding: 0.5rem 0;
   gap: 1.5rem;
 }
 
@@ -525,7 +525,7 @@ a {
 
 .logo-image {
   display: block;
-  height: 124px;
+  height: 96px;
   width: auto;
 }
 

@@ -399,6 +399,20 @@ a {
   stroke-width: 1.2;
 }
 
+.country-lu #LU,
+.interactive-map.country-lu #LU {
+  fill: #2563eb;
+  stroke: #1e293b;
+  stroke-width: 1.2;
+}
+
+.country-pl #PL,
+.interactive-map.country-pl #PL {
+  fill: #2563eb;
+  stroke: #1e293b;
+  stroke-width: 1.2;
+}
+
 .country-section-list {
   margin-top: 2.5rem;
   display: flex;

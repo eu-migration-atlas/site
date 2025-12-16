@@ -506,8 +506,12 @@ a {
 /* Header & nav */
 
 .site-header {
-  background: var(--bg-surface-dark);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+  background: linear-gradient(
+    180deg,
+    #0c1a2a 0%,
+    #112b45 100%
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -548,9 +552,9 @@ a {
   width: auto;
 }
 
-.main-nav a {
+.site-header .main-nav a {
   text-decoration: none;
-  color: #cbd5e1;
+  color: #f1f5f9;
   font-size: 0.95rem;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
@@ -558,16 +562,16 @@ a {
   transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
-.main-nav a:hover {
-  border-color: rgba(148, 163, 184, 0.35);
-  background-color: rgba(15, 23, 42, 0.8);
-  color: #f1f5f9;
+.site-header .main-nav a:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background-color: rgba(12, 26, 42, 0.8);
+  color: #d6b25e;
 }
 
-.main-nav a.is-active {
-  color: #f8fafc;
-  border-color: rgba(37, 99, 235, 0.7);
-  background-color: rgba(37, 99, 235, 0.18);
+.site-header .main-nav a.is-active {
+  color: #d6b25e;
+  border-color: rgba(214, 178, 94, 0.4);
+  background-color: rgba(17, 43, 69, 0.6);
 }
 
 .theme-toggle {

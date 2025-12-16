@@ -1170,6 +1170,11 @@ body.index .hero-visual .interactive-map {
   min-height: 600px;                /* pas de hoogte eventueel aan */
 }
 
+/* Maak de grenzen van niet-EU-landen wit op de homepage zodat ze zichtbaar blijven */
+body.index .interactive-map svg path.non-eu {
+  stroke: rgba(255, 255, 255, 0.8);
+}
+
 /* Countries page filter section */
 
 .page-countries .filters-section {

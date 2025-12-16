@@ -14,7 +14,7 @@
 
   /* Light surfaces for hybride blocks */
   --bg-light: #f5f7fb;
-  --bg-light-soft: #ffffff;
+  --bg-light-soft: #f7fafc;
 
   /* Textcolors */
   --text-main: #0f172a;         /* primary textcolor on light */
@@ -61,8 +61,8 @@
 
 body.theme-dark {
   --bg-page: #121416;
-  --bg-surface-dark: #161a20;
-  --bg-surface-elevated: #1c2029;
+  --bg-surface-dark: #0f223e;
+  --bg-surface-elevated: #132b4f;
   --bg-light: #1a1f27;
   --bg-light-soft: #1f2530;
 
@@ -518,6 +518,17 @@ a {
   backdrop-filter: blur(10px);
 }
 
+body.theme-dark .site-header {
+  background: linear-gradient(
+    180deg,
+    #133867 0%,
+    #0f2f52 45%,
+    #0c2745 100%
+  );
+  border-bottom-color: rgba(118, 169, 250, 0.4);
+  box-shadow: 0 10px 28px rgba(12, 32, 61, 0.55);
+}
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -564,7 +575,7 @@ a {
 
 .site-header .main-nav a:hover {
   border-color: rgba(255, 255, 255, 0.18);
-  background-color: rgba(12, 26, 42, 0.8);
+  background-color: rgba(16, 52, 90, 0.72);
   color: #d6b25e;
 }
 
@@ -690,7 +701,7 @@ body.theme-light .theme-toggle {
 
 /* Light theme variant for the hero so the homepage starts on a bright canvas */
 body.theme-light .hero {
-  background: linear-gradient(135deg, #e9eef8 0%, #f6f9ff 45%, #ffffff 100%);
+  background: linear-gradient(135deg, #e9eef8 0%, #f6f9ff 45%, #f8fbff 100%);
   color: var(--text-main);
 }
 

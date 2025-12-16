@@ -1,4 +1,69 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Theme toggle
+  const THEME_STORAGE_KEY = 'atlas-theme';
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const body = document.body;
+
+  function applyTheme(theme) {
+    const isDark = theme === 'dark';
+    body.classList.toggle('theme-dark', isDark);
+    body.classList.toggle('theme-light', !isDark);
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+    const label = document.querySelector('.theme-toggle__label');
+    if (label) {
+      label.textContent = isDark ? 'Donker' : 'Licht';
+    }
+    const toggle = document.querySelector('.theme-toggle');
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', String(isDark));
+      toggle.setAttribute('aria-label', isDark ? 'Schakel naar lichte modus' : 'Schakel naar donkere modus');
+    }
+  }
+
+  function storedTheme() {
+    return localStorage.getItem(THEME_STORAGE_KEY);
+  }
+
+  function initThemeToggle() {
+    const headerInner = document.querySelector('.site-header .header-inner');
+    const nav = headerInner?.querySelector('.main-nav');
+
+    if (!headerInner || !nav) return;
+
+    const headerActions = document.createElement('div');
+    headerActions.className = 'header-actions';
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'theme-toggle';
+    toggle.innerHTML = `
+      <span class="theme-toggle__icon" aria-hidden="true">☀️</span>
+      <span class="theme-toggle__label">Licht</span>
+    `;
+
+    toggle.addEventListener('click', () => {
+      const nextTheme = body.classList.contains('theme-dark') ? 'light' : 'dark';
+      applyTheme(nextTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    });
+
+    headerActions.appendChild(nav);
+    headerActions.appendChild(toggle);
+    headerInner.appendChild(headerActions);
+  }
+
+  initThemeToggle();
+
+  const initialTheme = storedTheme() || (prefersDark.matches ? 'dark' : 'light');
+  applyTheme(initialTheme);
+
+  prefersDark.addEventListener('change', event => {
+    if (!storedTheme()) {
+      applyTheme(event.matches ? 'dark' : 'light');
+    }
+  });
+
   // Active nav link
   const navLinks = document.querySelectorAll('header nav a, .site-nav a');
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';

@@ -455,10 +455,20 @@ a {
 }
 
 .country-section-card {
-  background: #ffffff;
+  background: radial-gradient(circle at 26% 18%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 46%),
+    radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%),
+    linear-gradient(145deg, #10253f, #0c1b31 52%, #0a1426);
   border-radius: 1.5rem;
   padding: 1.75rem 2rem;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  border: none;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-light .country-section-card {
+  background: radial-gradient(circle at 26% 18%, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.75) 48%),
+    radial-gradient(circle at 82% 22%, rgba(59, 130, 246, 0.1), rgba(255, 255, 255, 0.75) 52%),
+    #ffffff;
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.12);
 }
 
 .country-section-tag {

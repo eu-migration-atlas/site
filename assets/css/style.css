@@ -3,6 +3,13 @@
    Colors, spacing, and breakpoints used across the site.
    ======================================== */
 :root {
+  /* Map ombré backgrounds */
+  --map-ombre-light: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.14), rgba(255, 255, 255, 0.7) 45%),
+    radial-gradient(circle at 80% 26%, rgba(59, 130, 246, 0.12), rgba(255, 255, 255, 0.7) 52%),
+    linear-gradient(145deg, #f7f9ff, #e9eef8);
+  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04) 45%),
+    radial-gradient(circle at 80% 26%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%),
+    rgba(255, 255, 255, 0.03);
   /* Brand / EU */
   --eu-blue: #003399;
   --eu-gold: #ffcc00;
@@ -89,6 +96,11 @@ body.theme-dark {
 body.theme-light {
   color-scheme: light;
   --heading-color: #1f3d73;
+}
+
+body.theme-dark .interactive-map {
+  background: var(--map-ombre-dark);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48);
 }
 
 /* ========================================
@@ -339,11 +351,10 @@ a {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: radial-gradient(circle at 28% 18%, rgba(37, 99, 235, 0.14), rgba(255, 255, 255, 0.7) 46%),
-    radial-gradient(circle at 82% 26%, rgba(59, 130, 246, 0.12), rgba(255, 255, 255, 0.7) 52%),
-    #f5f7fb;
+  background: var(--map-ombre-light);
   border-radius: 1rem;
-  border: 1px solid #e0e4ef;
+  border: none;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
   overflow: hidden;
   min-height: 400px;
 }
@@ -356,12 +367,8 @@ a {
 }
 
 .page-country .interactive-map {
-  background: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.65) 45%),
-    radial-gradient(circle at 80% 26%, rgba(59, 130, 246, 0.1), rgba(255, 255, 255, 0.65) 52%),
-    linear-gradient(145deg, #f7f9ff, #e9eef8);
-  border: none;
+  background: var(--map-ombre-light);
   border-radius: 18px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
 }
 
 .interactive-map svg {
@@ -796,10 +803,8 @@ body.theme-light .hero-eyebrow {
 }
 
 .hero-visual .interactive-map {
-  background: radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 42%),
-    radial-gradient(circle at 80% 24%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 48%),
-    rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: inherit;
+  border: none;
   min-height: 720px;
 }
 
@@ -1392,12 +1397,10 @@ body.index .hero-visual {
 
 /* Stijl de kaart zelf: donker met subtiele witachtige schaduw */
 body.index .hero-visual .interactive-map {
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.10), rgba(255,255,255,0.04) 45%),
-              radial-gradient(circle at 80% 24%, rgba(255,255,255,0.06), rgba(255,255,255,0.02) 50%),
-              rgba(255,255,255,0.04);
-  border: none;                     /* geen grenslijn rond de kaart */
+  background: var(--map-ombre-dark);
+  border: none;
   border-radius: 18px;              /* matcht de hero-visual */
-  box-shadow: 0 12px 32px rgba(255,255,255,0.08); /* licht schaduw-effect op donkere pagina */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
   min-height: 600px;                /* pas de hoogte eventueel aan */
 }
 
@@ -1410,10 +1413,8 @@ body.theme-light.index .hero-visual {
 }
 
 body.theme-light.index .hero-visual .interactive-map {
-  background: radial-gradient(circle at 34% 18%, rgba(37, 99, 235, 0.1), rgba(255, 255, 255, 0.6) 46%),
-              radial-gradient(circle at 80% 26%, rgba(59, 130, 246, 0.08), rgba(255, 255, 255, 0.6) 52%),
-              #ffffff;
-  border: 1px solid rgba(37, 56, 101, 0.16);
+  background: var(--map-ombre-light);
+  border: none;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
 }
 
@@ -1434,12 +1435,9 @@ body.theme-dark .overview-map {
 
 body.theme-dark.page-country .interactive-map,
 body.theme-dark .page-country .interactive-map {
-  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08), rgba(255,255,255,0.02) 45%),
-              radial-gradient(circle at 80% 26%, rgba(255,255,255,0.06), rgba(255,255,255,0.02) 50%),
-              rgba(255,255,255,0.03);
+  background: var(--map-ombre-dark);
   border: none;
   border-radius: 18px;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48);
 }
 
 body.theme-dark .page-country .interactive-map svg path {

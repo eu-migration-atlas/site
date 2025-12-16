@@ -63,15 +63,30 @@
         <div class="filter-lock">
           <span class="lock-icon" aria-hidden="true">🔒</span>
           <div>
-            <span class="lock-label">Filters vergrendeld</span>
-            <small>Ontgrendel met wachtwoord om aanpassingen te bewaren.</small>
+            <span class="lock-label">Locked controls</span>
+            <small>Enter the NHL password to edit filters and text. Changes are saved locally.</small>
           </div>
           <div class="lock-actions">
-            <input type="password" class="filter-password-input" placeholder="Wachtwoord" aria-label="Wachtwoord om filteraanpassingen te maken" />
-            <button type="button" class="filter-lock-toggle">Ontgrendel</button>
+            <input type="password" class="filter-password-input" placeholder="Password" aria-label="Password to unlock filter and text edits" />
+            <button type="button" class="filter-lock-toggle">Unlock</button>
           </div>
           <p class="filter-lock-status" role="status" aria-live="polite"></p>
         </div>
+      </div>
+      <div class="editable-texts">
+        <span class="filter-eyebrow">Page text (English)</span>
+        <p class="filter-description">
+          Update the intro and overview paragraphs shown on this page. Your changes stay in this browser once unlocked.
+        </p>
+        <label class="editable-field">
+          <span>Intro paragraph</span>
+          <textarea data-editable-field="intro" data-target-selector=".page-intro p"></textarea>
+        </label>
+        <label class="editable-field">
+          <span>Europe at a glance text</span>
+          <textarea data-editable-field="overview" data-target-selector=".overview-text p"></textarea>
+        </label>
+        <p class="editable-status" aria-live="polite"></p>
       </div>
       <div class="topic-filter">
         <span class="filter-eyebrow">Topics</span>

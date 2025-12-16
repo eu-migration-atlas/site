@@ -276,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const countryFilterPassword = countryFilterPanel?.querySelector('.filter-password-input');
   const countryFilterToggle = countryFilterPanel?.querySelector('.filter-lock-toggle');
   const countryFilterStatus = countryFilterPanel?.querySelector('.filter-lock-status');
+  const editableFields = countryFilterPanel?.querySelectorAll('[data-editable-field]');
+  const editableStatus = countryFilterPanel?.querySelector('.editable-status');
 
   function applyCountryFilters() {
     if (!countryCards.length) return;
@@ -412,7 +414,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const countryKey = countryFilterPanel.dataset.countryKey || 'country';
     const topicsStorageKey = `countryFilterSelections_${countryKey}`;
     const unlockStorageKey = `countryFilterUnlocked_${countryKey}`;
+    const textStoragePrefix = `countryText_${countryKey}_`;
     const password = 'NHL';
+
+    const textDefaults = {};
+
+    const syncEditableField = (field, value) => {
+      const targetSelector = field.dataset.targetSelector;
+      const target = targetSelector ? document.querySelector(targetSelector) : null;
+      if (target) {
+        target.textContent = value;
+      }
+      field.value = value;
+    };
+
+    const saveEditableField = field => {
+      const key = `${textStoragePrefix}${field.dataset.editableField}`;
+      localStorage.setItem(key, field.value);
+      if (editableStatus) {
+        editableStatus.textContent = 'Saved locally. Reload to see your text on return.';
+      }
+    };
+
+    const loadEditableFields = () => {
+      if (!editableFields?.length) return;
+      editableFields.forEach(field => {
+        const key = `${textStoragePrefix}${field.dataset.editableField}`;
+        const saved = localStorage.getItem(key);
+        if (!textDefaults[key]) {
+          const targetSelector = field.dataset.targetSelector;
+          const target = targetSelector ? document.querySelector(targetSelector) : null;
+          textDefaults[key] = (target?.textContent || '').trim();
+        }
+        const value = saved !== null ? saved : textDefaults[key] || '';
+        syncEditableField(field, value);
+      });
+    };
 
     const setActiveTopics = topics => {
       countryFilterChips.forEach(chip => {
@@ -445,16 +482,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (countryFilterApply) countryFilterApply.disabled = locked;
       if (countryFilterReset) countryFilterReset.disabled = locked;
+      editableFields?.forEach(field => {
+        field.disabled = locked;
+      });
 
       if (countryFilterStatus) {
         countryFilterStatus.textContent = locked
-          ? 'Filters zijn vergrendeld. Vul het wachtwoord in om aan te passen.'
-          : 'Filters zijn ontgrendeld. Je aanpassingen worden opgeslagen.';
+          ? 'Presets and page text are locked. Enter the password to edit and save.'
+          : 'Unlocked. Your filters and text will be saved in this browser.';
       }
     };
 
     const savedTopics = loadSavedTopics();
     setActiveTopics(savedTopics.length ? savedTopics : defaultTopics);
+
+    loadEditableFields();
 
     const isUnlocked = localStorage.getItem(unlockStorageKey) === 'true';
     setLockedState(!isUnlocked);
@@ -469,6 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
       countryFilterReset.addEventListener('click', () => {
         setActiveTopics(defaultTopics);
         saveActiveTopics();
+        loadEditableFields();
       });
     }
 
@@ -484,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setLockedState(!unlocked);
 
         if (!unlocked && countryFilterStatus) {
-          countryFilterStatus.textContent = 'Onjuist wachtwoord. Probeer het opnieuw.';
+          countryFilterStatus.textContent = 'Incorrect password. Try again with the NHL code.';
         }
       });
     }
@@ -501,5 +544,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = destination.pathname + destination.search;
       });
     }
+
+    editableFields?.forEach(field => {
+      field.addEventListener('input', () => {
+        syncEditableField(field, field.value);
+        saveEditableField(field);
+      });
+    });
   }
 });

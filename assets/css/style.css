@@ -1812,7 +1812,8 @@ body.index .hero-visual .interactive-map {
 
 .country-filter-panel.is-locked .filter-chip,
 .country-filter-panel.is-locked .filter-apply,
-.country-filter-panel.is-locked .filter-reset {
+.country-filter-panel.is-locked .filter-reset,
+.country-filter-panel.is-locked .editable-field textarea {
   opacity: 0.55;
   cursor: not-allowed;
 }
@@ -1820,5 +1821,42 @@ body.index .hero-visual .interactive-map {
 .country-filter-panel button:disabled,
 .country-filter-panel .filter-chip:disabled {
   pointer-events: none;
+}
+
+.country-filter-panel .editable-texts {
+  margin: 1.5rem 0 1rem;
+  padding: 1.25rem;
+  border: 1px solid #e3e7ef;
+  border-radius: 12px;
+  background: #f9fbff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.country-filter-panel .editable-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.country-filter-panel .editable-field span {
+  font-weight: 700;
+  color: #1f2a44;
+}
+
+.country-filter-panel .editable-field textarea {
+  min-height: 110px;
+  border: 1px solid #cdd5e0;
+  border-radius: 10px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.98rem;
+  resize: vertical;
+}
+
+.country-filter-panel .editable-status {
+  margin: 0.25rem 0 0;
+  color: #0d3b66;
+  font-weight: 600;
 }
 

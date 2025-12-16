@@ -1694,6 +1694,13 @@ body.index .hero-visual .interactive-map {
   background: #f8fafc;
 }
 
+.country-filter-panel.is-compact {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding: 1.25rem 1rem;
+  border-radius: 12px;
+}
+
 .country-filter-panel .filter-description {
   margin: 0 0 1rem;
   color: #4b5563;
@@ -1704,6 +1711,22 @@ body.index .hero-visual .interactive-map {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+.country-filter-panel .filter-save {
+  background: #0d3b66;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.3rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.country-filter-panel .filter-save:hover {
+  background: #0b3258;
+  transform: translateY(-1px);
 }
 
 .country-filter-panel .filter-apply {
@@ -1831,6 +1854,12 @@ body.index .hero-visual .interactive-map {
   background: #f9fbff;
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+}
+
+.country-filter-panel .editable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0.75rem;
 }
 

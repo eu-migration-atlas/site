@@ -82,20 +82,20 @@
       </article>
     </section>
 
-    <section class="country-filter-panel" data-default-topics="strict-policy" data-country-key="poland">
+    <section class="country-filter-panel is-compact" data-default-topics="strict-policy" data-country-key="poland" data-save-mode="shared-link">
       <div class="filters-heading">
         <span class="filters-eyebrow">Country filter presets</span>
-        <h2 class="filters-title">Select the themes that fit Poland</h2>
+        <h2 class="filters-title">Edit Poland’s highlights</h2>
       </div>
       <p class="filter-description">
-        Choose the policy themes that best describe Poland. Once unlocked, you can also edit the section text below. Everything is saved locally.
+        Enter the password <strong>NHL</strong> at the bottom to unlock edits. Press Save to update the texts on this page for everyone using the link.
       </p>
       <div class="filters-controls">
         <div class="filter-lock">
           <span class="lock-icon" aria-hidden="true">🔒</span>
           <div>
             <span class="lock-label">Locked controls</span>
-            <small>Enter the NHL password to update filters and section copy at the bottom of the page.</small>
+            <small>Unlock with the NHL password to adjust the texts below and keep them on this page.</small>
           </div>
           <div class="lock-actions">
             <input type="password" class="filter-password-input" placeholder="Password" aria-label="Password to unlock filter and text edits" />
@@ -105,26 +105,28 @@
         </div>
       </div>
       <div class="editable-texts">
-        <span class="filter-eyebrow">Section text (English)</span>
+        <span class="filter-eyebrow">Editable sections</span>
         <p class="filter-description">
-          Adjust the copy for each country section. Changes stay in this browser once the NHL password is entered.
+          Update the copy for each section once unlocked. Saving refreshes this page’s link so others can see it.
         </p>
-        <label class="editable-field">
-          <span>Political climate</span>
-          <textarea data-editable-field="political" data-target-selector=".section-political"></textarea>
-        </label>
-        <label class="editable-field">
-          <span>Migration statistics</span>
-          <textarea data-editable-field="migration" data-target-selector=".section-migration"></textarea>
-        </label>
-        <label class="editable-field">
-          <span>Current policies</span>
-          <textarea data-editable-field="policies" data-target-selector=".section-policies"></textarea>
-        </label>
-        <label class="editable-field">
-          <span>Application possibilities</span>
-          <textarea data-editable-field="application" data-target-selector=".section-application"></textarea>
-        </label>
+        <div class="editable-grid">
+          <label class="editable-field">
+            <span>Political climate</span>
+            <textarea data-editable-field="political" data-target-selector=".section-political"></textarea>
+          </label>
+          <label class="editable-field">
+            <span>Migration statistics</span>
+            <textarea data-editable-field="migration" data-target-selector=".section-migration"></textarea>
+          </label>
+          <label class="editable-field">
+            <span>Current policies</span>
+            <textarea data-editable-field="policies" data-target-selector=".section-policies"></textarea>
+          </label>
+          <label class="editable-field">
+            <span>Application possibilities</span>
+            <textarea data-editable-field="application" data-target-selector=".section-application"></textarea>
+          </label>
+        </div>
         <p class="editable-status" aria-live="polite"></p>
       </div>
       <div class="topic-filter">
@@ -137,8 +139,9 @@
         </div>
       </div>
       <div class="filter-actions">
+        <button type="button" class="filter-save">Save changes</button>
+        <button type="button" class="filter-reset">Reset</button>
         <button type="button" class="filter-apply">Filter countries</button>
-        <button type="button" class="filter-reset">Reset to defaults</button>
       </div>
     </section>
   </main>

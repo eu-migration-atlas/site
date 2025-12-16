@@ -273,6 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const countryFilterChips = countryFilterPanel?.querySelectorAll('.filter-chip');
   const countryFilterApply = countryFilterPanel?.querySelector('.filter-apply');
   const countryFilterReset = countryFilterPanel?.querySelector('.filter-reset');
+  const countryFilterSave = countryFilterPanel?.querySelector('.filter-save');
   const countryFilterPassword = countryFilterPanel?.querySelector('.filter-password-input');
   const countryFilterToggle = countryFilterPanel?.querySelector('.filter-lock-toggle');
   const countryFilterStatus = countryFilterPanel?.querySelector('.filter-lock-status');
@@ -412,12 +413,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .split(/\s+/)
       .filter(Boolean);
     const countryKey = countryFilterPanel.dataset.countryKey || 'country';
+    const saveMode = countryFilterPanel.dataset.saveMode || 'local';
     const topicsStorageKey = `countryFilterSelections_${countryKey}`;
     const unlockStorageKey = `countryFilterUnlocked_${countryKey}`;
     const textStoragePrefix = `countryText_${countryKey}_`;
+    const sharedParamKey = `${countryKey}State`;
     const password = 'NHL';
 
     const textDefaults = {};
+    const useSharedLink = saveMode === 'shared-link';
 
     const syncEditableField = (field, value) => {
       const targetSelector = field.dataset.targetSelector;
@@ -429,6 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const saveEditableField = field => {
+      if (useSharedLink) return;
       const key = `${textStoragePrefix}${field.dataset.editableField}`;
       localStorage.setItem(key, field.value);
       if (editableStatus) {
@@ -440,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!editableFields?.length) return;
       editableFields.forEach(field => {
         const key = `${textStoragePrefix}${field.dataset.editableField}`;
-        const saved = localStorage.getItem(key);
+        const saved = useSharedLink ? null : localStorage.getItem(key);
         if (!textDefaults[key]) {
           const targetSelector = field.dataset.targetSelector;
           const target = targetSelector ? document.querySelector(targetSelector) : null;
@@ -451,28 +456,113 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
+    const decodeSharedState = encoded => {
+      try {
+        const json = decodeURIComponent(escape(atob(encoded)));
+        return JSON.parse(json);
+      } catch (error) {
+        console.warn('Could not decode shared state', error);
+        return null;
+      }
+    };
+
+    const encodeSharedState = state => {
+      try {
+        const json = JSON.stringify(state);
+        return btoa(unescape(encodeURIComponent(json)));
+      } catch (error) {
+        console.warn('Could not encode shared state', error);
+        return '';
+      }
+    };
+
     const setActiveTopics = topics => {
       countryFilterChips.forEach(chip => {
         chip.classList.toggle('active', topics.includes(chip.dataset.topic));
       });
     };
 
-    const saveActiveTopics = () => {
-      const activeTopics = Array.from(countryFilterChips)
+    const getActiveTopics = () =>
+      Array.from(countryFilterChips)
         .filter(chip => chip.classList.contains('active'))
         .map(chip => chip.dataset.topic)
         .filter(Boolean);
 
-      localStorage.setItem(topicsStorageKey, activeTopics.join(','));
+    const saveActiveTopics = () => {
+      const activeTopics = getActiveTopics();
+
+      if (!useSharedLink) {
+        localStorage.setItem(topicsStorageKey, activeTopics.join(','));
+      }
       return activeTopics;
     };
 
     const loadSavedTopics = () => {
+      if (useSharedLink) return [];
       const saved = localStorage.getItem(topicsStorageKey) || '';
       return saved
         .split(',')
         .map(value => value.trim())
         .filter(Boolean);
+    };
+
+    const applyState = state => {
+      if (!state) return;
+      const topics = Array.isArray(state.topics) ? state.topics : [];
+      if (topics.length) {
+        setActiveTopics(topics);
+      }
+
+      if (state.texts && editableFields?.length) {
+        editableFields.forEach(field => {
+          const key = field.dataset.editableField;
+          if (key && state.texts[key] !== undefined) {
+            syncEditableField(field, state.texts[key]);
+          }
+        });
+      }
+    };
+
+    const loadSharedState = () => {
+      if (!useSharedLink) return false;
+      const params = new URLSearchParams(window.location.search);
+      const encoded = params.get(sharedParamKey);
+      if (!encoded) return false;
+      const state = decodeSharedState(encoded);
+      applyState(state);
+      return Boolean(state);
+    };
+
+    const buildSharedState = () => {
+      const texts = {};
+      editableFields?.forEach(field => {
+        const key = field.dataset.editableField;
+        if (key) {
+          texts[key] = field.value;
+        }
+      });
+
+      return {
+        topics: getActiveTopics(),
+        texts
+      };
+    };
+
+    const persistState = () => {
+      if (useSharedLink) {
+        const state = buildSharedState();
+        const encoded = encodeSharedState(state);
+        const url = new URL(window.location.href);
+        url.searchParams.set(sharedParamKey, encoded);
+        window.history.replaceState({}, '', url.toString());
+        if (editableStatus) {
+          editableStatus.textContent = 'Saved to this page link. Share the URL so others can view the updates.';
+        }
+        return;
+      }
+
+      editableFields?.forEach(field => saveEditableField(field));
+      saveActiveTopics();
     };
 
     const setLockedState = locked => {
@@ -482,6 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (countryFilterApply) countryFilterApply.disabled = locked;
       if (countryFilterReset) countryFilterReset.disabled = locked;
+      if (countryFilterSave) countryFilterSave.disabled = locked;
       editableFields?.forEach(field => {
         field.disabled = locked;
       });
@@ -489,16 +580,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (countryFilterStatus) {
         countryFilterStatus.textContent = locked
           ? 'Presets and section text are locked. Enter the password to edit and save.'
-          : 'Unlocked. Your filters and section text will be saved in this browser.';
+          : useSharedLink
+            ? 'Unlocked. Save to refresh the page link so everyone sees the changes.'
+            : 'Unlocked. Your filters and section text will be saved in this browser.';
       }
     };
 
     const savedTopics = loadSavedTopics();
-    setActiveTopics(savedTopics.length ? savedTopics : defaultTopics);
+    const sharedStateLoaded = loadSharedState();
+    if (!sharedStateLoaded) {
+      setActiveTopics(savedTopics.length ? savedTopics : defaultTopics);
+      loadEditableFields();
+    }
 
-    loadEditableFields();
-
-    const isUnlocked = localStorage.getItem(unlockStorageKey) === 'true';
+    const isUnlocked = !useSharedLink && localStorage.getItem(unlockStorageKey) === 'true';
     setLockedState(!isUnlocked);
 
     countryFilterChips.forEach(chip => {
@@ -510,8 +605,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (countryFilterReset) {
       countryFilterReset.addEventListener('click', () => {
         setActiveTopics(defaultTopics);
-        saveActiveTopics();
         loadEditableFields();
+
+        if (useSharedLink) {
+          const url = new URL(window.location.href);
+          url.searchParams.delete(sharedParamKey);
+          window.history.replaceState({}, '', url.toString());
+          if (editableStatus) {
+            editableStatus.textContent = 'Reverted to default text and topics for this link.';
+          }
+        } else {
+          saveActiveTopics();
+        }
       });
     }
 
@@ -520,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const value = countryFilterPassword.value.trim();
         const unlocked = value === password;
 
-        if (unlocked) {
+        if (unlocked && !useSharedLink) {
           localStorage.setItem(unlockStorageKey, 'true');
         }
 
@@ -545,10 +650,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+    if (countryFilterSave) {
+      countryFilterSave.addEventListener('click', persistState);
+    }
+
     editableFields?.forEach(field => {
       field.addEventListener('input', () => {
         syncEditableField(field, field.value);
-        saveEditableField(field);
+        if (!useSharedLink) {
+          saveEditableField(field);
+        }
       });
     });
   }

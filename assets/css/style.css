@@ -12,6 +12,9 @@
   --bg-surface-dark: #0f192a;  /* header/hero/footers */
   --bg-surface-elevated: #0b1624;
 
+  /* Headings */
+  --heading-color: #1f3d73;
+
   /* Light surfaces for hybride blocks */
   --bg-light: #f5f7fb;
   --bg-light-soft: #eef2f9;
@@ -73,6 +76,8 @@ body.theme-dark {
   --text-muted-light: #cbd5e1;
   --text-invert: #e5e7eb;
 
+  --heading-color: var(--eu-gold);
+
   --border-soft: rgba(148, 163, 184, 0.35);
   --border-soft-light: rgba(148, 163, 184, 0.3);
   --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.35);
@@ -83,6 +88,7 @@ body.theme-dark {
 
 body.theme-light {
   color-scheme: light;
+  --heading-color: #1f3d73;
 }
 
 /* ========================================
@@ -143,7 +149,7 @@ body.compare-page {
 h1, h2, h3, h4 {
   font-family: "Merriweather", "Georgia", serif;
   letter-spacing: 0.01em;
-  color: var(--text-strong);
+  color: var(--heading-color);
 }
 
 p {
@@ -735,7 +741,7 @@ body.theme-light .theme-toggle:focus-visible {
 .hero h1 {
   font-size: 2.4rem;
   margin: 0 0 0.8rem;
-  color: var(--text-invert);
+  color: var(--heading-color);
 }
 
 .hero-sub {
@@ -755,10 +761,6 @@ body.theme-light .theme-toggle:focus-visible {
 body.theme-light .hero {
   background: linear-gradient(135deg, #e9eef8 0%, #f6f9ff 45%, #f8fbff 100%);
   color: var(--text-main);
-}
-
-body.theme-light .hero h1 {
-  color: var(--text-strong);
 }
 
 body.theme-light .hero-sub {

@@ -177,13 +177,21 @@ document.addEventListener('DOMContentLoaded', () => {
           map.appendChild(tooltip);
 
           const paths = svg.querySelectorAll('path[id]');
-          const countryLinks = {
+          const countryProfiles = {
             it: 'countries/italy.html',
             es: 'countries/spain.html',
             pt: 'countries/portugal.html',
             lu: 'countries/luxembourg.html',
             pl: 'countries/poland.html'
           };
+
+          // EU Member States get at least a fallback link to the Countries overview
+          // so the homepage map always opens a relevant page when clicked.
+          const euCountryCodes = new Set([
+            'at', 'be', 'bg', 'hr', 'cy', 'cz', 'dk', 'ee', 'fi', 'fr', 'de',
+            'gr', 'hu', 'ie', 'it', 'lv', 'lt', 'lu', 'mt', 'nl', 'pl', 'pt',
+            'ro', 'sk', 'si', 'es', 'se'
+          ]);
 
           // Resolve the correct base path so map clicks work on GitHub Pages and local dev
           const baseHref = (() => {
@@ -203,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
           paths.forEach(path => {
             const countryName = path.getAttribute('name') || path.id;
             const countryCode = (path.id || '').toLowerCase();
-            const target = countryLinks[countryCode];
+            const target = countryProfiles[countryCode] || (euCountryCodes.has(countryCode) ? `countries.html#${countryCode}` : null);
 
             path.addEventListener('mouseenter', () => {
               tooltip.textContent = countryName;

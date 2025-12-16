@@ -280,56 +280,50 @@ a {
   box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.08);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
-.flag-italy { /* no more background here */ }
-.flag-italy::before {
-  content: "";
+.country-flag::before {
+  content: var(--flag-emoji, "");
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    #009246 0%,
-    #009246 33.33%,
-    #ffffff 33.33%,
-    #ffffff 66.66%,
-    #ce2b37 66.66%,
-    #ce2b37 100%
-  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.flag-portugal { /* no background here either */ }
-.flag-portugal::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    #006600 0%,
-    #006600 40%,
-    #ff0000 40%,
-    #ff0000 100%
-  );
-}
-
-.flag-spain { /* no background here */ }
-
-.flag-spain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  /* Spanish flag: red – yellow – red (horizontal) */
-  background: linear-gradient(
-    180deg,
-    #aa151b 0%,
-    #aa151b 25%,
-    #f1bf00 25%,
-    #f1bf00 75%,
-    #aa151b 75%,
-    #aa151b 100%
-  );
-}
+.flag-austria { --flag-emoji: "🇦🇹"; }
+.flag-belgium { --flag-emoji: "🇧🇪"; }
+.flag-bulgaria { --flag-emoji: "🇧🇬"; }
+.flag-croatia { --flag-emoji: "🇭🇷"; }
+.flag-cyprus { --flag-emoji: "🇨🇾"; }
+.flag-czechia { --flag-emoji: "🇨🇿"; }
+.flag-denmark { --flag-emoji: "🇩🇰"; }
+.flag-estonia { --flag-emoji: "🇪🇪"; }
+.flag-finland { --flag-emoji: "🇫🇮"; }
+.flag-france { --flag-emoji: "🇫🇷"; }
+.flag-germany { --flag-emoji: "🇩🇪"; }
+.flag-greece { --flag-emoji: "🇬🇷"; }
+.flag-hungary { --flag-emoji: "🇭🇺"; }
+.flag-ireland { --flag-emoji: "🇮🇪"; }
+.flag-italy { --flag-emoji: "🇮🇹"; }
+.flag-latvia { --flag-emoji: "🇱🇻"; }
+.flag-lithuania { --flag-emoji: "🇱🇹"; }
+.flag-luxembourg { --flag-emoji: "🇱🇺"; }
+.flag-malta { --flag-emoji: "🇲🇹"; }
+.flag-netherlands { --flag-emoji: "🇳🇱"; }
+.flag-poland { --flag-emoji: "🇵🇱"; }
+.flag-portugal { --flag-emoji: "🇵🇹"; }
+.flag-romania { --flag-emoji: "🇷🇴"; }
+.flag-slovakia { --flag-emoji: "🇸🇰"; }
+.flag-slovenia { --flag-emoji: "🇸🇮"; }
+.flag-spain { --flag-emoji: "🇪🇸"; }
+.flag-sweden { --flag-emoji: "🇸🇪"; }
 
 .country-overview {
   margin-top: 1.75rem;

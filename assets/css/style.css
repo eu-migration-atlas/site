@@ -76,7 +76,7 @@ body.theme-dark {
   --text-muted-light: #cbd5e1;
   --text-invert: #e5e7eb;
 
-  --heading-color: var(--eu-gold);
+  --heading-color: #f2c94c;
 
   --border-soft: rgba(148, 163, 184, 0.35);
   --border-soft-light: rgba(148, 163, 184, 0.3);
@@ -505,20 +505,23 @@ a {
   max-width: 48rem;
 }
 
-.section-light,
-.section-light p,
-.section-light h1,
-.section-light h2,
-.section-light h3,
-.section-light h4 {
-  color: var(--text-on-light);
-}
-
 .section-light {
   background: var(--bg-light);
   border-top: 1px solid var(--border-soft-light);
   border-bottom: 1px solid var(--border-soft-light);
   padding: 2.5rem 0;
+  color: var(--text-on-light);
+}
+
+.section-light p {
+  color: var(--text-on-light);
+}
+
+.section-light h1,
+.section-light h2,
+.section-light h3,
+.section-light h4 {
+  color: var(--heading-color);
 }
 
 .section-light .card {

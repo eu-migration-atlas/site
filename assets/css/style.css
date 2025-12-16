@@ -280,72 +280,18 @@ body.compare-page {
    - Any accidental text inside stays hidden (e.g., "FR")
    - Emoji comes only from ::before */
 .country-flag {
-  width: 42px;
-  height: 28px;
-  border-radius: 6px;
+  width: 28px;
+  height: 20px;
+  border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  position: relative;
-
   box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.08);
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Hide any inner text */
-  color: transparent;
-  font-size: 0;
-  line-height: 0;
-
-  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
-  user-select: none;
-  aspect-ratio: 3 / 2;
+  object-fit: cover;
   flex: 0 0 auto;
+  display: inline-block;
+  background: #f8fafc;
 }
-
-.country-flag::before {
-  content: var(--flag-emoji, "");
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  line-height: 1;
-  color: initial;
-}
-
-/* Emoji mappings */
-.flag-austria { --flag-emoji: "🇦🇹"; }
-.flag-belgium { --flag-emoji: "🇧🇪"; }
-.flag-bulgaria { --flag-emoji: "🇧🇬"; }
-.flag-croatia { --flag-emoji: "🇭🇷"; }
-.flag-cyprus { --flag-emoji: "🇨🇾"; }
-.flag-czechia { --flag-emoji: "🇨🇿"; }
-.flag-denmark { --flag-emoji: "🇩🇰"; }
-.flag-estonia { --flag-emoji: "🇪🇪"; }
-.flag-finland { --flag-emoji: "🇫🇮"; }
-.flag-france { --flag-emoji: "🇫🇷"; }
-.flag-germany { --flag-emoji: "🇩🇪"; }
-.flag-greece { --flag-emoji: "🇬🇷"; }
-.flag-hungary { --flag-emoji: "🇭🇺"; }
-.flag-ireland { --flag-emoji: "🇮🇪"; }
-.flag-italy { --flag-emoji: "🇮🇹"; }
-.flag-latvia { --flag-emoji: "🇱🇻"; }
-.flag-lithuania { --flag-emoji: "🇱🇹"; }
-.flag-luxembourg { --flag-emoji: "🇱🇺"; }
-.flag-malta { --flag-emoji: "🇲🇹"; }
-.flag-netherlands { --flag-emoji: "🇳🇱"; }
-.flag-poland { --flag-emoji: "🇵🇱"; }
-.flag-portugal { --flag-emoji: "🇵🇹"; }
-.flag-romania { --flag-emoji: "🇷🇴"; }
-.flag-slovakia { --flag-emoji: "🇸🇰"; }
-.flag-slovenia { --flag-emoji: "🇸🇮"; }
-.flag-spain { --flag-emoji: "🇪🇸"; }
-.flag-sweden { --flag-emoji: "🇸🇪"; }
 
 /* ========================================
    Country overview + map
@@ -410,15 +356,17 @@ body.theme-dark .page-country .interactive-map {
   height: auto;
 }
 
-.interactive-map svg path {
+.interactive-map svg path[id] {
   fill: none;
-  stroke: var(--map-stroke-eu);
-  stroke-width: 0.4;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
   transition: fill var(--transition-fast), stroke var(--transition-fast), stroke-width var(--transition-fast);
 }
 
 .interactive-map svg path.eu-member {
   fill: #c3c9da;
+  stroke: rgba(255, 255, 255, 0.45);
 }
 
 body.theme-dark .page-country .interactive-map svg path.eu-member {
@@ -427,7 +375,7 @@ body.theme-dark .page-country .interactive-map svg path.eu-member {
 
 .interactive-map svg path.non-eu {
   fill: transparent;
-  stroke: var(--map-stroke-non-eu);
+  stroke: rgba(255, 255, 255, 0.25);
 }
 
 .interactive-map svg path.is-clickable {
@@ -438,6 +386,10 @@ body.theme-dark .page-country .interactive-map svg path.eu-member {
   fill: var(--eu-gold);
   stroke: #0f172a;
   stroke-width: 0.8;
+}
+
+.interactive-map svg path.is-highlighted {
+  stroke-width: 2;
 }
 
 .interactive-map .map-tooltip {

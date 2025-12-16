@@ -49,6 +49,43 @@
       <div class="interactive-map" data-map-src="../assets/maps/europe.svg" data-highlight="pl" aria-label="Interactive map of Europe highlighting Poland"></div>
    </div>
 </section>
+
+    <section class="country-filter-panel" data-default-topics="strict-policy" data-country-key="poland">
+      <div class="filters-heading">
+        <span class="filters-eyebrow">Country filter presets</span>
+        <h2 class="filters-title">Select the themes that fit Poland</h2>
+      </div>
+      <p class="filter-description">
+        Choose the policy themes that best describe Poland. Use them to filter the countries page for similar approaches.
+      </p>
+      <div class="filters-controls">
+        <div class="filter-lock">
+          <span class="lock-icon" aria-hidden="true">🔒</span>
+          <div>
+            <span class="lock-label">Filters vergrendeld</span>
+            <small>Ontgrendel met wachtwoord om aanpassingen te bewaren.</small>
+          </div>
+          <div class="lock-actions">
+            <input type="password" class="filter-password-input" placeholder="Wachtwoord" aria-label="Wachtwoord om filteraanpassingen te maken" />
+            <button type="button" class="filter-lock-toggle">Ontgrendel</button>
+          </div>
+          <p class="filter-lock-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="topic-filter">
+        <span class="filter-eyebrow">Topics</span>
+        <div class="filter-chips">
+          <button type="button" class="filter-chip" data-topic="high-recognition">High recognition rate</button>
+          <button type="button" class="filter-chip" data-topic="strict-policy">Strict asylum policy</button>
+          <button type="button" class="filter-chip" data-topic="labour-migration">High labour migration</button>
+          <button type="button" class="filter-chip" data-topic="humanitarian-focus">Humanitarian focus</button>
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button type="button" class="filter-apply">Filter countries</button>
+        <button type="button" class="filter-reset">Reset to defaults</button>
+      </div>
+    </section>
       
     <section class="country-section-list">
       <article class="country-section-card">

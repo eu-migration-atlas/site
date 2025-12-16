@@ -280,17 +280,123 @@ body.compare-page {
    - Any accidental text inside stays hidden (e.g., "FR")
    - Emoji comes only from ::before */
 .country-flag {
-  width: 28px;
-  height: 20px;
-  border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.08);
-  object-fit: cover;
-  flex: 0 0 auto;
   display: inline-block;
-  background: #f8fafc;
+  width: 32px;
+  height: 22px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.country-flag.flag-at {
+  background-image: url("../flags/at.svg");
+}
+
+.country-flag.flag-be {
+  background-image: url("../flags/be.svg");
+}
+
+.country-flag.flag-bg {
+  background-image: url("../flags/bg.svg");
+}
+
+.country-flag.flag-cy {
+  background-image: url("../flags/cy.svg");
+}
+
+.country-flag.flag-cz {
+  background-image: url("../flags/cz.svg");
+}
+
+.country-flag.flag-de {
+  background-image: url("../flags/de.svg");
+}
+
+.country-flag.flag-dk {
+  background-image: url("../flags/dk.svg");
+}
+
+.country-flag.flag-ee {
+  background-image: url("../flags/ee.svg");
+}
+
+.country-flag.flag-es {
+  background-image: url("../flags/es.svg");
+}
+
+.country-flag.flag-fi {
+  background-image: url("../flags/fi.svg");
+}
+
+.country-flag.flag-fr {
+  background-image: url("../flags/fr.svg");
+}
+
+.country-flag.flag-gr {
+  background-image: url("../flags/gr.svg");
+}
+
+.country-flag.flag-hr {
+  background-image: url("../flags/hr.svg");
+}
+
+.country-flag.flag-hu {
+  background-image: url("../flags/hu.svg");
+}
+
+.country-flag.flag-ie {
+  background-image: url("../flags/ie.svg");
+}
+
+.country-flag.flag-it {
+  background-image: url("../flags/it.svg");
+}
+
+.country-flag.flag-lt {
+  background-image: url("../flags/lt.svg");
+}
+
+.country-flag.flag-lu {
+  background-image: url("../flags/lu.svg");
+}
+
+.country-flag.flag-lv {
+  background-image: url("../flags/lv.svg");
+}
+
+.country-flag.flag-mt {
+  background-image: url("../flags/mt.svg");
+}
+
+.country-flag.flag-nl {
+  background-image: url("../flags/nl.svg");
+}
+
+.country-flag.flag-pl {
+  background-image: url("../flags/pl.svg");
+}
+
+.country-flag.flag-pt {
+  background-image: url("../flags/pt.svg");
+}
+
+.country-flag.flag-ro {
+  background-image: url("../flags/ro.svg");
+}
+
+.country-flag.flag-se {
+  background-image: url("../flags/se.svg");
+}
+
+.country-flag.flag-si {
+  background-image: url("../flags/si.svg");
+}
+
+.country-flag.flag-sk {
+  background-image: url("../flags/sk.svg");
 }
 
 /* ========================================

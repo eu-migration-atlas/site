@@ -1081,14 +1081,14 @@ body.theme-dark .country-card {
 .compare-page .country-select {
   width: 100%;
   max-width: 100%;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 2.6rem 0.6rem 1.1rem;
   border-radius: 999px;
-  border: 1px solid var(--cmp-card-border);
-  background: var(--cmp-card-bg);
-  color: var(--cmp-card-text);
+  border: 1px solid #e4e8ed;
+  background: #ffffff;
+  color: #1d4ed8;
   font: inherit;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
   cursor: pointer;
 
@@ -1096,26 +1096,24 @@ body.theme-dark .country-card {
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231f2a44' d='M1.41 0L6 4.58 10.59 0 12 1.41 6 7.41 0 1.41z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231d4ed8' d='M1.41 0L6 4.58 10.59 0 12 1.41 6 7.41 0 1.41z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1.1rem center;
   background-size: 12px 8px;
 
-  box-shadow: var(--cmp-card-shadow);
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast),
-    border-color var(--transition-fast);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
-.compare-page .country-select:hover {
-  border-color: rgba(129, 140, 248, 0.6);
-  transform: translateY(-1px);
+.compare-page .country-select:hover,
+.compare-page .country-select:focus-visible {
+  border-color: #2563eb;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
 }
 
 .compare-page .country-select:focus-visible {
-  outline: 2px solid #4f46e5;
-  outline-offset: 2px;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 1px #4f46e522, 0 6px 16px rgba(0, 0, 0, 0.14);
+  outline: none;
+  transform: translateY(-1px);
 }
 
 .compare-page {

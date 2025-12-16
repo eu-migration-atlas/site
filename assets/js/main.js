@@ -380,16 +380,30 @@ document.addEventListener('DOMContentLoaded', () => {
       .map(chip => chip.dataset.topic)
       .filter(Boolean);
 
+    const topicExclusions = {
+      'high-recognition': new Set(['ee', 'fr']),
+      'strict-policy': new Set(['gr', 'it', 'lv', 'lt']),
+      'labour-migration': new Set(['at', 'hr', 'ro', 'dk', 'fi', 'ee', 'lt', 'hu']),
+      'humanitarian-focus': new Set(['fr', 'es', 'fi', 'si', 'hr', 'ro', 'it'])
+    };
+
+    const isExcludedByTopic = cardId =>
+      activeTopics.some(topic => topicExclusions[topic]?.has(cardId));
+
     countryCards.forEach(card => {
       const name = (card.querySelector('h2')?.textContent || '').toLowerCase();
       const cardRegion = (card.dataset.region || '').toLowerCase();
       const cardTopics = (card.dataset.topic || '').split(/\s+/).filter(Boolean);
+      const cardId = (card.id || '').toLowerCase();
 
       const matchesSearch = !searchTerm || name.includes(searchTerm);
       const matchesRegion = !regionValue || cardRegion === regionValue;
       const matchesTopics = activeTopics.every(topic => cardTopics.includes(topic));
+      const excluded = isExcludedByTopic(cardId);
 
-      card.style.display = matchesSearch && matchesRegion && matchesTopics ? '' : 'none';
+      card.style.display = matchesSearch && matchesRegion && matchesTopics && !excluded
+        ? ''
+        : 'none';
     });
   }
 

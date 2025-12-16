@@ -869,6 +869,11 @@ body.theme-light .hero-eyebrow {
   box-shadow: 0 14px 32px rgba(37, 99, 235, 0.12);
 }
 
+body.theme-dark .country-card:hover {
+  border-color: rgba(229, 231, 235, 0.6);
+  box-shadow: 0 14px 32px rgba(255, 255, 255, 0.14);
+}
+
 .country-card h2 {
   margin: 0;
 }

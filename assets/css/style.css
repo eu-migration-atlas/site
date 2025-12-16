@@ -104,20 +104,39 @@ body {
 
 /* === Compare page theme === */
 .compare-page {
-  --cmp-page-bg: #e5edf5;         /* soft background */
-  --cmp-panel-bg: #111827;        /* dark panel */
-  --cmp-panel-inner-bg: #0b1220;  /* subtle darker edge layer */
-  --cmp-card-bg: #f9fafb;         /* tiles */
-  --cmp-card-text: #0f172a;
-  --cmp-card-muted: #6b7280;
-  --cmp-card-expanded-bg: #dde7ff; /* light blue highlight */
-  --cmp-border-subtle: rgba(15, 23, 42, 0.35);
-  --cmp-shadow-panel: 0 18px 40px rgba(15, 23, 42, 0.4);
-  --cmp-shadow-card: 0 10px 22px rgba(15, 23, 42, 0.22);
+  --cmp-page-bg: var(--bg-light);
+  --cmp-panel-bg: #ffffff;
+  --cmp-panel-border: var(--border-soft-light);
+  --cmp-panel-shadow: var(--shadow-soft-light);
+  --cmp-card-bg: #f9fbff;
+  --cmp-card-border: var(--border-soft-light);
+  --cmp-card-text: var(--text-main);
+  --cmp-card-muted: var(--text-muted);
+  --cmp-card-expanded-bg: #e6edff;
+  --cmp-card-shadow: var(--shadow-soft-light);
+  --cmp-section-text: var(--text-main);
+  --cmp-section-muted: var(--text-muted);
+  --cmp-heading: var(--text-strong);
+}
+
+body.theme-dark.compare-page {
+  --cmp-page-bg: var(--bg-page);
+  --cmp-panel-bg: var(--bg-surface-elevated);
+  --cmp-panel-border: var(--border-soft-light);
+  --cmp-panel-shadow: var(--shadow-soft);
+  --cmp-card-bg: var(--bg-light);
+  --cmp-card-border: var(--border-soft);
+  --cmp-card-text: var(--text-main);
+  --cmp-card-muted: var(--text-muted);
+  --cmp-card-expanded-bg: #1f2f4a;
+  --cmp-card-shadow: var(--shadow-soft);
+  --cmp-section-text: var(--text-main);
+  --cmp-section-muted: var(--text-muted);
+  --cmp-heading: var(--text-strong);
 }
 
 body.compare-page {
-  background: #131821;
+  background: var(--cmp-page-bg);
   color: var(--cmp-card-text);
 }
 
@@ -1017,18 +1036,18 @@ body.theme-dark .country-card {
 }
 
 .compare-page .section-light {
-  background: transparent;
+  background: var(--cmp-page-bg);
   border: none;
-  color: #e5e7eb;
+  color: var(--cmp-section-text);
 }
 
 .compare-page .section-light p,
 .compare-page .section-header p {
-  color: #cbd5e1;
+  color: var(--cmp-section-muted);
 }
 
 .compare-page .section-header h1 {
-  color: #f8fafc;
+  color: var(--cmp-heading);
 }
 
 .compare-page .country-select-header,
@@ -1042,13 +1061,13 @@ body.theme-dark .country-card {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #e5e7eb;
+  color: var(--cmp-card-muted);
   margin-bottom: 0.4rem;
 }
 
 .compare-page .panel-intro {
   margin: 0 0 1.2rem;
-  color: #cbd5e1;
+  color: var(--cmp-card-muted);
   font-size: 0.95rem;
 }
 
@@ -1057,9 +1076,9 @@ body.theme-dark .country-card {
   max-width: 100%;
   padding: 0.6rem 1rem;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
+  border: 1px solid var(--cmp-card-border);
   background: var(--cmp-card-bg);
-  color: #111827;
+  color: var(--cmp-card-text);
   font: inherit;
   font-size: 0.95rem;
   font-weight: 600;
@@ -1075,7 +1094,7 @@ body.theme-dark .country-card {
   background-position: right 1.1rem center;
   background-size: 12px 8px;
 
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+  box-shadow: var(--cmp-card-shadow);
   transition: background-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast),
     border-color var(--transition-fast);
 }
@@ -1093,11 +1112,11 @@ body.theme-dark .country-card {
 }
 
 .compare-page {
-  background: #0b1220;
+  background: var(--cmp-page-bg);
 }
 
 .main-content {
-  background: #0f172a;
+  background: var(--cmp-page-bg);
 }
 
 .comparison-panels {
@@ -1111,11 +1130,12 @@ body.theme-dark .country-card {
 }
 
 .comparison-panel {
-  background: #020617;
+  background: var(--cmp-panel-bg);
   border-radius: 1.8rem;
   padding: 1.9rem 1.8rem 2.2rem;
-  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.5);
-  color: #e5e7eb;
+  box-shadow: var(--cmp-panel-shadow);
+  border: 1px solid var(--cmp-panel-border);
+  color: var(--cmp-section-text);
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
@@ -1124,7 +1144,7 @@ body.theme-dark .country-card {
 
 .compare-panel {
   position: relative;
-  background-color: #050b1e;
+  background-color: var(--cmp-panel-bg);
   border-radius: 24px;
   padding: 2.4rem 2rem;
   margin-top: 2rem;
@@ -1133,7 +1153,7 @@ body.theme-dark .country-card {
 
 .comparison-panel h2,
 .comparison-panel label {
-  color: #f8fafc;
+  color: var(--cmp-heading);
 }
 
 
@@ -1154,6 +1174,8 @@ body.theme-dark .country-card {
   background-color: var(--cmp-card-bg);
   border-radius: 20px;
   padding: 1.8rem;
+  border: 1px solid var(--cmp-card-border);
+  color: var(--cmp-card-text);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1164,7 +1186,7 @@ body.theme-dark .country-card {
 
   overflow: hidden;
   box-sizing: border-box;
-  box-shadow: 0 0 0 rgba(0,0,0,0);
+  box-shadow: var(--cmp-card-shadow);
   position: relative;
   z-index: 0;
 
@@ -1178,7 +1200,7 @@ body.theme-dark .country-card {
 /* subtle hover-effect */
 .compare-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0,0,0,0.35);
+  box-shadow: var(--cmp-panel-shadow);
 }
 
 /* expanded state: both panels show full text */
@@ -1192,7 +1214,7 @@ body.theme-dark .country-card {
   background-color: var(--cmp-card-expanded-bg);
 
   transform: translateY(-6px);
-  box-shadow: 0 28px 50px rgba(0,0,0,0.55);
+  box-shadow: var(--cmp-panel-shadow);
   z-index: 5;
 }
 
@@ -1209,11 +1231,19 @@ body.theme-dark .country-card {
 .compare-page .metric-card p {
   font-size: 0.9rem;
   line-height: 1.5;
-  color: #4b5563;
+  color: var(--cmp-card-muted);
 }
 
 
+.compare-card h3 {
+  color: var(--cmp-heading);
+}
+
 .compare-card p {
+  margin: 0;
+  color: var(--cmp-card-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {

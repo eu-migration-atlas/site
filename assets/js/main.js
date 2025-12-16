@@ -185,6 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
             pl: 'countries/poland.html'
           };
 
+          const activeCode = highlight || '';
+          if (activeCode) {
+            const targetPath = svg.querySelector(`#${activeCode.toUpperCase()}`);
+            if (targetPath) {
+              targetPath.classList.add('is-highlighted');
+              targetPath.setAttribute('aria-current', 'true');
+            }
+          }
+
           // EU Member States get at least a fallback link to the Countries overview
           // so the homepage map always opens a relevant page when clicked.
           const euCountryCodes = new Set([

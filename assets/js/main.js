@@ -4,6 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
   const body = document.body;
 
+  const SUN_ICON = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="18" height="18">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4V2m0 20v-2m8-8h2M2 12h2m12.95-6.95 1.42-1.42M7.05 18.95l-1.42 1.42m12.72 0-1.42-1.42M7.05 5.05 5.63 3.63M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" />
+    </svg>
+  `;
+
+  const MOON_ICON = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="18" height="18">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+    </svg>
+  `;
+
   function applyTheme(theme) {
     const isDark = theme === 'dark';
     body.classList.toggle('theme-dark', isDark);
@@ -12,12 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const label = document.querySelector('.theme-toggle__label');
     if (label) {
-      label.textContent = isDark ? 'Donker' : 'Licht';
+      label.textContent = isDark ? 'Dark' : 'Light';
+    }
+    const icon = document.querySelector('.theme-toggle__icon');
+    if (icon) {
+      icon.innerHTML = isDark ? MOON_ICON : SUN_ICON;
     }
     const toggle = document.querySelector('.theme-toggle');
     if (toggle) {
       toggle.setAttribute('aria-pressed', String(isDark));
-      toggle.setAttribute('aria-label', isDark ? 'Schakel naar lichte modus' : 'Schakel naar donkere modus');
+      toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     }
   }
 
@@ -38,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.type = 'button';
     toggle.className = 'theme-toggle';
     toggle.innerHTML = `
-      <span class="theme-toggle__icon" aria-hidden="true">☀️</span>
-      <span class="theme-toggle__label">Licht</span>
+      <span class="theme-toggle__icon" aria-hidden="true">${SUN_ICON}</span>
+      <span class="theme-toggle__label">Light</span>
     `;
 
     toggle.addEventListener('click', () => {

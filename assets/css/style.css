@@ -963,18 +963,6 @@ body.theme-dark .country-card:hover {
   margin: 0;
 }
 
-.country-code {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #e5e7eb;
-  color: #111827;
-  font-weight: 800;
-}
-
 .country-more {
   font-weight: 700;
   color: #2563eb;

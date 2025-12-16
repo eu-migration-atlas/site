@@ -306,6 +306,12 @@ a {
   transition: fill var(--transition-fast), stroke var(--transition-fast), stroke-width var(--transition-fast);
 }
 
+.interactive-map svg path:focus,
+.interactive-map svg path:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 .interactive-map svg path.is-clickable {
   cursor: pointer;
 }

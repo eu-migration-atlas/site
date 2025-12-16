@@ -211,12 +211,17 @@ document.addEventListener('DOMContentLoaded', () => {
           paths.forEach(path => {
             const countryName = path.getAttribute('name') || path.id;
             const countryCode = (path.id || '').toLowerCase();
-            const target = countryProfiles[countryCode] || (euCountryCodes.has(countryCode) ? `countries.html#${countryCode}` : null);
+            const isEuMember = euCountryCodes.has(countryCode);
+            const target = countryProfiles[countryCode] || (isEuMember ? `countries.html#${countryCode}` : null);
+
+            path.classList.add(isEuMember ? 'eu-member' : 'non-eu');
 
             path.addEventListener('mouseenter', () => {
               tooltip.textContent = countryName;
               tooltip.classList.add('is-visible');
-              path.classList.add('is-hovered');
+              if (isEuMember) {
+                path.classList.add('is-hovered');
+              }
             });
 
             path.addEventListener('mouseleave', hideTooltip);

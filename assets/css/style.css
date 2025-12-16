@@ -8,13 +8,13 @@
   --eu-gold: #ffcc00;
 
   /* Dark theme basis (page & header) */
-  --bg-page: #f5f7fb;           /* standard pagebackground */
+  --bg-page: #f6f1e7;           /* standard pagebackground */
   --bg-surface-dark: #0f192a;  /* header/hero/footers */
   --bg-surface-elevated: #0b1624;
 
   /* Light surfaces for hybride blocks */
-  --bg-light: #f5f7fb;
-  --bg-light-soft: #f7fafc;
+  --bg-light: #faf5ed;
+  --bg-light-soft: #fdfaf4;
 
   /* Textcolors */
   --text-main: #0f172a;         /* primary textcolor on light */
@@ -508,10 +508,11 @@ a {
 .site-header {
   background: linear-gradient(
     180deg,
-    #0c1a2a 0%,
-    #112b45 100%
+    #f4f7ff 0%,
+    #e2eafc 100%
   );
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -525,8 +526,8 @@ body.theme-dark .site-header {
     #0f2f52 45%,
     #0c2745 100%
   );
-  border-bottom-color: rgba(118, 169, 250, 0.4);
-  box-shadow: 0 10px 28px rgba(12, 32, 61, 0.55);
+  border-bottom: none;
+  box-shadow: 0 10px 28px rgba(12, 32, 61, 0.45);
 }
 
 .header-inner {
@@ -565,21 +566,38 @@ body.theme-dark .site-header {
 
 .site-header .main-nav a {
   text-decoration: none;
-  color: #f1f5f9;
+  color: var(--text-strong);
   font-size: 0.95rem;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(15, 23, 42, 0.06);
   transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .site-header .main-nav a:hover {
+  border-color: rgba(37, 99, 235, 0.25);
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+}
+
+.site-header .main-nav a.is-active {
+  color: #1d4ed8;
+  border-color: rgba(37, 99, 235, 0.35);
+  background-color: rgba(37, 99, 235, 0.16);
+}
+
+body.theme-dark .site-header .main-nav a {
+  color: #f1f5f9;
+  border-color: transparent;
+}
+
+body.theme-dark .site-header .main-nav a:hover {
   border-color: rgba(255, 255, 255, 0.18);
   background-color: rgba(16, 52, 90, 0.72);
   color: #d6b25e;
 }
 
-.site-header .main-nav a.is-active {
+body.theme-dark .site-header .main-nav a.is-active {
   color: #d6b25e;
   border-color: rgba(214, 178, 94, 0.4);
   background-color: rgba(17, 43, 69, 0.6);
@@ -591,9 +609,9 @@ body.theme-dark .site-header {
   gap: 0.45rem;
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(255, 255, 255, 0.06);
-  color: #e2e8f0;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(15, 23, 42, 0.05);
+  color: var(--text-strong);
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
@@ -601,8 +619,8 @@ body.theme-dark .site-header {
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.16);
   outline: none;
 }
 
@@ -628,15 +646,27 @@ body.theme-dark .site-header {
 }
 
 body.theme-dark .theme-toggle {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(148, 163, 184, 0.55);
-  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+}
+
+body.theme-dark .theme-toggle:hover,
+body.theme-dark .theme-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(148, 163, 184, 0.6);
 }
 
 body.theme-light .theme-toggle {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.35);
-  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-strong);
+}
+
+body.theme-light .theme-toggle:hover,
+body.theme-light .theme-toggle:focus-visible {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.16);
 }
 
 .site-footer {

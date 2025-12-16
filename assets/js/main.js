@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (activeCode) {
             const targetPath = svg.querySelector(`#${activeCode.toUpperCase()}`);
             if (targetPath) {
-              targetPath.classList.add('is-highlighted');
+              targetPath.classList.add('country', 'is-highlighted', 'selected');
               targetPath.setAttribute('aria-current', 'true');
             }
           }
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
               countryProfiles[countryCode] ||
               (isEuMember ? overviewHref : null);
 
-            path.classList.add(isEuMember ? 'eu-member' : 'non-eu');
+            path.classList.add('country', isEuMember ? 'eu' : 'non-eu');
 
             path.addEventListener('mouseenter', () => {
               tooltip.textContent = countryName;

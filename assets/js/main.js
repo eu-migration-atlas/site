@@ -80,18 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Active nav link
-  const navLinks = document.querySelectorAll('header nav a, .site-nav a');
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  // Active nav link (supports nested pages like /countries/austria.html)
+  const navLinks = document.querySelectorAll('header nav a[data-page]');
+  const path = window.location.pathname;
+
+  // Default: determine current "section"
+  let activePage = 'home';
+  if (path.includes('/countries/')) activePage = 'countries';
+  else if (path.endsWith('/countries.html') || path.includes('countries.html')) activePage = 'countries';
+  else if (path.includes('compare.html')) activePage = 'compare';
+  else if (path.includes('assistant.html')) activePage = 'assistant';
+  else if (path.includes('about.html')) activePage = 'about';
+  else if (path.endsWith('/') || path.includes('index.html')) activePage = 'home';
 
   navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href) return;
-
-    const linkPath = href.split('/').pop();
-    if (linkPath === currentPath) {
-      link.classList.add('is-active');
-    }
+    link.classList.toggle('is-active', link.dataset.page === activePage);
   });
 
   // Country select – voorkom dubbele selectie
@@ -258,13 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
           map.appendChild(tooltip);
 
           const paths = svg.querySelectorAll('path[id]');
-          const countryProfiles = {
-            it: 'countries/italy.html',
-            es: 'countries/spain.html',
-            pt: 'countries/portugal.html',
-            lu: 'countries/luxembourg.html',
-            pl: 'countries/poland.html'
-          };
 
           const activeCode = highlight || '';
           if (activeCode) {
@@ -283,16 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'ro', 'sk', 'si', 'es', 'se'
           ]);
 
-          // Resolve the correct base path so map clicks work on GitHub Pages and local dev
-          const baseHref = (() => {
-            const baseTag = document.querySelector('base');
-            if (baseTag && baseTag.href) return baseTag.href;
-
-            const { origin, pathname } = window.location;
-            const path = pathname.endsWith('/') ? pathname : pathname.replace(/[^/]*$/, '');
-            return `${origin}${path}`;
-          })();
-
           function hideTooltip() {
             tooltip.classList.remove('is-visible');
             paths.forEach(path => path.classList.remove('is-hovered'));
@@ -302,7 +288,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const countryName = path.getAttribute('name') || path.id;
             const countryCode = (path.id || '').toLowerCase();
             const isEuMember = euCountryCodes.has(countryCode);
-            const target = countryProfiles[countryCode] || (isEuMember ? `countries.html#${countryCode}` : null);
+            const inCountriesFolder = window.location.pathname.includes('/countries/');
+            const overviewHref = inCountriesFolder ? `../countries.html#${countryCode}` : `countries.html#${countryCode}`;
+
+            // Use correct base for profile links too
+            const profileBase = inCountriesFolder ? '../countries/' : 'countries/';
+
+            const countryProfiles = {
+              it: `${profileBase}italy.html`,
+              es: `${profileBase}spain.html`,
+              pt: `${profileBase}portugal.html`,
+              lu: `${profileBase}luxembourg.html`,
+              pl: `${profileBase}poland.html`
+            };
+
+            const target =
+              countryProfiles[countryCode] ||
+              (isEuMember ? overviewHref : null);
 
             path.classList.add(isEuMember ? 'eu-member' : 'non-eu');
 
@@ -326,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
               path.classList.add('is-clickable');
               path.setAttribute('role', 'link');
               path.setAttribute('tabindex', '0');
-              const destination = new URL(target, baseHref).toString();
+              const destination = new URL(target, window.location.href).toString();
 
               path.addEventListener('click', () => {
                 window.location.href = destination;

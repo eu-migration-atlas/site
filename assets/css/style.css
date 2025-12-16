@@ -8,13 +8,13 @@
   --eu-gold: #ffcc00;
 
   /* Dark theme basis (page & header) */
-  --bg-page: #f6f1e7;           /* standard pagebackground */
+  --bg-page: #ffffff;           /* standard pagebackground */
   --bg-surface-dark: #0f192a;  /* header/hero/footers */
   --bg-surface-elevated: #0b1624;
 
   /* Light surfaces for hybride blocks */
-  --bg-light: #faf5ed;
-  --bg-light-soft: #fdfaf4;
+  --bg-light: #f5f7fb;
+  --bg-light-soft: #eef2f9;
 
   /* Textcolors */
   --text-main: #0f172a;         /* primary textcolor on light */
@@ -508,11 +508,13 @@ a {
 .site-header {
   background: linear-gradient(
     180deg,
-    #f4f7ff 0%,
-    #e2eafc 100%
+    #243b63 0%,
+    #1b2f52 45%,
+    #152742 100%
   );
+  color: #eef2f7;
   border-bottom: none;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 26px rgba(12, 32, 61, 0.32);
   position: sticky;
   top: 0;
   z-index: 20;
@@ -564,26 +566,27 @@ body.theme-dark .site-header {
   width: auto;
 }
 
+
 .site-header .main-nav a {
   text-decoration: none;
-  color: var(--text-strong);
+  color: #eef2f7;
   font-size: 0.95rem;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .site-header .main-nav a:hover {
-  border-color: rgba(37, 99, 235, 0.25);
-  background-color: rgba(37, 99, 235, 0.12);
-  color: #1d4ed8;
+  border-color: rgba(214, 231, 255, 0.6);
+  background-color: rgba(45, 107, 197, 0.45);
+  color: #f8fafc;
 }
 
 .site-header .main-nav a.is-active {
-  color: #1d4ed8;
-  border-color: rgba(37, 99, 235, 0.35);
-  background-color: rgba(37, 99, 235, 0.16);
+  color: #f8fafc;
+  border-color: rgba(214, 231, 255, 0.75);
+  background-color: rgba(37, 99, 235, 0.55);
 }
 
 body.theme-dark .site-header .main-nav a {
@@ -603,24 +606,26 @@ body.theme-dark .site-header .main-nav a.is-active {
   background-color: rgba(17, 43, 69, 0.6);
 }
 
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(15, 23, 42, 0.05);
-  color: var(--text-strong);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef2f7;
   font-weight: 600;
   cursor: pointer;
   transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 
+
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
-  background: rgba(15, 23, 42, 0.08);
-  border-color: rgba(15, 23, 42, 0.16);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.26);
   outline: none;
 }
 
@@ -645,28 +650,19 @@ body.theme-dark .site-header .main-nav a.is-active {
   font-size: 0.9rem;
 }
 
-body.theme-dark .theme-toggle {
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(255, 255, 255, 0.06);
-  color: #e2e8f0;
+body.theme-dark .theme-toggle,
+body.theme-light .theme-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef2f7;
 }
 
 body.theme-dark .theme-toggle:hover,
-body.theme-dark .theme-toggle:focus-visible {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(148, 163, 184, 0.6);
-}
-
-body.theme-light .theme-toggle {
-  background: rgba(15, 23, 42, 0.05);
-  border-color: rgba(15, 23, 42, 0.08);
-  color: var(--text-strong);
-}
-
+body.theme-dark .theme-toggle:focus-visible,
 body.theme-light .theme-toggle:hover,
 body.theme-light .theme-toggle:focus-visible {
-  background: rgba(15, 23, 42, 0.08);
-  border-color: rgba(15, 23, 42, 0.16);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.26);
 }
 
 .site-footer {
@@ -945,7 +941,7 @@ body.theme-dark .country-card:hover {
 }
 
 .country-card--placeholder {
-  background: #f8fafc;
+  background: #eef2f9;
 }
 
 /* ========================================
@@ -1006,7 +1002,7 @@ body.theme-dark .country-card:hover {
 .feature-card,
 .country-card {
   padding: 1.3rem 1.5rem;
-  background: #ffffff;
+  background: #f3f5fb;
   border-radius: 18px;
   border: 1px solid rgba(148, 163, 184, 0.35);
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);

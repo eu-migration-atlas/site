@@ -1592,7 +1592,7 @@ body.theme-dark .filters-section .filters-title {
   pointer-events: none;
 }
 
-.filters-section .custom-select {
+.custom-select {
   display: inline-flex;
   align-items: center;
   padding: 0;
@@ -1605,6 +1605,10 @@ body.theme-dark .filters-section .filters-title {
   width: 100%;
   max-width: 320px;
   z-index: 3;
+}
+
+.compare-page .custom-select {
+  max-width: 100%;
 }
 
 .custom-select .select-toggle {
@@ -1669,7 +1673,7 @@ body.theme-dark .filters-section .filters-title {
   color: #0f172a;
 }
 
-body.theme-dark .filters-section .custom-select {
+body.theme-dark .custom-select {
   background: linear-gradient(160deg, #1b212b 0%, #11151d 100%);
   border: 1px solid rgba(148, 163, 184, 0.32);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);

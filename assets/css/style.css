@@ -1449,7 +1449,8 @@ body.theme-dark .page-country .interactive-map svg path.eu-member {
 }
 
 body.theme-dark .page-country .interactive-map svg path.non-eu {
-  stroke: rgba(255, 255, 255, 0.8);
+  stroke: #ffffff !important;
+  stroke-width: 0.55;
 }
 
 /* Countries page filter section */

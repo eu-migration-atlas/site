@@ -311,7 +311,8 @@ a {
 }
 
 .interactive-map svg path.non-eu {
-  fill: rgba(241, 243, 248, 0.45);
+  fill: transparent;
+  stroke: rgba(15, 23, 42, 0.35);
 }
 
 .interactive-map svg path.is-clickable {

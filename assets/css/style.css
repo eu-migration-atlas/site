@@ -10,13 +10,14 @@
   --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04) 45%),
     radial-gradient(circle at 80% 26%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%),
     rgba(255, 255, 255, 0.03);
+
   /* Brand / EU */
   --eu-blue: #003399;
   --eu-gold: #ffcc00;
 
   /* Dark theme basis (page & header) */
-  --bg-page: #ffffff;           /* standard pagebackground */
-  --bg-surface-dark: #0f192a;  /* header/hero/footers */
+  --bg-page: #ffffff;
+  --bg-surface-dark: #0f192a;
   --bg-surface-elevated: #0b1624;
 
   /* Headings */
@@ -27,7 +28,7 @@
   --bg-light-soft: #eef2f9;
 
   /* Textcolors */
-  --text-main: #0f172a;         /* primary textcolor on light */
+  --text-main: #0f172a;
   --text-muted: #4b5563;
   --text-strong: #0b1624;
   --text-on-light: #0f172a;
@@ -67,6 +68,10 @@
 
   /* Animation */
   --transition-fast: 0.15s ease-out;
+
+  /* Map strokes (centralized) */
+  --map-stroke-eu: rgba(17, 24, 39, 0.85);
+  --map-stroke-non-eu: rgba(15, 23, 42, 0.35);
 }
 
 body.theme-dark {
@@ -89,6 +94,10 @@ body.theme-dark {
   --border-soft-light: rgba(148, 163, 184, 0.3);
   --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.35);
   --shadow-soft-light: 0 10px 28px rgba(0, 0, 0, 0.35);
+
+  /* Map strokes in dark mode */
+  --map-stroke-eu: rgba(226, 232, 240, 0.8);
+  --map-stroke-non-eu: rgba(255, 255, 255, 0.78);
 
   color-scheme: dark;
 }
@@ -120,7 +129,23 @@ body {
   line-height: 1.6;
 }
 
-/* === Compare page theme === */
+h1, h2, h3, h4 {
+  font-family: "Merriweather", "Georgia", serif;
+  letter-spacing: 0.01em;
+  color: var(--heading-color);
+}
+
+p {
+  color: var(--text-muted);
+}
+
+a {
+  color: inherit;
+}
+
+/* ========================================
+   Compare page theme
+   ======================================== */
 .compare-page {
   --cmp-page-bg: var(--bg-light);
   --cmp-panel-bg: #ffffff;
@@ -158,24 +183,9 @@ body.compare-page {
   color: var(--cmp-card-text);
 }
 
-h1, h2, h3, h4 {
-  font-family: "Merriweather", "Georgia", serif;
-  letter-spacing: 0.01em;
-  color: var(--heading-color);
-}
-
-p {
-  color: var(--text-muted);
-}
-
-a {
-  color: inherit;
-}
-
 /* ========================================
    CTA buttons
    ======================================== */
-
 .btn-primary,
 .btn-secondary {
   display: inline-flex;
@@ -252,6 +262,9 @@ a {
   color: #4b5563;
 }
 
+/* ========================================
+   Country title + flag (robust)
+   ======================================== */
 .country-title {
   display: inline-flex;
   align-items: center;
@@ -263,20 +276,17 @@ a {
   margin: 0;
 }
 
+/* Robust emoji flag:
+   - Any accidental text inside stays hidden (e.g., "FR")
+   - Emoji comes only from ::before */
 .country-flag {
   width: 42px;
   height: 28px;
   border-radius: 6px;
-
-  /* thin and subtle */
   border: 1px solid rgba(0, 0, 0, 0.06);
-
   overflow: hidden;
-  background-origin: border-box;
-  background-clip: padding-box;
   position: relative;
 
-  /* soft depth instead of a boring edge */
   box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.08);
@@ -284,9 +294,16 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  /* Hide any inner text */
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+
   font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
-  font-size: 1.35rem;
-  line-height: 1;
+  user-select: none;
+  aspect-ratio: 3 / 2;
+  flex: 0 0 auto;
 }
 
 .country-flag::before {
@@ -296,8 +313,12 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: initial;
 }
 
+/* Emoji mappings */
 .flag-austria { --flag-emoji: "🇦🇹"; }
 .flag-belgium { --flag-emoji: "🇧🇪"; }
 .flag-bulgaria { --flag-emoji: "🇧🇬"; }
@@ -326,6 +347,9 @@ a {
 .flag-spain { --flag-emoji: "🇪🇸"; }
 .flag-sweden { --flag-emoji: "🇸🇪"; }
 
+/* ========================================
+   Country overview + map
+   ======================================== */
 .country-overview {
   margin-top: 1.75rem;
   display: grid;
@@ -366,6 +390,19 @@ a {
   border-radius: 18px;
 }
 
+body.theme-dark .overview-map {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+body.theme-dark.page-country .interactive-map,
+body.theme-dark .page-country .interactive-map {
+  background: var(--map-ombre-dark);
+  border: none;
+  border-radius: 18px;
+}
+
 .interactive-map svg {
   display: block;
   width: 95%;
@@ -375,7 +412,7 @@ a {
 
 .interactive-map svg path {
   fill: none;
-  stroke: #111827;
+  stroke: var(--map-stroke-eu);
   stroke-width: 0.4;
   transition: fill var(--transition-fast), stroke var(--transition-fast), stroke-width var(--transition-fast);
 }
@@ -384,9 +421,13 @@ a {
   fill: #c3c9da;
 }
 
+body.theme-dark .page-country .interactive-map svg path.eu-member {
+  fill: rgba(82, 104, 140, 0.65);
+}
+
 .interactive-map svg path.non-eu {
   fill: transparent;
-  stroke: rgba(15, 23, 42, 0.35);
+  stroke: var(--map-stroke-non-eu);
 }
 
 .interactive-map svg path.is-clickable {
@@ -454,19 +495,22 @@ a {
   margin: 0 auto;
 }
 
-@media (max-width: 900px) {
-  .country-overview {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* active country highlight for any page */
+/* Active country highlight for any page */
 .interactive-map svg path.is-highlighted {
   fill: #2563eb;
   stroke: #1e293b;
   stroke-width: 1.2;
 }
 
+@media (max-width: 900px) {
+  .country-overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   Sections & cards
+   ======================================== */
 .country-section-list {
   margin-top: 2.5rem;
   display: flex;
@@ -564,15 +608,11 @@ body.theme-light .country-section-card {
   color: var(--text-on-light);
 }
 
-/* Header & nav */
-
+/* ========================================
+   Header & nav
+   ======================================== */
 .site-header {
-  background: linear-gradient(
-    180deg,
-    #243b63 0%,
-    #1b2f52 45%,
-    #152742 100%
-  );
+  background: linear-gradient(180deg, #243b63 0%, #1b2f52 45%, #152742 100%);
   color: #eef2f7;
   border-bottom: none;
   box-shadow: 0 10px 26px rgba(12, 32, 61, 0.32);
@@ -583,12 +623,7 @@ body.theme-light .country-section-card {
 }
 
 body.theme-dark .site-header {
-  background: linear-gradient(
-    180deg,
-    #133867 0%,
-    #0f2f52 45%,
-    #0c2745 100%
-  );
+  background: linear-gradient(180deg, #133867 0%, #0f2f52 45%, #0c2745 100%);
   border-bottom: none;
   box-shadow: 0 10px 28px rgba(12, 32, 61, 0.45);
 }
@@ -627,7 +662,6 @@ body.theme-dark .site-header {
   width: auto;
 }
 
-
 .site-header .main-nav a {
   text-decoration: none;
   color: #f1f5f9;
@@ -653,7 +687,6 @@ body.theme-dark .site-header {
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.28);
 }
 
-
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -667,7 +700,6 @@ body.theme-dark .site-header {
   cursor: pointer;
   transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
-
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
@@ -730,7 +762,6 @@ body.theme-light .theme-toggle:focus-visible {
 /* ========================================
    Homepage hero
    ======================================== */
-
 .hero {
   background: linear-gradient(135deg, #161a20 0%, #0f1218 45%, #1f262f 100%);
   color: var(--text-invert);
@@ -772,7 +803,6 @@ body.theme-light .theme-toggle:focus-visible {
   gap: 0.8rem;
 }
 
-/* Light theme variant for the hero so the homepage starts on a bright canvas */
 body.theme-light .hero {
   background: linear-gradient(135deg, #e9eef8 0%, #f6f9ff 45%, #f8fbff 100%);
   color: var(--text-main);
@@ -786,15 +816,14 @@ body.theme-light .hero-eyebrow {
   color: rgba(15, 23, 42, 0.65);
 }
 
-/* De hero-visual wraps de interactieve kaart op de homepage.
-   Subtielere stijl zonder zware rand of schaduw. */
+/* The hero-visual wraps the interactive map on homepage */
 .hero-visual {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
-  border: none;              /* geen rand meer */
-  border-radius: 14px;       /* iets kleinere afronding */
-  padding: 1.2rem;           /* minder witruimte rond de kaart */
-  box-shadow: 0 14px 36px rgba(6, 10, 20, 0.35);  /* subtielere schaduw */
-  min-height: 820px;         /* behoud hoogte zodat de kaart voldoende ruimte heeft */
+  border: none;
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: 0 14px 36px rgba(6, 10, 20, 0.35);
+  min-height: 820px;
 }
 
 .hero-visual .interactive-map {
@@ -870,7 +899,6 @@ body.theme-light .hero-eyebrow {
 /* ========================================
    Homepage feature grid
    ======================================== */
-
 .section-features {
   padding: 3.2rem 0 3.6rem;
 }
@@ -929,7 +957,6 @@ body.theme-light .hero-eyebrow {
 /* ========================================
    Countries list
    ======================================== */
-
 .country-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -956,10 +983,7 @@ body.theme-dark .country-card:hover {
   box-shadow: 0 14px 32px rgba(255, 255, 255, 0.14);
 }
 
-.country-card h2 {
-  margin: 0;
-}
-
+.country-card h2,
 .country-card p {
   margin: 0;
 }
@@ -976,7 +1000,6 @@ body.theme-dark .country-card:hover {
 /* ========================================
    Responsive tweaks
    ======================================== */
-
 @media (max-width: 1024px) {
   .hero-layout {
     grid-template-columns: 1fr;
@@ -1026,7 +1049,6 @@ body.theme-dark .country-card:hover {
 /* ========================================
    Components: cards, badges & tags
    ======================================== */
-
 .card,
 .feature-card,
 .country-card {
@@ -1045,6 +1067,7 @@ body.theme-dark .country-card {
   box-shadow: var(--shadow-soft-light);
 }
 
+/* Compare page section */
 .compare-page .section-light {
   background: var(--cmp-page-bg);
   border: none;
@@ -1060,6 +1083,9 @@ body.theme-dark .country-card {
   color: var(--cmp-heading);
 }
 
+/* ========================================
+   Compare page – panels/cards
+   ======================================== */
 .compare-page .country-select-header,
 .compare-page .compare-panel-header {
   margin-bottom: 1.4rem;
@@ -1119,10 +1145,6 @@ body.theme-dark .country-card {
   transform: translateY(-1px);
 }
 
-.compare-page {
-  background: var(--cmp-page-bg);
-}
-
 .main-content {
   background: var(--cmp-page-bg);
 }
@@ -1164,8 +1186,6 @@ body.theme-dark .country-card {
   color: var(--cmp-heading);
 }
 
-
-
 .comparison-panel-metrics {
   margin-top: 1.75rem;
 }
@@ -1177,7 +1197,6 @@ body.theme-dark .country-card {
   gap: 1.75rem;
 }
 
-/* basis: all cards larger and equal height */
 .compare-card {
   background-color: var(--cmp-card-bg);
   border-radius: 20px;
@@ -1188,7 +1207,6 @@ body.theme-dark .country-card {
   flex-direction: column;
   justify-content: flex-start;
 
-  /* larger basis-height */
   min-height: 320px;
   max-height: 320px;
 
@@ -1199,19 +1217,14 @@ body.theme-dark .country-card {
   z-index: 0;
 
   transform-origin: top center;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background-color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-/* subtle hover-effect */
 .compare-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--cmp-panel-shadow);
 }
 
-/* expanded state: both panels show full text */
 .compare-card.cmp-expanded {
   grid-column: 1 / -1;
   min-height: auto;
@@ -1242,7 +1255,6 @@ body.theme-dark .country-card {
   color: var(--cmp-card-muted);
 }
 
-
 .compare-card h3 {
   color: var(--cmp-heading);
 }
@@ -1260,8 +1272,6 @@ body.theme-dark .country-card {
   }
 }
 
-/* Compare – section icons */
-
 .compare-page .compare-section-icon {
   display: inline-flex;
   width: 1.4rem;
@@ -1270,8 +1280,6 @@ body.theme-dark .country-card {
   font-size: 1rem;
   opacity: 0.9;
 }
-
-/* Small responsive tweak */
 
 @media (max-width: 768px) {
   .compare-page .compare-controls-card {
@@ -1297,9 +1305,8 @@ body.theme-dark .country-card {
 }
 
 /* ============================
-   4. ATLAS AI PAGE BASIS
+   ATLAS AI PAGE BASIS
    ============================ */
-
 .page-assistant .page-header {
   margin-bottom: 1.6rem;
 }
@@ -1317,7 +1324,6 @@ body.theme-dark .country-card {
   grid-template-columns: minmax(0, 1.05fr);
 }
 
-/* Frame containing the Voiceflow widget */
 .assistant-frame {
   border-radius: 14px;
   background: rgba(15, 23, 42, 0.9);
@@ -1326,7 +1332,6 @@ body.theme-dark .country-card {
   overflow: hidden;
 }
 
-/* Small text next to/above the widget (user explanation) */
 .assistant-meta {
   margin-top: 1rem;
   color: var(--text-muted);
@@ -1335,9 +1340,8 @@ body.theme-dark .country-card {
 }
 
 /* ============================
-   5. MOBILE FINETUNE
+   MOBILE FINETUNE
    ============================ */
-
 @media (max-width: 900px) {
   .header-inner {
     gap: 0.9rem;
@@ -1356,38 +1360,32 @@ body.theme-dark .country-card {
     padding: 1.1rem 1.1rem 1.3rem;
   }
 
-.assistant-frame {
-  min-height: 360px;
+  .assistant-frame {
+    min-height: 360px;
+  }
 }
-}
-
 
 /* ========================================
    Homepagina: hero-kaart in ‘card’-stijl
    zonder witte achtergrond
    ======================================== */
-
-/* Maak de hero-visual op de homepagina kaartachtig,
-   zonder rand en met een lichte schaduw op de donkere achtergrond */
 body.index .hero-visual {
-  background: transparent;          /* geen witte achtergrond */
-  border: none;                     /* verwijder de rand */
-  border-radius: 18px;              /* zelfde afronding als landkaarten */
-  padding: 0;                       /* geen extra witruimte rond de kaart */
-  box-shadow: none;                 /* laat alleen de kaart zelf een schaduw hebben */
+  background: transparent;
+  border: none;
+  border-radius: 18px;
+  padding: 0;
+  box-shadow: none;
   min-height: auto;
 }
 
-/* Stijl de kaart zelf: donker met subtiele witachtige schaduw */
 body.index .hero-visual .interactive-map {
   background: var(--map-ombre-dark);
   border: none;
-  border-radius: 18px;              /* matcht de hero-visual */
+  border-radius: 18px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
-  min-height: 600px;                /* pas de hoogte eventueel aan */
+  min-height: 600px;
 }
 
-/* Zorg dat het kaartblok ook in de lichte modus visueel afsteekt. */
 body.theme-light.index .hero-visual {
   background: linear-gradient(160deg, rgba(53, 88, 166, 0.08), rgba(255, 255, 255, 0.95));
   border: 1px solid var(--border-soft-light);
@@ -1401,43 +1399,17 @@ body.theme-light.index .hero-visual .interactive-map {
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
 }
 
-/* Maak de grenzen van niet-EU-landen wit op de homepage zodat ze zichtbaar blijven */
-body.theme-dark.index .interactive-map svg path.non-eu {
-  stroke: rgba(255, 255, 255, 0.8);
+/* Homepage-specific stroke tweak via vars (no !important chaos) */
+body.theme-dark.index {
+  --map-stroke-non-eu: rgba(255, 255, 255, 0.8);
+}
+body.theme-light.index {
+  --map-stroke-non-eu: rgba(30, 41, 59, 0.6);
 }
 
-body.theme-light.index .interactive-map svg path.non-eu {
-  stroke: rgba(30, 41, 59, 0.6);
-}
-
-body.theme-dark .overview-map {
-  background: none;
-  border: none;
-  box-shadow: none;
-}
-
-body.theme-dark.page-country .interactive-map,
-body.theme-dark .page-country .interactive-map {
-  background: var(--map-ombre-dark);
-  border: none;
-  border-radius: 18px;
-}
-
-body.theme-dark .page-country .interactive-map svg path {
-  stroke: rgba(226, 232, 240, 0.8);
-}
-
-body.theme-dark .page-country .interactive-map svg path.eu-member {
-  fill: rgba(82, 104, 140, 0.65);
-}
-
-body.theme-dark .page-country .interactive-map svg path.non-eu {
-  stroke: #ffffff !important;
-  stroke-width: 0.55;
-}
-
-/* Countries page filter section */
-
+/* ========================================
+   Countries page filter section
+   ======================================== */
 .page-countries .filters-section {
   margin: 1.5rem 0 1rem;
 }
@@ -1559,6 +1531,9 @@ body.theme-dark .filters-section .filters-title {
   gap: 0.8rem;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 90;
+  overflow: visible;
 }
 
 .filters-section .filters-inputs {
@@ -1574,8 +1549,6 @@ body.theme-dark .filters-section .filters-title {
   width: 100%;
   max-width: 320px;
 }
-
-
 
 .filters-section input.filter-search-input {
   padding: 0.65rem 1rem 0.65rem 2.9rem;
@@ -1606,6 +1579,27 @@ body.theme-dark .filters-section .filters-title {
   pointer-events: none;
 }
 
+.filters-section input.filter-search-input::placeholder {
+  color: #718096;
+  font-weight: 500;
+}
+
+body.theme-dark .filters-section input.filter-search-input {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: linear-gradient(135deg, #1a1f27 0%, #0f1218 100%);
+  color: #e5e7eb;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+body.theme-dark .filters-section .filter-search::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2-4.35-4.35'/%3E%3C/svg%3E");
+}
+
+body.theme-dark .filters-section input.filter-search-input::placeholder {
+  color: #cbd5e1;
+}
+
+/* Custom select (new dropdown) */
 .custom-select {
   display: inline-flex;
   align-items: center;
@@ -1618,7 +1612,7 @@ body.theme-dark .filters-section .filters-title {
   position: relative;
   width: 100%;
   max-width: 320px;
-  z-index: 3;
+  z-index: 120;
 }
 
 .compare-page .custom-select {
@@ -1665,7 +1659,7 @@ body.theme-dark .filters-section .filters-title {
   box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
   list-style: none;
   display: none;
-  z-index: 50;
+  z-index: 200;
   overflow: hidden;
 }
 
@@ -1718,32 +1712,13 @@ body.theme-dark .custom-select .select-options li[aria-selected="true"] {
   color: #e5e7eb;
 }
 
-.custom-select:focus-within .select-toggle,
-.custom-select:hover .select-toggle {
+.custom-select:focus-within,
+.custom-select:hover {
   border-color: #2563eb;
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
 }
 
-.filters-section input.filter-search-input::placeholder {
-  color: #718096;
-  font-weight: 500;
-}
-
-body.theme-dark .filters-section input.filter-search-input {
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: linear-gradient(135deg, #1a1f27 0%, #0f1218 100%);
-  color: #e5e7eb;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-body.theme-dark .filters-section .filter-search::before {
-  background-image: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2-4.35-4.35'/%3E%3C/svg%3E");
-}
-
-body.theme-dark .filters-section input.filter-search-input::placeholder {
-  color: #cbd5e1;
-}
-
+/* Reset button */
 .filter-reset {
   border: none;
   background: transparent;
@@ -1792,6 +1767,8 @@ body.theme-dark .topic-filter .filter-eyebrow {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .filter-chip {
@@ -1881,15 +1858,12 @@ body.theme-dark .filter-chip::before {
   margin-left: 0.1rem;
 }
 
-/* ----------------------------------------
-   Countries page: select styling and stack
-   ---------------------------------------- */
-
-/* Maak een volledig afgeronde omhulling voor de regioselectie */
+/* ========================================
+   Countries page: Region select (deduped)
+   ======================================== */
 .country-filter-panel .region-select-wrapper {
   position: relative;
   z-index: 120;
-  z-index: 20;
   display: inline-block;
   border-radius: 18px;
   box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
@@ -1898,7 +1872,6 @@ body.theme-dark .filter-chip::before {
   overflow: visible;
 }
 
-/* Het zichtbare deel van de dropdown: als een knop */
 .country-filter-panel .region-select-toggle {
   padding: 0.7rem 1.5rem 0.7rem 1rem;
   width: 100%;
@@ -1911,7 +1884,6 @@ body.theme-dark .filter-chip::before {
   border-radius: 18px;
 }
 
-/* Pijltje rechts in de knop */
 .country-filter-panel .region-select-toggle::after {
   content: '';
   position: absolute;
@@ -1925,7 +1897,6 @@ body.theme-dark .filter-chip::before {
   background-image: none;
 }
 
-/* De lijst met regio’s: afgerond en zwevend boven de chips/kaarten */
 .country-filter-panel .region-select-list {
   display: none;
   position: absolute;
@@ -1942,60 +1913,6 @@ body.theme-dark .filter-chip::before {
   z-index: 200;
 }
 
-.country-filter-panel .region-select-list li:first-child {
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
-}
-
-.country-filter-panel .region-select-list li:last-child {
-  border-bottom-left-radius: 14px;
-  border-bottom-right-radius: 14px;
-}
-
-/* Het zichtbare deel van de dropdown: als een knop */
-.country-filter-panel .region-select-toggle {
-  padding: 0.7rem 1.5rem 0.7rem 1rem;
-  width: 100%;
-  border: none;
-  background: transparent;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  text-align: left;
-}
-
-/* Pijltje rechts in de knop */
-.country-filter-panel .region-select-toggle::after {
-  content: '';
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  width: 0.5rem;
-  height: 0.5rem;
-  transform: translateY(-50%) rotate(45deg);
-  border-right: 2px solid #2563eb;
-  border-bottom: 2px solid #2563eb;
-  background-image: none;
-}
-
-/* De lijst met regio’s: afgerond en zwevend boven de chips/kaarten */
-.country-filter-panel .region-select-list {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  width: 100%;
-  margin-top: 0.25rem;
-  background: #fff;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
-  list-style: none;
-  padding: 0.5rem 0;
-  z-index: 30;
-}
-
-/* Items in de open lijst */
 .country-filter-panel .region-select-list li {
   padding: 0.6rem 1rem;
   cursor: pointer;
@@ -2008,7 +1925,6 @@ body.theme-dark .filter-chip::before {
 .country-filter-panel .region-select-list li[aria-selected="true"] {
   background: rgba(37, 99, 235, 0.1);
   color: #2563eb;
-  border-radius: 0;
 }
 
 .country-filter-panel .region-select-list li:first-child:hover,
@@ -2023,20 +1939,9 @@ body.theme-dark .filter-chip::before {
   border-bottom-right-radius: 14px;
 }
 
-/* filtershell en children vormen een hogere laag */
-.page-countries .filters-shell {
-  position: relative;
-  z-index: 2;
-  overflow: visible;
-}
-
-/* verlaag de z-index van de topicchips zodat ze onder de dropdown blijven */
-.country-filter-panel .topic-filter .filter-chips {
-  position: relative;
-  z-index: 1;
-}
-
-/* Country profile filter hand-off */
+/* ========================================
+   Country profile filter hand-off
+   ======================================== */
 .country-filter-panel {
   margin: 2rem 0;
   padding: 1.5rem;
@@ -2105,18 +2010,12 @@ body.theme-dark .filter-chip::before {
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
 }
 
 .country-filter-panel .filter-reset:hover {
   background: #eef2f7;
   transform: translateY(-1px);
-}
-
-/* plaats de select-laag boven de overige controls */
-.country-filter-panel .filters-controls {
-  position: relative;
-  z-index: 90;
-  overflow: visible;
 }
 
 .country-filter-panel .filter-lock {
@@ -2239,4 +2138,3 @@ body.theme-dark .filter-chip::before {
   color: #0d3b66;
   font-weight: 600;
 }
-

@@ -63,7 +63,7 @@
 }
 
 body.theme-dark {
-  --bg-page: #121416;
+  --bg-page: linear-gradient(135deg, #161a20 0%, #0f1218 45%, #1f262f 100%);
   --bg-surface-dark: #0f223e;
   --bg-surface-elevated: #132b4f;
   --bg-light: #222b36;
@@ -104,7 +104,7 @@ body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text-on-light);
-  background-color: var(--bg-page);
+  background: var(--bg-page);
   line-height: 1.6;
 }
 
@@ -328,10 +328,10 @@ a {
 }
 
 .overview-map {
-  background: #ffffff;
+  background: none;
   border-radius: 1.25rem;
-  padding: 1rem;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  padding: 0;
+  box-shadow: none;
 }
 
 .interactive-map {
@@ -339,11 +339,29 @@ a {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: radial-gradient(circle at 30% 20%, #f4f6ff, #e3e8f6 45%, #d6def1);
+  background: radial-gradient(circle at 28% 18%, rgba(37, 99, 235, 0.14), rgba(255, 255, 255, 0.7) 46%),
+    radial-gradient(circle at 82% 26%, rgba(59, 130, 246, 0.12), rgba(255, 255, 255, 0.7) 52%),
+    #f5f7fb;
   border-radius: 1rem;
   border: 1px solid #e0e4ef;
   overflow: hidden;
   min-height: 400px;
+}
+
+.page-country .overview-map {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+.page-country .interactive-map {
+  background: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.65) 45%),
+    radial-gradient(circle at 80% 26%, rgba(59, 130, 246, 0.1), rgba(255, 255, 255, 0.65) 52%),
+    linear-gradient(145deg, #f7f9ff, #e9eef8);
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
 }
 
 .interactive-map svg {
@@ -1409,9 +1427,9 @@ body.theme-light.index .interactive-map svg path.non-eu {
 }
 
 body.theme-dark .overview-map {
-  background: linear-gradient(145deg, #1f252f 0%, #141821 42%, #0d0f15 100%);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 
 body.theme-dark.page-country .interactive-map,
@@ -1420,7 +1438,8 @@ body.theme-dark .page-country .interactive-map {
               radial-gradient(circle at 80% 26%, rgba(255,255,255,0.06), rgba(255,255,255,0.02) 50%),
               rgba(255,255,255,0.03);
   border: none;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border-radius: 18px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48);
 }
 
 body.theme-dark .page-country .interactive-map svg path {

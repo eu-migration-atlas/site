@@ -300,10 +300,18 @@ a {
 }
 
 .interactive-map svg path {
-  fill: #e7eaf3;
+  fill: #f1f3f8;
   stroke: #111827;
   stroke-width: 0.4;
   transition: fill var(--transition-fast), stroke var(--transition-fast), stroke-width var(--transition-fast);
+}
+
+.interactive-map svg path.eu-member {
+  fill: #d9dde7;
+}
+
+.interactive-map svg path.non-eu {
+  fill: #f7f8fc;
 }
 
 .interactive-map svg path.is-clickable {

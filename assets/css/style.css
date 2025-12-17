@@ -4,12 +4,12 @@
    ======================================== */
 :root {
   /* Map ombré backgrounds */
-  --map-ombre-light: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.14), rgba(255, 255, 255, 0.7) 45%),
-    radial-gradient(circle at 80% 26%, rgba(59, 130, 246, 0.12), rgba(255, 255, 255, 0.7) 52%),
-    linear-gradient(145deg, #f7f9ff, #e9eef8);
-  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04) 45%),
-    radial-gradient(circle at 80% 26%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%),
-    rgba(255, 255, 255, 0.03);
+  --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.08) 45%),
+    radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.16), rgba(88, 142, 255, 0.08) 52%),
+    linear-gradient(145deg, #dfe9ff, #e9f0ff);
+  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04) 48%),
+    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05) 52%),
+    linear-gradient(155deg, #0d141f, #131c29);
 
   /* Brand / EU */
   --eu-blue: #003399;
@@ -70,11 +70,11 @@
   --transition-fast: 0.15s ease-out;
 
   /* Map styling */
-  --map-border: rgba(0, 0, 0, 0.3);
-  --map-non-eu-border: rgba(0, 0, 0, 0.22);
-  --map-eu-fill: rgba(170, 185, 210, 0.85);
+  --map-eu-fill: #dfe8f5;
+  --map-eu-border: #ffffff;
+  --map-non-eu-border: #0a0a0a;
   --map-selected-fill: #1f6feb;
-  --map-selected-border: rgba(0, 0, 0, 0.35);
+  --map-selected-border: var(--map-eu-border);
   --map-stroke-width: 0.6;
 }
 
@@ -100,11 +100,11 @@ body.theme-dark {
   --shadow-soft-light: 0 10px 28px rgba(0, 0, 0, 0.35);
 
   /* Map styling in dark mode */
-  --map-border: rgba(255, 255, 255, 0.35);
-  --map-non-eu-border: rgba(255, 255, 255, 0.25);
-  --map-eu-fill: rgba(220, 230, 245, 0.85);
+  --map-eu-fill: rgba(223, 232, 245, 0.92);
+  --map-eu-border: #000000;
+  --map-non-eu-border: #ffffff;
   --map-selected-fill: #1f6feb;
-  --map-selected-border: rgba(255, 255, 255, 0.55);
+  --map-selected-border: var(--map-eu-border);
 
   color-scheme: dark;
 }
@@ -501,19 +501,23 @@ body.theme-dark .page-country .interactive-map {
   width: 95%;
   max-height: 95%;
   height: auto;
+  border: none;
 }
 
-.interactive-map svg .country {
+.interactive-map svg .country,
+.interactive-map svg path[id] {
   fill: transparent;
-  stroke: var(--map-border);
+  stroke: var(--map-non-eu-border);
   stroke-width: var(--map-stroke-width);
   vector-effect: non-scaling-stroke;
   stroke-linejoin: round;
   transition: fill var(--transition-fast), stroke var(--transition-fast), stroke-width var(--transition-fast);
 }
 
-.interactive-map svg .country.eu {
+.interactive-map svg .country.eu,
+.interactive-map svg [data-eu="true"] {
   fill: var(--map-eu-fill);
+  stroke: var(--map-eu-border);
 }
 
 .interactive-map svg .country.non-eu {
@@ -527,7 +531,7 @@ body.theme-dark .page-country .interactive-map {
 
 .interactive-map svg .country.is-hovered {
   fill: var(--eu-gold);
-  stroke: var(--map-selected-border);
+  stroke: var(--map-eu-border);
   stroke-width: calc(var(--map-stroke-width) * 0.9);
 }
 
@@ -813,7 +817,7 @@ body.theme-light .country-section-card {
 }
 
 .hero-map-card .interactive-map svg path.eu {
-  fill: #dbe6f2;
+  fill: var(--map-eu-fill);
 }
 
 .hero-map-card .interactive-map svg path.non-eu {
@@ -825,8 +829,8 @@ body.theme-light .country-section-card {
 }
 
 .hero-map-card .interactive-map svg path {
-  stroke: rgba(255, 255, 255, 0.32);
-  stroke-width: 0.6;
+  stroke: var(--map-non-eu-border);
+  stroke-width: var(--map-stroke-width);
 }
 
 body.theme-dark .hero-map-card {
@@ -834,11 +838,11 @@ body.theme-dark .hero-map-card {
 }
 
 body.theme-dark .hero-map-card .interactive-map svg path.eu {
-  stroke: #000;
+  stroke: var(--map-eu-border);
 }
 
 body.theme-dark .hero-map-card .interactive-map svg path.non-eu {
-  stroke: #ffffff;
+  stroke: var(--map-non-eu-border);
 }
 
 :root[data-theme="light"] .hero-map-card {

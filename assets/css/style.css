@@ -75,7 +75,7 @@
   --map-non-eu-border: #0a0a0a;
   --map-selected-fill: #1f6feb;
   --map-selected-border: var(--map-eu-border);
-  --map-stroke-width: 0.6;
+  --map-stroke-width: 0.8;
 }
 
 body.theme-dark {

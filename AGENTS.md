@@ -16,6 +16,11 @@ These rules apply to all AI-assisted changes in this repository.
 - No whitespace-only changes.
 - Use existing CSS variables and the current theme system.
 
+## Map rendering constraints
+- SVG country borders must use a stroke-width of 0.8.
+- Border thickness may not be altered without explicit instruction.
+- Stroke-width consistency across EU and non-EU countries is mandatory.
+
 ## Visual stability
 - Avoid layout shifts.
 - Do not alter spacing, typography scale, or colors outside the target component.

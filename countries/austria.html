@@ -28,38 +28,42 @@
 
   <main class="page-main country-profile">
     <section class="country-hero section">
-      <div class="country-hero__heading">
-        <div class="country-title">
-          <span class="country-flag flag-at" role="img" aria-label="Flag of Austria"></span>
-          <h1>Austria</h1>
+      <div class="grid-hero">
+        <div class="hero-left">
+          <h1><span class="country-flag flag-at" role="img" aria-label="Flag of Austria"></span> Austria</h1>
+          <p class="subtitle">Schengen member balancing humanitarian obligations with firm border control.</p>
         </div>
-        <p class="country-hero__tagline">Schengen member balancing humanitarian obligations with firm border control.</p>
+
+        <aside class="hero-map-card" aria-label="Austria in Europe">
+          <div class="interactive-map" data-map-src="../assets/maps/europe.svg" data-highlight="at"></div>
+        </aside>
       </div>
     </section>
 
     <section class="section policy-snapshot">
-      <div class="section-header">
-        <p class="section-eyebrow">POLICY PROFILE</p>
-        <h2>At a glance</h2>
-        <p class="section-lead">Concise view of Austria&rsquo;s position in the EU migration landscape.</p>
-      </div>
+      <div class="eyebrow">Policy profile</div>
+      <h2 class="section-title">Policy essentials</h2>
+      <p class="section-subtitle">Concise view of Austria&rsquo;s position in the EU migration landscape.</p>
 
       <div class="snapshot-grid">
-        <div class="snapshot-item">
-          <p class="snapshot-label">Position in EU migration system</p>
-          <p class="snapshot-value">Central transit and destination state within Schengen.</p>
+        <div class="snapshot-card">
+          <div class="snapshot-label">Position in EU migration system</div>
+          <div class="snapshot-value">Central transit and destination state within Schengen.</div>
         </div>
-        <div class="snapshot-item">
-          <p class="snapshot-label">Primary policy focus</p>
-          <p class="snapshot-value">Deterrence, border control, and limitation of secondary movements.</p>
+
+        <div class="snapshot-card">
+          <div class="snapshot-label">Primary policy focus</div>
+          <div class="snapshot-value">Deterrence, border control, and limitation of secondary movements.</div>
         </div>
-        <div class="snapshot-item">
-          <p class="snapshot-label">Pressure level</p>
-          <p class="snapshot-value is-pill">Medium–High</p>
+
+        <div class="snapshot-card">
+          <div class="snapshot-label">Pressure level</div>
+          <div class="snapshot-value is-pill">Medium–High</div>
         </div>
-        <div class="snapshot-item">
-          <p class="snapshot-label">Key tension</p>
-          <p class="snapshot-value">EU solidarity mechanisms vs. national capacity and political resistance.</p>
+
+        <div class="snapshot-card">
+          <div class="snapshot-label">Key tension</div>
+          <div class="snapshot-value">EU solidarity mechanisms vs. national capacity and political resistance.</div>
         </div>
       </div>
     </section>

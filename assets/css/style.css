@@ -4,16 +4,10 @@
    ======================================== */
 :root {
   /* Map ombré backgrounds */
-  --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.3), rgba(37, 99, 235, 0.12) 46%),
-    radial-gradient(circle at 78% 22%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1) 54%), var(--bg-page);
-  --map-ombre-dark: radial-gradient(circle at 30% 20%,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.08) 42%,
-      rgba(255, 255, 255, 0) 70%),
-    radial-gradient(circle at 78% 26%,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.06) 48%,
-      rgba(255, 255, 255, 0) 72%);
+  --map-ombre: radial-gradient(circle at 24% 20%,
+      rgba(37, 99, 235, 0.18),
+      rgba(37, 99, 235, 0.08) 46%,
+      rgba(255, 255, 255, 0) 70%);
   --home-map-ombre: none;
 
   /* Brand / EU */
@@ -91,6 +85,11 @@ body.theme-dark {
   --bg-light: #222b36;
   --bg-light-soft: #263143;
 
+  --map-ombre: radial-gradient(circle at 30% 20%,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.06) 48%,
+      rgba(255, 255, 255, 0) 72%);
+
   --text-main: #e5e7eb;
   --text-muted: #cbd5e1;
   --text-strong: #f8fafc;
@@ -118,6 +117,11 @@ body.theme-dark {
 body.theme-light {
   color-scheme: light;
   --heading-color: #1f3d73;
+
+  --map-ombre: radial-gradient(circle at 24% 20%,
+      rgba(37, 99, 235, 0.18),
+      rgba(37, 99, 235, 0.08) 46%,
+      rgba(255, 255, 255, 0) 70%);
 }
 
 html[data-theme="dark"] {
@@ -135,6 +139,18 @@ html[data-theme="dark"] {
   --text: rgba(13, 23, 38, 0.92);
   --muted: rgba(13, 23, 38, 0.68);
   --border: rgba(13, 23, 38, 0.1);
+
+  --map-ombre: radial-gradient(circle at 24% 20%,
+      rgba(37, 99, 235, 0.18),
+      rgba(37, 99, 235, 0.08) 46%,
+      rgba(255, 255, 255, 0) 70%);
+}
+
+:root[data-theme="dark"] {
+  --map-ombre: radial-gradient(circle at 30% 20%,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.06) 48%,
+      rgba(255, 255, 255, 0) 72%);
 }
 
 :root[data-theme="light"] .country-hero,
@@ -825,38 +841,46 @@ body.theme-light .country-section-card {
 
 .hero-map-card {
   position: relative;
-  background: var(--map-ombre-light);
-  border-radius: 18px;
+  overflow: visible;
+  border-radius: var(--radius-lg);
   padding: 12px;
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
 }
 
+.hero-map-card::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: calc(var(--radius-lg) + 18px);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(18px);
+  opacity: 0.9;
+  background: var(--map-ombre);
+}
+
 .page-country .hero-map-card.hero-visual {
-  background: transparent;
   padding: 12px;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
   min-height: auto;
-  border-radius: 18px;
-}
-
-.page-country .hero-map-card.hero-visual::before {
-  content: none;
+  border-radius: var(--radius-lg);
 }
 
 .hero-map-card .interactive-map {
-  min-height: 240px;
-  background: var(--bg-page);
-  box-shadow: none;
-  border-radius: 12px;
-}
-
-.page-country .hero-map-card.hero-visual .interactive-map {
   position: relative;
   z-index: 1;
   min-height: 240px;
-  background: transparent;
+  background: var(--bg-page);
   box-shadow: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.page-country .hero-map-card.hero-visual .interactive-map {
+  min-height: 240px;
+  background: var(--bg-page);
+  box-shadow: none;
+  border-radius: var(--radius-lg);
   --map-stroke-width: var(--map-stroke-width-mini);
 }
 
@@ -891,7 +915,7 @@ body.theme-light .country-section-card {
 }
 
 body.theme-dark .hero-map-card {
-  background: var(--map-ombre-dark);
+  background: transparent;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
 }
 
@@ -899,12 +923,7 @@ body.theme-dark .page-country .hero-map-card.hero-visual,
 :root[data-theme="dark"] .page-country .hero-map-card.hero-visual {
   background: transparent;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
-  border-radius: 18px;
-}
-
-body.theme-dark .page-country .hero-map-card.hero-visual::before,
-:root[data-theme="dark"] .page-country .hero-map-card.hero-visual::before {
-  content: none;
+  border-radius: var(--radius-lg);
 }
 
 body.theme-dark .hero-map-card .interactive-map svg path.eu {
@@ -922,9 +941,9 @@ body.theme-dark .hero-map-card .interactive-map {
 
 body.theme-dark .page-country .hero-map-card.hero-visual .interactive-map,
 :root[data-theme="dark"] .page-country .hero-map-card.hero-visual .interactive-map {
-  background: transparent;
+  background: var(--bg-surface-dark);
   box-shadow: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 }
 
 body.theme-light .page-country .hero-map-card.hero-visual,
@@ -935,12 +954,12 @@ body.theme-light .page-country .hero-map-card.hero-visual,
 
 body.theme-light .page-country .hero-map-card.hero-visual .interactive-map,
 :root[data-theme="light"] .page-country .hero-map-card.hero-visual .interactive-map {
-  background: transparent;
+  background: var(--bg-page);
   box-shadow: none;
 }
 
 :root[data-theme="light"] .hero-map-card {
-  background: var(--map-ombre-light);
+  background: transparent;
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
 }
 
@@ -1933,7 +1952,7 @@ html[data-theme="dark"] .page-home .interactive-map::before {
   content: "";
   position: absolute;
   inset: -48px;
-  background: var(--map-ombre-dark);
+  background: var(--map-ombre);
   pointer-events: none;
   z-index: 0;
   filter: blur(18px);

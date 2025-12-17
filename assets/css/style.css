@@ -873,6 +873,13 @@ body.theme-dark .page-country .hero-map-card.hero-visual {
   border-radius: 18px;
 }
 
+body.theme-dark .page-country .hero-map-card.hero-visual {
+  background: var(--map-ombre-dark);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+  border-radius: 18px;
+}
+
 body.theme-dark .hero-map-card .interactive-map svg path.eu {
   stroke: var(--map-eu-border);
 }

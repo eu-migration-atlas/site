@@ -1,47 +1,57 @@
 # AI Agent Instructions (Non-Negotiable)
 
-These rules apply to ALL AI-assisted changes in this repository.
+These rules apply to all AI-assisted changes in this repository.
 
-## 1) Scope control
+## Scope control
 - Modify ONLY the files explicitly listed in the task.
-- Do NOT touch any other files, including shared CSS/JS, unless the task explicitly lists them.
+- Do NOT touch any other files.
 
-## 2) Structure & layout (LOCKED)
+## Structure & layout
 - Do NOT change HTML structure unless explicitly instructed.
-- Do NOT rename, remove, or reorganize classes/IDs.
-- Header and navigation are LOCKED: never modify them.
+- Do NOT rename, remove, or reorganize classes or IDs.
+- Header and navigation are LOCKED and must never be modified.
 
-## 3) Styling rules (surgical changes only)
+## Styling rules
 - No refactoring, cleanup, or reformatting.
 - No whitespace-only changes.
 - Use existing CSS variables and the current theme system.
-- Make the smallest possible diff that solves the task.
+- Do NOT change the theme toggling mechanism, theme selectors, or how dark/light mode is applied.
 
-## 4) Map styling constraints (stroke & interaction)
-- Main/hero maps: stroke-width MUST be 0.8.
-- Mini-maps on country pages: stroke-width MUST be 0.6.
+## Theme-safe variable rules (critical)
+- Theme-dependent styling MUST be defined via theme-scoped selectors:
+  - Use `:root[data-theme="light"] { ... }` for light mode values.
+  - Use `:root[data-theme="dark"] { ... }` for dark mode values.
+- Do NOT merge light/dark variables into a single mixed value.
+- If a shared variable name is needed (e.g., `--map-ombre`), it MUST be assigned separately per theme scope.
+
+## Map styling constraints
+- Main/hero maps use `stroke-width: 0.8`; mini-maps on country pages use `stroke-width: 0.6`.
+- Switzerland must use the same stroke treatment as EU member states.
+- EU hover behavior is mandatory: EU regions must turn yellow on hover.
+- Mini-maps on country pages must be interactive (inline/embedded SVG that supports hover/click).
+
+## Map container glow rules (constant ombre, no frames)
+- Every map container must have a constant ombre/glow.
+- Light mode: subtle blue-tinted ombre/glow.
+- Dark mode: white-tinted glow accents on a DARK base.
+  - Do NOT switch the map container background to white/purple in dark mode.
+  - Only the surrounding glow/overlay is white-tinted; the map surface stays dark.
+- No borders/frames/outlines around map containers.
+- The ombre/glow belongs on the OUTER hero map card/container (e.g., `::before` on the card), NOT on the interactive map/SVG itself.
+
+## Map rendering constraints
+- SVG country borders must use a stroke-width of 0.8 or 0.6.
 - Border thickness may not be altered without explicit instruction.
-- Switzerland MUST use the same stroke treatment as EU member states.
-- EU hover behavior is mandatory: EU regions turn yellow on hover.
-- Mini-maps must be interactive (inline/embedded SVG supporting hover/click).
+- Stroke-width consistency across EU and non-EU countries is mandatory.
 
-## 5) Map container glow rules (NO BORDERS, NO FRAMES)
-- There must be a constant ombre/glow around map containers.
-- Light mode: subtle blue-tinted glow.
-- Dark mode: subtle white-tinted glow ONLY; the map surface/background remains DARK.
-- Never switch the map container background to white/purple in dark mode.
-
-### Implementation rule (prevents the recurring bug)
-- The glow MUST be applied to the OUTER map card/container using ::before or ::after.
-- The glow MUST NOT be applied to the SVG or the interactive map element itself.
-- The OUTER container MUST allow the glow to extend outward:
-  - outer container: overflow: visible
-  - inner surface wrapper (rounded card): overflow: hidden + border-radius
-- No borders/frames around map containers. If a border appears: remove it, do not recolor it.
-
-## 6) Visual stability
+## Visual stability
 - Avoid layout shifts.
 - Do not alter spacing, typography scale, or colors outside the target component.
 
-## 7) If blocked
-- If requirements cannot be met without broader changes: STOP and explain exactly why.
+## Diff discipline
+- Make the smallest possible change to achieve the task.
+- If requirements cannot be met without broader changes: STOP and explain.
+- Always verify light AND dark mode before concluding.
+
+## Priority
+- Consistency and existing design decisions override best practices or optimizations.

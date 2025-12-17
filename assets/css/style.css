@@ -818,7 +818,7 @@ body.theme-light .country-section-card {
 .page-country .hero-map-card.hero-visual {
   background: var(--map-ombre-light);
   padding: 12px;
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
   min-height: auto;
   border-radius: 18px;
 }
@@ -868,9 +868,10 @@ body.theme-dark .hero-map-card {
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
 }
 
-body.theme-dark .page-country .hero-map-card.hero-visual {
+body.theme-dark .page-country .hero-map-card.hero-visual,
+:root[data-theme="dark"] .page-country .hero-map-card.hero-visual {
   background: var(--map-ombre-dark);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
   border-radius: 18px;
 }
 
@@ -887,10 +888,23 @@ body.theme-dark .hero-map-card .interactive-map {
   box-shadow: none;
 }
 
-body.theme-dark .page-country .hero-map-card.hero-visual .interactive-map {
+body.theme-dark .page-country .hero-map-card.hero-visual .interactive-map,
+:root[data-theme="dark"] .page-country .hero-map-card.hero-visual .interactive-map {
   background: var(--bg-surface-dark);
   box-shadow: none;
   border-radius: 12px;
+}
+
+body.theme-light .page-country .hero-map-card.hero-visual,
+:root[data-theme="light"] .page-country .hero-map-card.hero-visual {
+  background: var(--map-ombre-light);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+body.theme-light .page-country .hero-map-card.hero-visual .interactive-map,
+:root[data-theme="light"] .page-country .hero-map-card.hero-visual .interactive-map {
+  background: var(--bg-page);
+  box-shadow: none;
 }
 
 :root[data-theme="light"] .hero-map-card {

@@ -25,6 +25,7 @@ Every map container must have a constant ombre/glow:
 - Light mode: blue ombre/glow (subtle blue-tinted gradient around the map).
 - Dark mode: white glow accents on a DARK base (do not switch the map container background to white/purple; only the glow/overlay is white-tinted).
 - No frames/borders around map containers.
+- The ombre/glow belongs on the hero map card container, not on the interactive map itself; in dark mode the map surface stays dark while only the surrounding glow is white-tinted.
 
 ## Map rendering constraints
 - SVG country borders must use a stroke-width of 0.8 or 0.6.

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDark = theme === 'dark';
     body.classList.toggle('theme-dark', isDark);
     body.classList.toggle('theme-light', !isDark);
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
 
     const label = document.querySelector('.theme-toggle__label');
     if (label) {

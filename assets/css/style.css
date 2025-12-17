@@ -8,6 +8,7 @@
     radial-gradient(circle at 78% 22%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1) 54%), var(--bg-page);
   --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08) 48%),
     radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07) 54%), var(--bg-surface-dark);
+  --home-map-ombre: none;
 
   /* Brand / EU */
   --eu-blue: #003399;
@@ -111,6 +112,15 @@ body.theme-dark {
 body.theme-light {
   color-scheme: light;
   --heading-color: #1f3d73;
+}
+
+html[data-theme="dark"] {
+  --home-map-ombre: radial-gradient(
+    circle at 60% 40%,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0) 70%
+  );
 }
 
 :root[data-theme="light"] {
@@ -1902,6 +1912,25 @@ body.index .hero-visual .interactive-map {
   border-radius: 18px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
   min-height: 600px;
+}
+
+.page-home .interactive-map {
+  position: relative;
+}
+
+.page-home .interactive-map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--home-map-ombre);
+  z-index: 0;
+}
+
+.page-home .interactive-map svg {
+  position: relative;
+  z-index: 1;
 }
 
 body.theme-light.index .hero-visual {

@@ -811,8 +811,8 @@ body.theme-light .country-section-card {
 
 .hero-map-card .interactive-map {
   min-height: 240px;
-  background: transparent;
-  box-shadow: none;
+  background: var(--map-ombre-light);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
   border-radius: 12px;
 }
 
@@ -831,6 +831,7 @@ body.theme-light .country-section-card {
 .hero-map-card .interactive-map svg path {
   stroke: var(--map-non-eu-border);
   stroke-width: var(--map-stroke-width);
+  vector-effect: non-scaling-stroke;
 }
 
 body.theme-dark .hero-map-card {
@@ -843,6 +844,11 @@ body.theme-dark .hero-map-card .interactive-map svg path.eu {
 
 body.theme-dark .hero-map-card .interactive-map svg path.non-eu {
   stroke: var(--map-non-eu-border);
+}
+
+body.theme-dark .hero-map-card .interactive-map {
+  background: var(--map-ombre-dark);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
 }
 
 :root[data-theme="light"] .hero-map-card {

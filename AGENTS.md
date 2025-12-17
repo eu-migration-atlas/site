@@ -16,6 +16,15 @@ These rules apply to all AI-assisted changes in this repository.
 - No whitespace-only changes.
 - Use existing CSS variables and the current theme system.
 
+## Map styling constraints
+- All EU map borders must use stroke-width: 0.8 (via CSS variable preferred).
+- EU hover behavior is mandatory: EU regions must turn yellow on hover.
+- Mini-maps on country pages must be interactive (inline/embedded SVG that supports hover/click).
+- Every map container must have a constant ombre/glow:
+  - Light mode: blue
+  - Dark mode: white
+- No frames/borders around map containers.
+
 ## Map rendering constraints
 - SVG country borders must use a stroke-width of 0.8.
 - Border thickness may not be altered without explicit instruction.

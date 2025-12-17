@@ -279,6 +279,36 @@ document.addEventListener('DOMContentLoaded', () => {
             'ro', 'sk', 'si', 'es', 'se'
           ]);
 
+          const euCountryProfiles = {
+            at: 'austria',
+            be: 'belgium',
+            bg: 'bulgaria',
+            hr: 'croatia',
+            cy: 'cyprus',
+            cz: 'czechia',
+            dk: 'denmark',
+            ee: 'estonia',
+            fi: 'finland',
+            fr: 'france',
+            de: 'germany',
+            gr: 'greece',
+            hu: 'hungary',
+            ie: 'ireland',
+            it: 'italy',
+            lv: 'latvia',
+            lt: 'lithuania',
+            lu: 'luxembourg',
+            mt: 'malta',
+            nl: 'netherlands',
+            pl: 'poland',
+            pt: 'portugal',
+            ro: 'romania',
+            sk: 'slovakia',
+            si: 'slovenia',
+            es: 'spain',
+            se: 'sweden'
+          };
+
           function hideTooltip() {
             tooltip.classList.remove('is-visible');
             paths.forEach(path => path.classList.remove('is-hovered'));
@@ -291,21 +321,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const inCountriesFolder = window.location.pathname.includes('/countries/');
             const overviewHref = inCountriesFolder ? `../countries.html#${countryCode}` : `countries.html#${countryCode}`;
 
-            // Use correct base for profile links too
             const profileBase = inCountriesFolder ? '../countries/' : 'countries/';
-
-            const countryProfiles = {
-              it: `${profileBase}italy.html`,
-              es: `${profileBase}spain.html`,
-              pt: `${profileBase}portugal.html`,
-              lu: `${profileBase}luxembourg.html`,
-              pl: `${profileBase}poland.html`
-            };
-
+            const countrySlug = euCountryProfiles[countryCode];
             const target =
-              countryProfiles[countryCode] ||
-              (isEuMember ? overviewHref : null);
+              isEuMember && countrySlug
+                ? `${profileBase}${countrySlug}.html`
+                : null;
 
+            path.dataset.euMember = isEuMember ? 'true' : 'false';
             path.classList.add('country', isEuMember ? 'eu' : 'non-eu');
 
             path.addEventListener('mouseenter', () => {

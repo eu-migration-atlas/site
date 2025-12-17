@@ -76,6 +76,7 @@
   --map-selected-fill: #1f6feb;
   --map-selected-border: var(--map-eu-border);
   --map-stroke-width: 0.8;
+  --map-stroke-width-mini: 0.6;
 }
 
 body.theme-dark {
@@ -828,6 +829,7 @@ body.theme-light .country-section-card {
   min-height: 240px;
   background: var(--map-ombre-light);
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  --map-stroke-width: var(--map-stroke-width-mini);
 }
 
 .hero-map-card .interactive-map svg path.eu {
@@ -1294,7 +1296,7 @@ body.theme-light .hero-eyebrow {
 }
 
 .hero-visual .interactive-map {
-  background: inherit;
+  background: var(--map-ombre-light);
   border: none;
   min-height: 720px;
 }

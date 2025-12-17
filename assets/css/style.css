@@ -827,14 +827,14 @@ body.theme-light .country-section-card {
 
 .hero-map-card .interactive-map {
   min-height: 240px;
-  background: var(--bg-light-soft);
+  background: var(--bg-page);
   box-shadow: none;
   border-radius: 12px;
 }
 
 .page-country .hero-map-card.hero-visual .interactive-map {
   min-height: 240px;
-  background: var(--bg-light-soft);
+  background: var(--bg-page);
   box-shadow: none;
   border-radius: 12px;
   --map-stroke-width: var(--map-stroke-width-mini);

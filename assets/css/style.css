@@ -4,12 +4,10 @@
    ======================================== */
 :root {
   /* Map ombré backgrounds */
-  --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.28), rgba(37, 99, 235, 0.1) 46%),
-    radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1) 54%),
-    linear-gradient(145deg, #d7e3f7, #e6edf9);
-  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05) 48%),
-    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.06) 54%),
-    linear-gradient(155deg, #0b1624, #111b2b);
+  --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.3), rgba(37, 99, 235, 0.12) 46%),
+    radial-gradient(circle at 78% 22%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1) 54%), var(--bg-page);
+  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08) 48%),
+    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07) 54%), var(--bg-surface-dark);
 
   /* Brand / EU */
   --eu-blue: #003399;

@@ -809,11 +809,25 @@ body.theme-light .country-section-card {
   box-shadow: none;
 }
 
+.page-country .hero-map-card.hero-visual {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  min-height: auto;
+}
+
 .hero-map-card .interactive-map {
   min-height: 240px;
   background: var(--map-ombre-light);
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
   border-radius: 12px;
+}
+
+.page-country .hero-map-card.hero-visual .interactive-map {
+  min-height: 240px;
+  background: var(--map-ombre-light);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
 }
 
 .hero-map-card .interactive-map svg path.eu {
@@ -822,6 +836,13 @@ body.theme-light .country-section-card {
 
 .hero-map-card .interactive-map svg path.non-eu {
   fill: transparent;
+}
+
+.hero-map-card .interactive-map svg .country.eu.is-hovered,
+.hero-map-card .interactive-map svg .country.eu:hover {
+  fill: var(--eu-gold) !important;
+  stroke: var(--map-eu-border);
+  stroke-width: var(--map-stroke-width);
 }
 
 .hero-map-card .interactive-map svg path.is-highlighted {

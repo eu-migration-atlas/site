@@ -636,6 +636,14 @@ body.theme-light .country-section-card {
   margin-bottom: 1.25rem;
 }
 
+.section-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
 .section-kicker {
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -715,7 +723,7 @@ body.theme-dark .country-hero {
   background: var(--bg-light);
   border: 1px solid var(--border-soft-light);
   border-radius: var(--radius-lg);
-  padding: 1.8rem 2rem;
+  padding: 2.2rem 2.3rem 2rem;
   box-shadow: var(--shadow-soft-light);
 }
 
@@ -723,6 +731,14 @@ body.theme-dark .policy-snapshot {
   background: var(--bg-surface-elevated);
   border-color: var(--border-soft);
   box-shadow: var(--shadow-soft);
+}
+
+.policy-snapshot .section-header {
+  margin-bottom: 1.5rem;
+}
+
+.policy-snapshot .section-lead {
+  margin-bottom: 0;
 }
 
 .snapshot-grid {
@@ -748,14 +764,19 @@ body.theme-dark .snapshot-item {
 }
 
 .snapshot-label {
-  font-weight: 700;
-  margin: 0 0 0.35rem;
-  color: var(--text-strong);
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .snapshot-value {
   margin: 0;
-  color: var(--text-muted);
+  color: var(--text-strong);
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .country-accordion .accordion {

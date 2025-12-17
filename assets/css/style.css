@@ -24,8 +24,8 @@
   --heading-color: #1f3d73;
 
   /* Light surfaces for hybride blocks */
-  --bg-light: #f5f7fb;
-  --bg-light-soft: #eef2f9;
+  --bg-light: #eef1f6;
+  --bg-light-soft: #e7ebf3;
 
   /* Textcolors */
   --text-main: #0f172a;
@@ -141,6 +141,11 @@ body.theme-light {
 
 :root[data-theme="light"] .snapshot-value {
   color: var(--text);
+}
+
+:root[data-theme="light"] .policy-snapshot .section-title,
+:root[data-theme="light"] .snapshot-label {
+  color: var(--eu-blue);
 }
 
 body.theme-dark .interactive-map {
@@ -793,11 +798,11 @@ body.theme-light .country-section-card {
 }
 
 .hero-map-card {
-  background: radial-gradient(120% 120% at 30% 20%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 45%, rgba(255, 255, 255, 0) 75%);
+  background: var(--map-ombre-dark);
   border: none !important;
   border-radius: 14px;
-  padding: 0.6rem;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  padding: 0.65rem;
+  box-shadow: none;
 }
 
 .hero-map-card .interactive-map {
@@ -824,15 +829,26 @@ body.theme-light .country-section-card {
   stroke-width: 0.9;
 }
 
+body.theme-dark .hero-map-card {
+  background: var(--map-ombre-dark);
+}
+
+body.theme-dark .hero-map-card .interactive-map svg path.eu {
+  stroke: #000;
+}
+
+body.theme-dark .hero-map-card .interactive-map svg path.non-eu {
+  stroke: #ffffff;
+}
+
 :root[data-theme="light"] .hero-map-card {
-  background: radial-gradient(120% 120% at 30% 20%, rgba(255, 255, 255, 0.95) 0%, rgba(230, 238, 250, 0.55) 45%, rgba(255, 255, 255, 0) 78%);
-  box-shadow: 0 0 0 1px rgba(10, 20, 35, 0.08) inset;
+  background: var(--map-ombre-light);
+  box-shadow: none;
 }
 
 .policy-snapshot {
-  margin-top: 14px;
-  padding: 30px 20px 18px;
-  padding-top: 32px !important;
+  margin-top: 10px;
+  padding: 22px 18px 18px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
   background: radial-gradient(
@@ -855,8 +871,8 @@ body.theme-light .country-section-card {
 .policy-profile .eyebrow,
 .policy-section .eyebrow {
   display: block;
-  margin-top: 24px !important;
-  padding-top: 8px !important;
+  margin-top: 6px !important;
+  padding-top: 2px !important;
 }
 
 .policy-snapshot .section-title {
@@ -882,8 +898,8 @@ body.theme-light .country-section-card {
 }
 
 .snapshot-card {
-  background: rgba(12, 28, 52, 0.28);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 24, 32, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
   padding: 1.1rem 1rem;
 }

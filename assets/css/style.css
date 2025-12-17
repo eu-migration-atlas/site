@@ -824,15 +824,7 @@ body.theme-light .country-section-card {
 }
 
 .page-country .hero-map-card.hero-visual::before {
-  content: "";
-  position: absolute;
-  inset: -18px;
-  background: var(--map-ombre-light);
-  filter: blur(14px);
-  opacity: 0.94;
-  border-radius: 22px;
-  z-index: 0;
-  pointer-events: none;
+  content: none;
 }
 
 .hero-map-card .interactive-map {
@@ -896,7 +888,7 @@ body.theme-dark .page-country .hero-map-card.hero-visual,
 
 body.theme-dark .page-country .hero-map-card.hero-visual::before,
 :root[data-theme="dark"] .page-country .hero-map-card.hero-visual::before {
-  background: var(--map-ombre-dark);
+  content: none;
 }
 
 body.theme-dark .hero-map-card .interactive-map svg path.eu {
@@ -1913,7 +1905,7 @@ body.index .hero-visual .interactive-map {
 }
 
 body.theme-light.index .hero-visual {
-  background: linear-gradient(160deg, rgba(53, 88, 166, 0.08), rgba(255, 255, 255, 0.95));
+  background: var(--bg-light-soft);
   border: 1px solid var(--border-soft-light);
   padding: 1rem;
   box-shadow: var(--shadow-soft-light);

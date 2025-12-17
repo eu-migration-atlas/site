@@ -75,7 +75,7 @@
   --map-eu-fill: rgba(170, 185, 210, 0.85);
   --map-selected-fill: #1f6feb;
   --map-selected-border: rgba(0, 0, 0, 0.35);
-  --map-stroke-width: 0.8;
+  --map-stroke-width: 0.6;
 }
 
 body.theme-dark {
@@ -798,10 +798,10 @@ body.theme-light .country-section-card {
 }
 
 .hero-map-card {
-  background: var(--map-ombre-dark);
+  background: transparent;
   border: none !important;
   border-radius: 14px;
-  padding: 0.65rem;
+  padding: 0;
   box-shadow: none;
 }
 
@@ -826,11 +826,11 @@ body.theme-light .country-section-card {
 
 .hero-map-card .interactive-map svg path {
   stroke: rgba(255, 255, 255, 0.32);
-  stroke-width: 0.9;
+  stroke-width: 0.6;
 }
 
 body.theme-dark .hero-map-card {
-  background: var(--map-ombre-dark);
+  background: transparent;
 }
 
 body.theme-dark .hero-map-card .interactive-map svg path.eu {
@@ -842,7 +842,7 @@ body.theme-dark .hero-map-card .interactive-map svg path.non-eu {
 }
 
 :root[data-theme="light"] .hero-map-card {
-  background: var(--map-ombre-light);
+  background: transparent;
   box-shadow: none;
 }
 

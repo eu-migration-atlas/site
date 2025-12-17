@@ -1,4 +1,4 @@
-# AI Agent Instructions (Non-NegOTIABLE)
+# AI Agent Instructions (Non-Negotiable)
 
 These rules apply to all AI-assisted changes in this repository.
 

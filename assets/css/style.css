@@ -4,12 +4,12 @@
    ======================================== */
 :root {
   /* Map ombré backgrounds */
-  --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.08) 45%),
-    radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.16), rgba(88, 142, 255, 0.08) 52%),
-    linear-gradient(145deg, #dfe9ff, #e9f0ff);
-  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04) 48%),
-    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05) 52%),
-    linear-gradient(155deg, #0d141f, #131c29);
+  --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.28), rgba(37, 99, 235, 0.1) 46%),
+    radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1) 54%),
+    linear-gradient(145deg, #e3ebfb, #edf3fb);
+  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05) 48%),
+    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.06) 54%),
+    linear-gradient(155deg, #0b1624, #111b2b);
 
   /* Brand / EU */
   --eu-blue: #003399;
@@ -76,6 +76,7 @@
   --map-selected-fill: #1f6feb;
   --map-selected-border: var(--map-eu-border);
   --map-stroke-width: 0.8;
+  --map-stroke-width-mini: 0.6;
 }
 
 body.theme-dark {
@@ -802,32 +803,36 @@ body.theme-light .country-section-card {
 }
 
 .hero-map-card {
-  background: transparent;
-  border: none !important;
-  border-radius: 14px;
-  padding: 0;
-  box-shadow: none;
+  position: relative;
+  background: var(--map-ombre-light);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
 }
 
 .page-country .hero-map-card.hero-visual {
-  background: transparent;
-  border: none;
-  padding: 0;
-  box-shadow: none;
+  background: var(--map-ombre-light);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 12px;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
   min-height: auto;
+  border-radius: 18px;
 }
 
 .hero-map-card .interactive-map {
   min-height: 240px;
-  background: var(--map-ombre-light);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  background: var(--bg-light-soft);
+  box-shadow: none;
   border-radius: 12px;
 }
 
 .page-country .hero-map-card.hero-visual .interactive-map {
   min-height: 240px;
-  background: var(--map-ombre-light);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+  background: var(--bg-light-soft);
+  box-shadow: none;
+  border-radius: 12px;
+  --map-stroke-width: var(--map-stroke-width-mini);
 }
 
 .hero-map-card .interactive-map svg path.eu {
@@ -856,7 +861,16 @@ body.theme-light .country-section-card {
 }
 
 body.theme-dark .hero-map-card {
-  background: transparent;
+  background: var(--map-ombre-dark);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+}
+
+body.theme-dark .page-country .hero-map-card.hero-visual {
+  background: var(--map-ombre-dark);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+  border-radius: 18px;
 }
 
 body.theme-dark .hero-map-card .interactive-map svg path.eu {
@@ -868,13 +882,19 @@ body.theme-dark .hero-map-card .interactive-map svg path.non-eu {
 }
 
 body.theme-dark .hero-map-card .interactive-map {
-  background: var(--map-ombre-dark);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+  background: var(--bg-surface-dark);
+  box-shadow: none;
+}
+
+body.theme-dark .page-country .hero-map-card.hero-visual .interactive-map {
+  background: var(--bg-surface-dark);
+  box-shadow: none;
+  border-radius: 12px;
 }
 
 :root[data-theme="light"] .hero-map-card {
-  background: transparent;
-  box-shadow: none;
+  background: var(--map-ombre-light);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
 }
 
 .policy-snapshot {
@@ -1294,7 +1314,7 @@ body.theme-light .hero-eyebrow {
 }
 
 .hero-visual .interactive-map {
-  background: inherit;
+  background: var(--map-ombre-light);
   border: none;
   min-height: 720px;
 }

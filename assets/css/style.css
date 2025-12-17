@@ -832,6 +832,7 @@ body.theme-light .country-section-card {
 .policy-snapshot {
   margin-top: 14px;
   padding: 30px 20px 18px;
+  padding-top: 32px !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
   background: radial-gradient(
@@ -848,6 +849,14 @@ body.theme-light .country-section-card {
   color: rgba(255, 255, 255, 0.6);
   margin-top: 6px;
   margin-bottom: 14px;
+}
+
+.policy-snapshot .eyebrow,
+.policy-profile .eyebrow,
+.policy-section .eyebrow {
+  display: block;
+  margin-top: 24px !important;
+  padding-top: 8px !important;
 }
 
 .policy-snapshot .section-title {

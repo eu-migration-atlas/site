@@ -6,8 +6,14 @@
   /* Map ombré backgrounds */
   --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.3), rgba(37, 99, 235, 0.12) 46%),
     radial-gradient(circle at 78% 22%, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.1) 54%), var(--bg-page);
-  --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08) 48%),
-    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07) 54%), var(--bg-surface-dark);
+  --map-ombre-dark: radial-gradient(circle at 30% 20%,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 42%,
+      rgba(255, 255, 255, 0) 70%),
+    radial-gradient(circle at 78% 26%,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 48%,
+      rgba(255, 255, 255, 0) 72%);
   --home-map-ombre: none;
 
   /* Brand / EU */
@@ -1912,6 +1918,36 @@ body.index .hero-visual .interactive-map {
   border-radius: 18px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
   min-height: 600px;
+}
+
+html[data-theme="dark"] .page-home .interactive-map {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-surface-dark);
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .page-home .interactive-map::before {
+  content: "";
+  position: absolute;
+  inset: -48px;
+  background: var(--map-ombre-dark);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(18px);
+  opacity: 1;
+}
+
+html[data-theme="dark"] .page-home .interactive-map > svg,
+html[data-theme="dark"] .page-home .interactive-map .map-svg {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 .page-home .interactive-map {

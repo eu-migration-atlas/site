@@ -632,6 +632,19 @@ body.theme-light .country-section-card {
   margin: 0 0 0.4rem;
 }
 
+.section-header {
+  margin-bottom: 1.25rem;
+}
+
+.section-kicker {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 0.35rem;
+}
+
 .section-lead {
   max-width: 44rem;
   color: var(--text-muted-light);
@@ -669,6 +682,194 @@ body.theme-light .country-section-card {
 
 .section-light li {
   color: var(--text-on-light);
+}
+
+/* ========================================
+   Country profile building blocks
+   ======================================== */
+.country-profile .section {
+  margin-bottom: 2.5rem;
+}
+
+.country-hero {
+  background: var(--bg-light);
+  border: 1px solid var(--border-soft-light);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem 2.4rem;
+  box-shadow: var(--shadow-soft-light);
+}
+
+body.theme-dark .country-hero {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.country-hero__tagline {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  color: var(--text-muted-light);
+}
+
+.policy-snapshot {
+  background: var(--bg-light);
+  border: 1px solid var(--border-soft-light);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 2rem;
+  box-shadow: var(--shadow-soft-light);
+}
+
+body.theme-dark .policy-snapshot {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.snapshot-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 0;
+  padding: 0;
+}
+
+.snapshot-item {
+  background: var(--bg-page);
+  border: 1px solid var(--border-soft-light);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow-soft-light);
+}
+
+body.theme-dark .snapshot-item {
+  background: var(--bg-surface-dark);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.snapshot-label {
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+  color: var(--text-strong);
+}
+
+.snapshot-value {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.country-accordion .accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.accordion-item {
+  background: var(--bg-light);
+  border: 1px solid var(--border-soft-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft-light);
+}
+
+body.theme-dark .accordion-item {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.accordion-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+}
+
+.accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-title {
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.accordion-indicator {
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.accordion-indicator::before,
+.accordion-indicator::after {
+  content: '';
+  position: absolute;
+  background: var(--text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.accordion-indicator::before {
+  width: 8px;
+  height: 2px;
+}
+
+.accordion-indicator::after {
+  width: 2px;
+  height: 8px;
+}
+
+.accordion-item[open] .accordion-indicator::after {
+  transform: scaleY(0);
+}
+
+.accordion-panel {
+  padding: 0 1.2rem 1.2rem;
+  border-top: 1px solid var(--border-soft-light);
+}
+
+body.theme-dark .accordion-panel {
+  border-color: var(--border-soft);
+}
+
+.compare-links__list {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.compare-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft-light);
+  background: var(--bg-light);
+  color: var(--text-strong);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  box-shadow: var(--shadow-soft-light);
+}
+
+.compare-link:hover,
+.compare-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
+body.theme-dark .compare-link {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-soft);
 }
 
 /* ========================================

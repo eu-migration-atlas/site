@@ -2,56 +2,57 @@
 
 These rules apply to all AI-assisted changes in this repository.
 
-## Scope control
+## 0) Theme system (DO NOT INVENT A NEW ONE)
+- This repo uses `body.theme-dark` / `body.theme-light` as the theme switch.
+- Do NOT introduce or rely on `html[data-theme]` or `:root[data-theme]` unless it already exists for that exact component.
+- Never mix theme mechanisms in the same change.
+
+## 1) Scope control
 - Modify ONLY the files explicitly listed in the task.
 - Do NOT touch any other files.
 
-## Structure & layout
+## 2) Structure & layout
 - Do NOT change HTML structure unless explicitly instructed.
 - Do NOT rename, remove, or reorganize classes or IDs.
 - Header and navigation are LOCKED and must never be modified.
 
-## Styling rules
+## 3) Styling rules
 - No refactoring, cleanup, or reformatting.
 - No whitespace-only changes.
-- Use existing CSS variables and the current theme system.
-- Do NOT change the theme toggling mechanism, theme selectors, or how dark/light mode is applied.
+- Do NOT duplicate CSS custom properties (no repeated `--map-...` names).
+- Prefer CSS variables over hardcoded values.
 
-## Theme-safe variable rules (critical)
-- Theme-dependent styling MUST be defined via theme-scoped selectors:
-  - Use `:root[data-theme="light"] { ... }` for light mode values.
-  - Use `:root[data-theme="dark"] { ... }` for dark mode values.
-- Do NOT merge light/dark variables into a single mixed value.
-- If a shared variable name is needed (e.g., `--map-ombre`), it MUST be assigned separately per theme scope.
+## 4) Map design rules (single source of truth)
+### 4.1 Map strokes
+- Hero maps: `--map-stroke-width: 0.8`
+- Mini maps (country pages): `--map-stroke-width-mini: 0.6`
+- Never hardcode `stroke-width` on elements; always use the variables.
 
-## Map styling constraints
-- Main/hero maps use `stroke-width: 0.8`; mini-maps on country pages use `stroke-width: 0.6`.
-- Switzerland must use the same stroke treatment as EU member states.
-- EU hover behavior is mandatory: EU regions must turn yellow on hover.
-- Mini-maps on country pages must be interactive (inline/embedded SVG that supports hover/click).
+### 4.2 EU vs non-EU styling
+- Non-EU: transparent fill.
+- EU: filled.
+- Borders:
+  - Light mode: EU borders = black, non-EU borders = black
+  - Dark mode: EU borders = white, non-EU borders = white
+- Hover: EU regions must turn EU-gold (`--eu-gold`) on hover.
 
-## Map container glow rules (constant ombre, no frames)
-- Every map container must have a constant ombre/glow.
-- Light mode: subtle blue-tinted ombre/glow.
-- Dark mode: white-tinted glow accents on a DARK base.
-  - Do NOT switch the map container background to white/purple in dark mode.
-  - Only the surrounding glow/overlay is white-tinted; the map surface stays dark.
-- No borders/frames/outlines around map containers.
-- The ombre/glow belongs on the OUTER hero map card/container (e.g., `::before` on the card), NOT on the interactive map/SVG itself.
+### 4.3 Click behavior
+- Clicking an EU member state opens its country page (countries/<slug>.html).
 
-## Map rendering constraints
-- SVG country borders must use a stroke-width of 0.8 or 0.6.
-- Border thickness may not be altered without explicit instruction.
-- Stroke-width consistency across EU and non-EU countries is mandatory.
+### 4.4 Glow/ombré (IMPORTANT)
+- The glow belongs on the OUTER CARD/CONTAINER around the map (e.g. `.hero-map-card` / `.home-hero-map`), NOT on `.interactive-map`.
+- `.interactive-map` is the map surface and must stay theme-correct:
+  - Light mode surface: `var(--bg-page)` (white)
+  - Dark mode surface: `var(--bg-surface-dark)` (dark)
+- No frames/borders around map containers or the map surface.
 
-## Visual stability
+## 5) Visual stability
 - Avoid layout shifts.
 - Do not alter spacing, typography scale, or colors outside the target component.
 
-## Diff discipline
+## 6) Diff discipline
 - Make the smallest possible change to achieve the task.
 - If requirements cannot be met without broader changes: STOP and explain.
-- Always verify light AND dark mode before concluding.
 
-## Priority
+## 7) Priority
 - Consistency and existing design decisions override best practices or optimizations.

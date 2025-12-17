@@ -17,7 +17,8 @@ These rules apply to all AI-assisted changes in this repository.
 - Use existing CSS variables and the current theme system.
 
 ## Map styling constraints
-- The EU map borders on the homepage must use stroke-width: 0.8, the EU map borders on the country pages must use stroke-width: 0.6 (via CSS variable preferred).
+- Main/hero maps use stroke-width: 0.8; mini-maps on country pages use stroke-width: 0.6.
+- Switzerland should be styled with the same stroke treatment as EU member states to avoid visual inconsistency.
 - EU hover behavior is mandatory: EU regions must turn yellow on hover.
 - Mini-maps on country pages must be interactive (inline/embedded SVG that supports hover/click).
 Every map container must have a constant ombre/glow:

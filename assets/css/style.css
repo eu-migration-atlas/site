@@ -6,7 +6,7 @@
   /* Map ombré backgrounds */
   --map-ombre-light: radial-gradient(circle at 24% 20%, rgba(37, 99, 235, 0.28), rgba(37, 99, 235, 0.1) 46%),
     radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1) 54%),
-    linear-gradient(145deg, #e3ebfb, #edf3fb);
+    linear-gradient(145deg, #d7e3f7, #e6edf9);
   --map-ombre-dark: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05) 48%),
     radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.06) 54%),
     linear-gradient(155deg, #0b1624, #111b2b);
@@ -70,7 +70,7 @@
   --transition-fast: 0.15s ease-out;
 
   /* Map styling */
-  --map-eu-fill: #dfe8f5;
+  --map-eu-fill: #c8d4ec;
   --map-eu-border: #ffffff;
   --map-non-eu-border: #0a0a0a;
   --map-selected-fill: #1f6feb;
@@ -149,10 +149,7 @@ body.theme-light {
   color: var(--eu-blue);
 }
 
-body.theme-dark .interactive-map {
-  background: var(--map-ombre-dark);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48);
-}
+
 
 /* ========================================
    Base: resets & typography
@@ -464,7 +461,7 @@ body.compare-page {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--map-ombre-light);
+  background: var(--bg-light-soft);
   border-radius: 1rem;
   border: none;
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
@@ -480,7 +477,7 @@ body.compare-page {
 }
 
 .page-country .interactive-map {
-  background: var(--map-ombre-light);
+  background: var(--bg-light-soft);
   border-radius: 18px;
 }
 
@@ -492,9 +489,14 @@ body.theme-dark .overview-map {
 
 body.theme-dark.page-country .interactive-map,
 body.theme-dark .page-country .interactive-map {
-  background: var(--map-ombre-dark);
+  background: var(--bg-surface-dark);
   border: none;
   border-radius: 18px;
+}
+
+body.theme-dark .interactive-map {
+  background: var(--bg-surface-dark);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48);
 }
 
 .interactive-map svg {
@@ -524,6 +526,11 @@ body.theme-dark .page-country .interactive-map {
 .interactive-map svg .country.non-eu {
   fill: transparent;
   stroke: var(--map-non-eu-border);
+}
+
+.interactive-map svg path#ch {
+  fill: var(--map-eu-fill);
+  stroke: var(--map-eu-border);
 }
 
 .interactive-map svg .country.is-clickable {
@@ -805,17 +812,15 @@ body.theme-light .country-section-card {
 .hero-map-card {
   position: relative;
   background: var(--map-ombre-light);
-  border: 1px solid rgba(148, 163, 184, 0.35);
   border-radius: 18px;
   padding: 12px;
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
 }
 
 .page-country .hero-map-card.hero-visual {
   background: var(--map-ombre-light);
-  border: 1px solid rgba(148, 163, 184, 0.35);
   padding: 12px;
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
   min-height: auto;
   border-radius: 18px;
 }
@@ -862,20 +867,11 @@ body.theme-light .country-section-card {
 
 body.theme-dark .hero-map-card {
   background: var(--map-ombre-dark);
-  border: 1px solid rgba(148, 163, 184, 0.22);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
 }
 
 body.theme-dark .page-country .hero-map-card.hero-visual {
   background: var(--map-ombre-dark);
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
-  border-radius: 18px;
-}
-
-body.theme-dark .page-country .hero-map-card.hero-visual {
-  background: var(--map-ombre-dark);
-  border: 1px solid rgba(148, 163, 184, 0.22);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
   border-radius: 18px;
 }
@@ -1321,7 +1317,7 @@ body.theme-light .hero-eyebrow {
 }
 
 .hero-visual .interactive-map {
-  background: var(--map-ombre-light);
+  background: var(--bg-light-soft);
   border: none;
   min-height: 720px;
 }
@@ -1873,7 +1869,7 @@ body.index .hero-visual {
 }
 
 body.index .hero-visual .interactive-map {
-  background: var(--map-ombre-dark);
+  background: var(--bg-surface-dark);
   border: none;
   border-radius: 18px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
@@ -1888,7 +1884,7 @@ body.theme-light.index .hero-visual {
 }
 
 body.theme-light.index .hero-visual .interactive-map {
-  background: var(--map-ombre-light);
+  background: var(--bg-light-soft);
   border: none;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
 }

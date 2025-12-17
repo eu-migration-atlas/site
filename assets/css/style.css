@@ -1905,22 +1905,31 @@ body.index .hero-visual .interactive-map {
 }
 
 body.theme-light.index .hero-visual {
-  background: var(--bg-light-soft);
-  border: 1px solid var(--border-soft-light);
+  background: transparent;
+  border: none;
   padding: 1rem;
-  box-shadow: var(--shadow-soft-light);
+  box-shadow: 0 26px 82px rgba(46, 104, 255, 0.16);
 }
 
 body.theme-light.index .hero-visual .interactive-map {
-  background: var(--bg-light-soft);
+  background: transparent;
   border: none;
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  outline: none;
+  box-shadow: none;
+}
+
+body.theme-light.index .hero-visual .interactive-map svg,
+body.theme-light.index .hero-visual .interactive-map img {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 body.theme-light.index .home-hero-map {
-  background: var(--bg-light-soft);
+  background: transparent;
   border: none;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 32px 98px rgba(46, 104, 255, 0.14);
 }
 
 /* Homepage-specific stroke tweak via vars (no !important chaos) */

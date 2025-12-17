@@ -720,25 +720,45 @@ body.theme-dark .country-hero {
 }
 
 .policy-snapshot {
-  background: var(--bg-light);
-  border: 1px solid var(--border-soft-light);
+  background: radial-gradient(
+      120% 140% at 20% 0%,
+      rgba(35, 80, 140, 0.22) 0%,
+      rgba(8, 20, 35, 0.78) 55%,
+      rgba(5, 12, 22, 0.86) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
-  padding: 2.2rem 2.3rem 2rem;
-  box-shadow: var(--shadow-soft-light);
+  padding: 3rem 2.3rem 2.2rem;
+  box-shadow: var(--shadow-soft);
+  color: #f3f7ff;
 }
 
 body.theme-dark .policy-snapshot {
-  background: var(--bg-surface-elevated);
-  border-color: var(--border-soft);
-  box-shadow: var(--shadow-soft);
+  background: radial-gradient(
+      120% 140% at 20% 0%,
+      rgba(35, 80, 140, 0.2) 0%,
+      rgba(6, 16, 28, 0.85) 55%,
+      rgba(4, 10, 20, 0.9) 100%
+    );
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .policy-snapshot .section-header {
   margin-bottom: 1.5rem;
 }
 
+.policy-snapshot .section-eyebrow {
+  margin-bottom: 0.85rem;
+}
+
+.policy-snapshot .section-header h2 {
+  margin-top: 0;
+  color: #f9fbff;
+}
+
 .policy-snapshot .section-lead {
   margin-bottom: 0;
+  color: rgba(243, 247, 255, 0.88);
 }
 
 .snapshot-grid {
@@ -750,33 +770,37 @@ body.theme-dark .policy-snapshot {
 }
 
 .snapshot-item {
-  background: var(--bg-page);
-  border: 1px solid var(--border-soft-light);
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  box-shadow: var(--shadow-soft-light);
-}
-
-body.theme-dark .snapshot-item {
-  background: var(--bg-surface-dark);
-  border-color: var(--border-soft);
+  padding: 1.25rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 25, 45, 0.35);
   box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(6px);
 }
 
 .snapshot-label {
-  margin: 0 0 0.25rem;
-  font-size: 0.95rem;
-  letter-spacing: 0.03em;
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .snapshot-value {
   margin: 0;
-  color: var(--text-strong);
-  font-weight: 600;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 700;
+  line-height: 1.45;
+  font-size: 1.05rem;
+}
+
+.snapshot-value.is-pill {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .country-accordion .accordion {

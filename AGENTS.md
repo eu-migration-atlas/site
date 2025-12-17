@@ -21,13 +21,13 @@ These rules apply to all AI-assisted changes in this repository.
 - Switzerland should be styled with the same stroke treatment as EU member states to avoid visual inconsistency.
 - EU hover behavior is mandatory: EU regions must turn yellow on hover.
 - Mini-maps on country pages must be interactive (inline/embedded SVG that supports hover/click).
-- Every map container must have a constant ombre/glow:
-  - Light mode: blue
-  - Dark mode: white
+Every map container must have a constant ombre/glow:
+- Light mode: blue ombre/glow (subtle blue-tinted gradient around the map).
+- Dark mode: white glow accents on a DARK base (do not switch the map container background to white/purple; only the glow/overlay is white-tinted).
 - No frames/borders around map containers.
 
 ## Map rendering constraints
-- SVG country borders must use a stroke-width of 0.8.
+- SVG country borders must use a stroke-width of 0.8 or 0.6.
 - Border thickness may not be altered without explicit instruction.
 - Stroke-width consistency across EU and non-EU countries is mandatory.
 

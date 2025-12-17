@@ -1513,6 +1513,7 @@ body.theme-light.index {
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   background: radial-gradient(circle at 14% 22%, rgba(165, 184, 213, 0.24), transparent 44%),
               radial-gradient(circle at 84% 30%, rgba(132, 167, 214, 0.22), transparent 42%);
   pointer-events: none;

@@ -1,7 +1,10 @@
 const chatLog = document.getElementById("chatLog");
 const chatForm = document.getElementById("chatForm");
 const chatInput = document.getElementById("chatInput");
-const apiUrl = document.body.dataset.apiUrl || "/chat";
+const queryApiUrl = new URLSearchParams(window.location.search).get("api");
+const dataApiUrl = document.body.dataset.apiUrl;
+const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+const apiUrl = queryApiUrl || dataApiUrl || (isLocalHost ? "/chat" : "");
 
 const appendMessage = (role, text, sources = []) => {
   const message = document.createElement("div");
@@ -32,6 +35,13 @@ chatForm.addEventListener("submit", async (event) => {
   if (!message) {
     return;
   }
+  if (!apiUrl) {
+    appendMessage(
+      "assistant",
+      "The assistant endpoint is not configured. Set data-api-url on the page to your Worker /chat URL or pass ?api=https://your-worker/chat in the URL."
+    );
+    return;
+  }
   appendMessage("user", message);
   chatInput.value = "";
   setLoading(true);
@@ -52,7 +62,10 @@ chatForm.addEventListener("submit", async (event) => {
     const data = await response.json();
     appendMessage("assistant", data.answer || "No response received.", data.used_sources || []);
   } catch (error) {
-    appendMessage("assistant", "Sorry, something went wrong while contacting the Atlas assistant.");
+    appendMessage(
+      "assistant",
+      "Sorry, something went wrong while contacting the Atlas assistant. Please confirm data-api-url points to your Worker /chat endpoint."
+    );
   } finally {
     setLoading(false);
   }

@@ -16,6 +16,15 @@ This repository includes a GitHub Pages frontend and a Cloudflare Worker backend
 3. Deploy the Worker and note the Worker URL (for example, `https://atlas-assistant.your-domain.workers.dev`).
 4. Update the frontend `data-api-url` attribute in `/site/index.html` if you want to point to a non-`/chat` endpoint.
 
+## Atlas AI endpoint
+
+- Default endpoint: `https://atlas-ai-worker.luuk-de-vries.workers.dev/chat`
+- Override with `?api=` in the URL, for example:
+
+```
+https://<site>/?api=https://atlas-ai-worker.luuk-de-vries.workers.dev/chat
+```
+
 ## Environment variables
 
 Set these on the Worker:

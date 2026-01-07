@@ -1,10 +1,12 @@
 const chatLog = document.getElementById("chatLog");
 const chatForm = document.getElementById("chatForm");
 const chatInput = document.getElementById("chatInput");
-const queryApiUrl = new URLSearchParams(window.location.search).get("api");
-const dataApiUrl = document.body.dataset.apiUrl;
-const isLocalHost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
-const apiUrl = queryApiUrl || dataApiUrl || (isLocalHost ? "/chat" : "");
+const DEFAULT_API_URL = "https://atlas-ai-worker.luuk-de-vries.workers.dev/chat";
+const queryApiParam = new URLSearchParams(window.location.search).get("api");
+const queryApiUrl = queryApiParam ? decodeURIComponent(queryApiParam) : "";
+const chatContainer = document.querySelector(".assistant-frame");
+const dataApiUrl = chatContainer ? chatContainer.dataset.apiUrl : "";
+const apiUrl = queryApiUrl || dataApiUrl || DEFAULT_API_URL;
 
 const appendMessage = (role, text, sources = []) => {
   const message = document.createElement("div");

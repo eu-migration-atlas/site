@@ -4,9 +4,10 @@ const chatInput = document.getElementById("chatInput");
 const DEFAULT_API_URL = "https://atlas-ai-worker.luuk-de-vries.workers.dev/chat";
 const queryApiParam = new URLSearchParams(window.location.search).get("api");
 const queryApiUrl = queryApiParam ? decodeURIComponent(queryApiParam) : "";
-const chatContainer = document.querySelector(".assistant-frame");
+const chatContainer = document.querySelector(".assistant-frame[data-api-url], .chat-card[data-api-url]");
 const dataApiUrl = chatContainer ? chatContainer.dataset.apiUrl : "";
 const apiUrl = queryApiUrl || dataApiUrl || DEFAULT_API_URL;
+console.info("Atlas AI endpoint:", apiUrl);
 
 const appendMessage = (role, text, sources = []) => {
   const message = document.createElement("div");
@@ -58,11 +59,28 @@ chatForm.addEventListener("submit", async (event) => {
     });
 
     if (!response.ok) {
-      throw new Error("Unable to reach the assistant.");
+      console.warn(`Atlas AI request failed with status ${response.status}`);
     }
 
-    const data = await response.json();
-    appendMessage("assistant", data.answer || "No response received.", data.used_sources || []);
+    const responseText = await response.text();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      appendMessage("assistant", "Received a non-JSON response from the assistant endpoint.");
+      return;
+    }
+
+    if (!response.ok) {
+      appendMessage(
+        "assistant",
+        "Sorry, something went wrong while contacting the Atlas assistant. Please confirm data-api-url points to your Worker /chat endpoint."
+      );
+      return;
+    }
+
+    const reply = data.reply || data.response || data.message;
+    appendMessage("assistant", reply || "No response received.", data.used_sources || []);
   } catch (error) {
     appendMessage(
       "assistant",

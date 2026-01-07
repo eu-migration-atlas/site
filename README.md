@@ -18,7 +18,7 @@ This repository includes a GitHub Pages frontend and a Cloudflare Worker backend
 
 ## Atlas AI endpoint
 
-- Default endpoint: `https://atlas-ai-worker.luuk-de-vries.workers.dev/chat`
+- Default endpoint: `https://atlas-ai-worker.luuk-de-vries.workers.dev/chat` (set on the chat container `data-api-url` attribute).
 - Override with `?api=` in the URL, for example:
 
 ```

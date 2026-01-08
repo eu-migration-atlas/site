@@ -17,64 +17,21 @@ const escapeHtml = (value) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-const renderAssistantContent = (text) => {
-  const safeText = escapeHtml(text || "");
-  const lines = safeText.split(/\r?\n/);
-  const output = [];
-  let paragraph = [];
-  let inList = false;
+const renderAssistantContent = (markdownText) => {
+  const safeText = markdownText || "";
+  if (typeof marked !== "undefined" && typeof DOMPurify !== "undefined") {
+    const html = marked.parse(safeText, { mangle: false, headerIds: false });
+    return DOMPurify.sanitize(html);
+  }
+  return `<p>${escapeHtml(safeText)}</p>`;
+};
 
-  const flushParagraph = () => {
-    if (paragraph.length > 0) {
-      output.push(`<p>${paragraph.join(" ")}</p>`);
-      paragraph = [];
-    }
-  };
-
-  const closeList = () => {
-    if (inList) {
-      output.push("</ul>");
-      inList = false;
-    }
-  };
-
-  lines.forEach((line) => {
-    const trimmed = line.trim();
-    if (!trimmed) {
-      flushParagraph();
-      closeList();
-      return;
-    }
-
-    const headingMatch = trimmed.match(/^(#{1,2})\s+(.*)$/);
-    if (headingMatch) {
-      flushParagraph();
-      closeList();
-      output.push(`<p><strong>${headingMatch[2]}</strong></p>`);
-      return;
-    }
-
-    const listMatch = trimmed.match(/^[-*]\s+(.*)$/);
-    if (listMatch) {
-      flushParagraph();
-      if (!inList) {
-        output.push("<ul>");
-        inList = true;
-      }
-      output.push(`<li>${listMatch[1]}</li>`);
-      return;
-    }
-
-    if (inList) {
-      closeList();
-    }
-    paragraph.push(trimmed);
+const updateAssistantLinks = (container) => {
+  const links = container.querySelectorAll("a");
+  links.forEach((link) => {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
   });
-
-  flushParagraph();
-  closeList();
-
-  return output.length > 0 ? output.join("") : `<p>${safeText}</p>`;
 };
 
 const appendMessage = (role, text, sources = [], options = {}) => {
@@ -84,6 +41,9 @@ const appendMessage = (role, text, sources = [], options = {}) => {
   content.className = "message-content";
   if (options.allowHtml) {
     content.innerHTML = text;
+    if (role === "assistant") {
+      updateAssistantLinks(content);
+    }
   } else {
     content.textContent = text;
   }
@@ -105,6 +65,7 @@ const setMessageContent = (message, text, sources = []) => {
   const content = message.querySelector(".message-content");
   if (content) {
     content.innerHTML = renderAssistantContent(text);
+    updateAssistantLinks(content);
   }
   const existingSources = message.querySelector(".sources");
   if (existingSources) {
@@ -182,7 +143,7 @@ chatForm.addEventListener("submit", async (event) => {
       return;
     }
 
-    const reply = data.reply || data.response || data.message || data.answer;
+    const reply = data.reply || data.response || data.message;
     setMessageContent(typingMessage, reply || "No response received. Try again.", data.used_sources || []);
   } catch (error) {
     console.error("Atlas AI request failed:", error);

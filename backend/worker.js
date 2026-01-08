@@ -143,8 +143,8 @@ export default {
       .map((item) => `Source: ${item.path}\n${item.chunk}`)
       .join("\n\n");
 
-    const systemPrompt = "You are the Atlas AI Assistant. Use the provided Atlas sources to answer questions about migration policy, political climate, and EU frameworks. Use short paragraphs, headings, and bullet points. Avoid long walls of text. Keep answers concise. If the sources are insufficient, say so and suggest which Atlas documents to add.";
-    const userPrompt = `User question: ${message}\n\nAtlas sources:\n${context}\n\nAnswer the question and include a \"Sources (Atlas)\" list based on the provided sources.`;
+    const systemPrompt = "You are the Atlas AI Assistant. Use the provided Atlas sources to answer questions about migration policy, political climate, and EU frameworks. Use short paragraphs, headings, and bullet points. Use markdown tables when comparisons or structured data help. Avoid long walls of text. Keep answers concise. If the sources are insufficient, say so and suggest which Atlas documents to add.";
+    const userPrompt = `User question: ${message}\n\nAtlas sources:\n${context}\n\nAnswer the question in markdown and include a \"Sources (Atlas)\" list based on the provided sources.`;
 
     let answerText = "";
     try {

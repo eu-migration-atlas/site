@@ -83,6 +83,25 @@
     .message .message-content li:last-child {
       margin-bottom: 0;
     }
+    .message .message-content table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .message .message-content th,
+    .message .message-content td {
+      border: 1px solid var(--border-color);
+      padding: 8px;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .message .message-content th {
+      background: var(--assistant-bg);
+      text-align: left;
+    }
+    .message .message-content tr:nth-child(even) {
+      background: var(--surface);
+    }
     .message.user {
       align-self: flex-end;
       background: var(--user-bg);

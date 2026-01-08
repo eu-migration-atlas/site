@@ -20,8 +20,16 @@ const escapeHtml = (value) =>
 const renderAssistantContent = (markdownText) => {
   const safeText = markdownText || "";
   if (typeof marked !== "undefined" && typeof DOMPurify !== "undefined") {
-    const html = marked.parse(safeText, { mangle: false, headerIds: false });
-    return DOMPurify.sanitize(html);
+    const html = marked.parse(safeText, {
+      mangle: false,
+      headerIds: false,
+      gfm: true,
+      breaks: true,
+    });
+    return DOMPurify.sanitize(html, {
+      ADD_TAGS: ["table", "thead", "tbody", "tr", "th", "td"],
+      ADD_ATTR: ["colspan", "rowspan", "align"],
+    });
   }
   return `<p>${escapeHtml(safeText)}</p>`;
 };

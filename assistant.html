@@ -59,6 +59,21 @@
   .assistant-chat-log .message .message-content li:last-child {
     margin-bottom: 0;
   }
+  .assistant-chat-log .message.assistant .message-content table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .assistant-chat-log .message.assistant .message-content th,
+  .assistant-chat-log .message.assistant .message-content td {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    vertical-align: top;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .assistant-chat-log .message.assistant .message-content tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.03);
+  }
   .assistant-chat-log .message.user {
     align-self: flex-end;
     background: var(--bg-soft, #e9f0fb);
@@ -202,6 +217,8 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="site/atlas.js"></script>
 </body>
 </html>

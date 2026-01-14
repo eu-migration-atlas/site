@@ -431,6 +431,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const customSelectInstances = new Map();
+  let compareHandlers = null;
+
+  const isCompareSelect = select =>
+    (select?.dataset?.selectType || '').startsWith('compare-');
 
   function initCustomSelect(select) {
     const selectToggle = select.querySelector('.select-toggle');
@@ -471,6 +475,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (select.dataset.selectType === 'region') {
         applyCountryFilters();
       }
+      if (compareHandlers && isCompareSelect(select)) {
+        compareHandlers.onSelect(select, value, label);
+      }
     };
 
     selectToggle.addEventListener('click', () => {
@@ -483,6 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     selectOptions.forEach(option => {
       option.addEventListener('click', () => {
+        if (option.getAttribute('aria-disabled') === 'true') {
+          return;
+        }
         setSelection(option.dataset.value || '', option.textContent.trim());
         closeSelect();
       });
@@ -490,6 +500,9 @@ document.addEventListener('DOMContentLoaded', () => {
       option.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
+          if (option.getAttribute('aria-disabled') === 'true') {
+            return;
+          }
           option.click();
         }
       });
@@ -520,6 +533,280 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  const compareTopicLabels = {
+    'high-recognition': 'High recognition rate',
+    'strict-policy': 'Strict asylum policy',
+    'labour-migration': 'High labour migration',
+    'humanitarian-focus': 'Humanitarian focus'
+  };
+
+  const compareRegionLabels = {
+    northern: 'Northern Europe',
+    southern: 'Southern Europe',
+    eastern: 'Eastern Europe',
+    western: 'Western Europe'
+  };
+
+  function initComparePage() {
+    if (!document.body.classList.contains('compare-page')) return;
+    const compareSelects = customSelects.filter(select => isCompareSelect(select));
+    if (!compareSelects.length) return;
+
+    const panelDefaults = new Map();
+    compareSelects.forEach(select => {
+      const panel = select.closest('.comparison-panel');
+      if (!panel || panelDefaults.has(panel)) return;
+      const intro = panel.querySelector('.panel-intro');
+      const cards = panel.querySelectorAll('.compare-card');
+      panelDefaults.set(panel, {
+        intro: intro?.textContent?.trim() || '',
+        cards: Array.from(cards).map(card => ({
+          metric: card.dataset.metric,
+          text: card.querySelector('p')?.textContent?.trim() || ''
+        }))
+      });
+    });
+
+    const topicInsights = {
+      'high-recognition': {
+        'political-climate': 'Recognition rates remain a strong talking point in policy debates.',
+        'migration-statistics': 'Protection approvals tend to track above the EU average.',
+        'current-policies': 'Policies emphasise fair procedures and consistent decision-making.',
+        'application-possibilities': 'Applicants can expect clear guidance and robust review pathways.'
+      },
+      'strict-policy': {
+        'political-climate': 'Security-focused messaging shapes parliamentary debates and media coverage.',
+        'migration-statistics': 'Arrivals and approvals often fluctuate alongside tighter screening cycles.',
+        'current-policies': 'Policy updates stress border management, returns, and stricter eligibility checks.',
+        'application-possibilities': 'Processing is structured with firm timelines and intensive documentation.'
+      },
+      'labour-migration': {
+        'political-climate': 'Labour market needs drive policy discussions and coalition priorities.',
+        'migration-statistics': 'Skilled-worker inflows are a defining feature of recent migration trends.',
+        'current-policies': 'Programs prioritize employer sponsorships and sector-specific permits.',
+        'application-possibilities': 'Employment-based routes and fast-track pathways are widely available.'
+      },
+      'humanitarian-focus': {
+        'political-climate': 'Humanitarian obligations remain central to government positioning.',
+        'migration-statistics': 'Protection-based arrivals are monitored alongside resettlement commitments.',
+        'current-policies': 'Policies reinforce reception capacity and integration supports.',
+        'application-possibilities': 'Asylum seekers are guided through protection-oriented procedures.'
+      }
+    };
+
+    const countryIndex = new Map();
+    const countryCache = new Map();
+
+    const loadCountryIndex = async () => {
+      if (countryIndex.size) return Array.from(countryIndex.values());
+      const response = await fetch('countries.html');
+      const html = await response.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const cards = doc.querySelectorAll('.country-card');
+      cards.forEach(card => {
+        const name = card.querySelector('h2')?.textContent?.trim() || '';
+        const description = card.querySelector('p')?.textContent?.trim() || '';
+        const region = (card.dataset.region || '').toLowerCase();
+        const topics = (card.dataset.topic || '')
+          .split(/\s+/)
+          .map(topic => topic.trim())
+          .filter(Boolean);
+        const href = card.getAttribute('href') || '';
+        const slugMatch = href.match(/countries\/([^/]+)\.html/i);
+        const slug = slugMatch ? slugMatch[1] : '';
+        if (!slug) return;
+        countryIndex.set(slug, { name, description, region, topics, slug });
+      });
+      return Array.from(countryIndex.values());
+    };
+
+    const isPlaceholderText = text =>
+      /^(Add|Provide|Outline|Summarize|Describe)\b/i.test(text || '');
+
+    const buildFallbackCopy = (country, metric) => {
+      const baseCopy = {
+        'political-climate': 'The political climate combines national priorities with EU-level coordination.',
+        'migration-statistics': 'Recent migration flows reflect regional trends and labour demand.',
+        'current-policies': 'Policy adjustments balance protection obligations with border management.',
+        'application-possibilities': 'Applicants navigate structured pathways supported by national agencies.'
+      };
+
+      const topicLines = (country.topics || [])
+        .map(topic => topicInsights[topic]?.[metric])
+        .filter(Boolean);
+
+      const detail = topicLines.length ? ` ${topicLines.join(' ')}` : '';
+      return `${baseCopy[metric] || ''}${detail}`.trim();
+    };
+
+    const buildIntro = country => {
+      const regionLabel = compareRegionLabels[country.region] || 'EU Member State';
+      const topicList = (country.topics || [])
+        .map(topic => compareTopicLabels[topic])
+        .filter(Boolean);
+      const topicText = topicList.length ? ` Focus areas: ${topicList.join(', ')}.` : '';
+      return `${country.name} · ${regionLabel}.${topicText}`;
+    };
+
+    const renderDefaultPanel = panel => {
+      const defaults = panelDefaults.get(panel);
+      const intro = panel.querySelector('.panel-intro');
+      if (intro && defaults?.intro) {
+        intro.textContent = defaults.intro;
+      }
+      const cards = panel.querySelectorAll('.compare-card');
+      cards.forEach(card => {
+        const defaultCard = defaults?.cards?.find(item => item.metric === card.dataset.metric);
+        const text = card.querySelector('p');
+        if (text && defaultCard?.text) {
+          text.textContent = defaultCard.text;
+        }
+      });
+      panel.classList.remove('is-ready');
+    };
+
+    const updateOptionStates = () => {
+      const selections = compareSelects.map(select => select.dataset.selected || '');
+      compareSelects.forEach(select => {
+        const otherSelections = selections.filter(value => value && value !== select.dataset.selected);
+        const options = select.querySelectorAll('.select-options li');
+        options.forEach(option => {
+          const value = option.dataset.value || '';
+          const isTaken = value && otherSelections.includes(value);
+          option.classList.toggle('is-disabled', isTaken);
+          option.setAttribute('aria-disabled', isTaken ? 'true' : 'false');
+          option.setAttribute('tabindex', isTaken ? '-1' : '0');
+        });
+      });
+    };
+
+    const parseCountryProfile = async country => {
+      if (countryCache.has(country.slug)) return countryCache.get(country.slug);
+      const promise = fetch(`countries/${country.slug}.html`)
+        .then(resp => resp.text())
+        .then(html => {
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const introText = doc.querySelector('.page-intro p')?.textContent?.trim() || '';
+          const sectionCards = doc.querySelectorAll('.country-section-card');
+          const sections = {};
+          sectionCards.forEach(card => {
+            const title = card.querySelector('h2')?.textContent?.trim() || '';
+            const body = card.querySelector('p')?.textContent?.trim() || '';
+            const key = title.toLowerCase();
+            if (key) {
+              sections[key] = { title, body };
+            }
+          });
+          return { introText, sections };
+        })
+        .catch(() => ({ introText: '', sections: {} }));
+
+      countryCache.set(country.slug, promise);
+      return promise;
+    };
+
+    const metricKeyByTitle = {
+      'political climate': 'political-climate',
+      'migration statistics': 'migration-statistics',
+      'current policies': 'current-policies',
+      'application possibilities': 'application-possibilities'
+    };
+
+    const updatePanel = async select => {
+      const panel = select.closest('.comparison-panel');
+      if (!panel) return;
+      const selected = select.dataset.selected || '';
+      const intro = panel.querySelector('.panel-intro');
+      if (!selected) {
+        renderDefaultPanel(panel);
+        return;
+      }
+
+      let country = countryIndex.get(selected);
+      if (!country) {
+        await loadCountryIndex();
+        country = countryIndex.get(selected);
+      }
+      if (!country) {
+        renderDefaultPanel(panel);
+        return;
+      }
+
+      panel.classList.add('is-loading');
+      const profile = await parseCountryProfile(country);
+      panel.classList.remove('is-loading');
+      panel.classList.add('is-ready');
+
+      const introText = profile.introText && !isPlaceholderText(profile.introText)
+        ? profile.introText
+        : buildIntro(country);
+      if (intro) {
+        intro.textContent = introText;
+      }
+
+      const cards = panel.querySelectorAll('.compare-card');
+      cards.forEach(card => {
+        const metric = card.dataset.metric;
+        const sectionTitle = Object.keys(metricKeyByTitle).find(
+          title => metricKeyByTitle[title] === metric
+        );
+        const section = sectionTitle ? profile.sections[sectionTitle] : null;
+        const text = card.querySelector('p');
+        if (!text) return;
+        if (section?.body && !isPlaceholderText(section.body)) {
+          text.textContent = section.body;
+        } else {
+          text.textContent = buildFallbackCopy(country, metric);
+        }
+      });
+    };
+
+    const syncSelections = () => {
+      compareSelects.forEach(select => updatePanel(select));
+      updateOptionStates();
+    };
+
+    compareHandlers = {
+      onSelect: (select, value) => {
+        const other = compareSelects.find(item => item !== select);
+        if (other && value && value === other.dataset.selected) {
+          const instance = customSelectInstances.get(select);
+          if (instance) {
+            instance.setSelection('', 'Select a country');
+          }
+          const panel = select.closest('.comparison-panel');
+          if (panel) {
+            const intro = panel.querySelector('.panel-intro');
+            if (intro) {
+              intro.textContent = 'That country is already selected on the other side. Choose a different member state.';
+            }
+            panel.classList.remove('is-ready');
+          }
+          return;
+        }
+        updatePanel(select);
+        updateOptionStates();
+      }
+    };
+
+    loadCountryIndex()
+      .then(() => {
+        syncSelections();
+      })
+      .catch(() => {
+        compareSelects.forEach(select => {
+          const panel = select.closest('.comparison-panel');
+          if (!panel) return;
+          const intro = panel.querySelector('.panel-intro');
+          if (intro) {
+            intro.textContent = 'Country data could not be loaded. Refresh or try again later.';
+          }
+        });
+      });
+  }
+
+  initComparePage();
 
   if (countryCards.length) {
     // Apply topics passed in via URL (e.g. from a country profile)

@@ -1667,6 +1667,11 @@ body.theme-dark .filter-chip::before {
   overflow: hidden;
 }
 
+.comparison-panel.is-ready {
+  border-color: var(--cmp-panel-accent-strong);
+  transform: translateY(-2px);
+}
+
 .comparison-panel::before {
   content: "";
   position: absolute;
@@ -1685,6 +1690,10 @@ body.theme-dark .filter-chip::before {
   height: 4px;
   background: linear-gradient(90deg, var(--cmp-panel-accent-strong), transparent 70%);
   pointer-events: none;
+}
+
+.comparison-panel.is-ready::after {
+  background: linear-gradient(90deg, var(--cmp-panel-accent-strong), var(--cmp-panel-accent), transparent 80%);
 }
 
 .compare-panel-grid {
@@ -1774,6 +1783,11 @@ body.theme-dark .filter-chip::before {
   border: 1px solid var(--cmp-card-border);
   box-shadow: var(--cmp-card-shadow);
   color: var(--cmp-card-muted);
+}
+
+.compare-page .select-options li.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

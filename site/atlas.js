@@ -34,6 +34,11 @@ const renderAssistantContent = (markdownText) => {
   return `<p>${escapeHtml(safeText)}</p>`;
 };
 
+const TYPE_INTERVAL_MS = 20;
+const TYPE_CHUNK_MIN = 2;
+const TYPE_CHUNK_MAX = 5;
+let activeTypewriter = null;
+
 const updateAssistantLinks = (container) => {
   const links = container.querySelectorAll("a");
   links.forEach((link) => {
@@ -67,6 +72,64 @@ const appendMessage = (role, text, sources = [], options = {}) => {
   chatLog.appendChild(message);
   chatLog.scrollTop = chatLog.scrollHeight;
   return message;
+};
+
+const startTypewriter = (message, text, sources = []) => {
+  const content = message.querySelector(".message-content");
+  if (!content) {
+    return;
+  }
+  if (activeTypewriter) {
+    activeTypewriter.finish();
+  }
+  const fullText = text || "No response received. Try again.";
+  const existingSources = message.querySelector(".sources");
+  if (existingSources) {
+    existingSources.remove();
+  }
+  content.textContent = "";
+  let index = 0;
+  let timerId = null;
+  const onClick = () => {
+    if (activeTypewriter && activeTypewriter.message === message) {
+      activeTypewriter.finish();
+    }
+  };
+  const finalize = () => {
+    content.innerHTML = renderAssistantContent(fullText);
+    updateAssistantLinks(content);
+    if (sources.length > 0) {
+      const sourcesBlock = document.createElement("div");
+      sourcesBlock.className = "sources";
+      sourcesBlock.textContent = `Sources (Atlas): ${sources.join(", ")}`;
+      message.appendChild(sourcesBlock);
+    }
+    chatLog.scrollTop = chatLog.scrollHeight;
+  };
+  const finish = () => {
+    if (timerId) {
+      window.clearTimeout(timerId);
+    }
+    timerId = null;
+    message.removeEventListener("click", onClick);
+    activeTypewriter = null;
+    finalize();
+  };
+  const step = () => {
+    if (index >= fullText.length) {
+      finish();
+      return;
+    }
+    const chunkSize =
+      Math.floor(Math.random() * (TYPE_CHUNK_MAX - TYPE_CHUNK_MIN + 1)) + TYPE_CHUNK_MIN;
+    index = Math.min(fullText.length, index + chunkSize);
+    content.textContent = fullText.slice(0, index);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    timerId = window.setTimeout(step, TYPE_INTERVAL_MS);
+  };
+  message.addEventListener("click", onClick);
+  activeTypewriter = { finish, message };
+  step();
 };
 
 const setMessageContent = (message, text, sources = []) => {
@@ -104,6 +167,9 @@ const setLoading = (isLoading) => {
 
 chatForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (activeTypewriter) {
+    activeTypewriter.finish();
+  }
   const message = chatInput.value.trim();
   if (!message) {
     return;
@@ -152,7 +218,7 @@ chatForm.addEventListener("submit", async (event) => {
     }
 
     const reply = data.reply || data.response || data.message;
-    setMessageContent(typingMessage, reply || "No response received. Try again.", data.used_sources || []);
+    startTypewriter(typingMessage, reply || "No response received. Try again.", data.used_sources || []);
   } catch (error) {
     console.error("Atlas AI request failed:", error);
     setMessageContent(typingMessage, "No response received. Try again.");

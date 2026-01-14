@@ -177,12 +177,15 @@ a { color: inherit; }
   --cmp-panel-bg: #ffffff;
   --cmp-panel-border: var(--border-soft-light);
   --cmp-panel-shadow: var(--shadow-soft-light);
+  --cmp-panel-accent: rgba(37, 99, 235, 0.12);
+  --cmp-panel-accent-strong: rgba(37, 99, 235, 0.35);
   --cmp-card-bg: #f9fbff;
   --cmp-card-border: var(--border-soft-light);
   --cmp-card-text: var(--text-main);
   --cmp-card-muted: var(--text-muted);
   --cmp-card-expanded-bg: #e6edff;
   --cmp-card-shadow: var(--shadow-soft-light);
+  --cmp-card-highlight: rgba(37, 99, 235, 0.18);
   --cmp-section-text: var(--text-main);
   --cmp-section-muted: var(--text-muted);
   --cmp-heading: var(--text-strong);
@@ -193,12 +196,15 @@ body.theme-dark.compare-page {
   --cmp-panel-bg: var(--bg-surface-elevated);
   --cmp-panel-border: var(--border-soft-light);
   --cmp-panel-shadow: var(--shadow-soft);
+  --cmp-panel-accent: rgba(148, 197, 255, 0.18);
+  --cmp-panel-accent-strong: rgba(147, 197, 253, 0.45);
   --cmp-card-bg: var(--bg-light);
   --cmp-card-border: var(--border-soft);
   --cmp-card-text: var(--text-main);
   --cmp-card-muted: var(--text-muted);
   --cmp-card-expanded-bg: #1f2f4a;
   --cmp-card-shadow: var(--shadow-soft);
+  --cmp-card-highlight: rgba(147, 197, 253, 0.2);
   --cmp-section-text: var(--text-main);
   --cmp-section-muted: var(--text-muted);
   --cmp-heading: var(--text-strong);
@@ -1657,6 +1663,28 @@ body.theme-dark .filter-chip::before {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.comparison-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 12%, var(--cmp-panel-accent-strong) 0%, transparent 55%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.comparison-panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cmp-panel-accent-strong), transparent 70%);
+  pointer-events: none;
 }
 
 .compare-panel-grid {
@@ -1689,6 +1717,15 @@ body.theme-dark .filter-chip::before {
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
+.compare-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, var(--cmp-card-highlight), transparent 55%);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
 .compare-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--cmp-panel-shadow);
@@ -1715,6 +1752,28 @@ body.theme-dark .filter-chip::before {
   color: var(--cmp-card-muted);
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.compare-page .country-select-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.compare-page .country-select-header label {
+  font-weight: 600;
+  color: var(--cmp-section-text);
+}
+
+.compare-page .panel-intro {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: var(--cmp-card-bg);
+  border: 1px solid var(--cmp-card-border);
+  box-shadow: var(--cmp-card-shadow);
+  color: var(--cmp-card-muted);
 }
 
 @media (max-width: 768px) {

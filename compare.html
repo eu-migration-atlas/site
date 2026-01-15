@@ -209,5 +209,196 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    const comparePanels = document.querySelectorAll('.comparison-panel');
+    comparePanels.forEach(panel => {
+      panel.style.overflow = 'visible';
+    });
+
+    const compareSelects = document.querySelectorAll('.custom-select');
+
+    function closeAllSelects(except) {
+      compareSelects.forEach(select => {
+        if (select === except) return;
+        select.classList.remove('open');
+        const button = select.querySelector('.select-toggle');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function updateDisabledOptions() {
+      const selectedValues = Array.from(compareSelects).map(select => select.dataset.selected || '');
+
+      compareSelects.forEach(select => {
+        const options = select.querySelectorAll('.select-options li');
+        const otherSelected = selectedValues.filter(value => value && value !== (select.dataset.selected || ''));
+
+        options.forEach(option => {
+          const value = option.dataset.value || '';
+          if (!value) {
+            option.classList.remove('is-disabled');
+            option.setAttribute('aria-disabled', 'false');
+            return;
+          }
+          const shouldDisable = otherSelected.includes(value);
+          option.classList.toggle('is-disabled', shouldDisable);
+          option.setAttribute('aria-disabled', shouldDisable ? 'true' : 'false');
+        });
+      });
+    }
+
+    function setSelectedOption(select, option) {
+      const value = option.dataset.value || '';
+      if (option.classList.contains('is-disabled')) return;
+
+      const label = select.querySelector('.select-label');
+      const options = select.querySelectorAll('.select-options li');
+
+      options.forEach(item => item.setAttribute('aria-selected', 'false'));
+      option.setAttribute('aria-selected', 'true');
+
+      if (label && value) {
+        label.textContent = option.textContent.trim();
+        select.dataset.selected = value;
+      }
+
+      closeAllSelects();
+      updateDisabledOptions();
+    }
+
+    function focusOption(options, target) {
+      const optionArray = Array.from(options);
+      const index = Math.max(0, optionArray.indexOf(target));
+      optionArray[index]?.focus();
+    }
+
+    compareSelects.forEach(select => {
+      const button = select.querySelector('.select-toggle');
+      const options = select.querySelectorAll('.select-options li');
+      const currentValue = select.dataset.selected || '';
+
+      options.forEach(option => {
+        option.setAttribute('aria-selected', option.dataset.value === currentValue ? 'true' : 'false');
+      });
+
+      button.addEventListener('click', () => {
+        const isOpen = select.classList.toggle('open');
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) {
+          closeAllSelects(select);
+          const selected = select.querySelector('.select-options li[aria-selected="true"]');
+          selected?.focus();
+        }
+      });
+
+      button.addEventListener('keydown', event => {
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          select.classList.add('open');
+          button.setAttribute('aria-expanded', 'true');
+          closeAllSelects(select);
+          const selected = select.querySelector('.select-options li[aria-selected="true"]') || options[0];
+          selected?.focus();
+        }
+      });
+
+      options.forEach(option => {
+        option.addEventListener('click', () => setSelectedOption(select, option));
+        option.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setSelectedOption(select, option);
+            button.focus();
+          }
+          if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            focusOption(options, option.nextElementSibling || options[0]);
+          }
+          if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            focusOption(options, option.previousElementSibling || options[options.length - 1]);
+          }
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            closeAllSelects();
+            button.focus();
+          }
+        });
+      });
+    });
+
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.custom-select')) closeAllSelects();
+    });
+
+    updateDisabledOptions();
+
+    const compareCards = Array.from(document.querySelectorAll('.compare-card'));
+    if (compareCards.length) {
+      compareCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        card.replaceWith(clone);
+      });
+
+      const refreshedCards = Array.from(document.querySelectorAll('.compare-card'));
+      const groups = {};
+
+      refreshedCards.forEach(card => {
+        const metric = card.dataset.metric;
+        if (!groups[metric]) groups[metric] = [];
+        groups[metric].push(card);
+      });
+
+      const prefersHover = window.matchMedia('(hover: hover)').matches;
+      const isMobile = window.innerWidth < 768;
+      let activeMetric = null;
+
+      function collapseActive() {
+        if (!activeMetric) return;
+        groups[activeMetric].forEach(card => card.classList.remove('cmp-expanded'));
+        activeMetric = null;
+      }
+
+      function expandMetric(metric) {
+        if (activeMetric === metric) return;
+        Object.values(groups).forEach(group =>
+          group.forEach(card => card.classList.remove('cmp-expanded'))
+        );
+        groups[metric].forEach(card => card.classList.add('cmp-expanded'));
+        activeMetric = metric;
+      }
+
+      function isGroupHovered(metric) {
+        return groups[metric].some(card => card.matches(':hover'));
+      }
+
+      refreshedCards.forEach(card => {
+        const metric = card.dataset.metric;
+        if (!metric) return;
+
+        if (!isMobile && prefersHover) {
+          card.addEventListener('mouseenter', () => expandMetric(metric));
+          card.addEventListener('mouseleave', () => {
+            window.setTimeout(() => {
+              if (!isGroupHovered(metric)) collapseActive();
+            }, 40);
+          });
+        } else {
+          card.addEventListener('click', () => {
+            const isExpanded = card.classList.contains('cmp-expanded');
+            if (isExpanded) {
+              collapseActive();
+              return;
+            }
+            expandMetric(metric);
+          });
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') collapseActive();
+      });
+    }
+  </script>
 </body>
 </html>

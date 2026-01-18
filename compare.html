@@ -35,9 +35,9 @@
       <header class="section-header">
         <h1>Compare Migration Policies</h1>
         <p>
-          Use this tool to compare the political climate, migration statistics, policies, and application
-          pathways of two EU Member States side by side. Select two countries to explore the highlights
-          from each profile.
+          Compare two EU Member States side by side using the official highlights from each country profile.
+          Pick any two countries to review political context, migration statistics, policy direction, and
+          application pathways at a glance.
         </p>
       </header>
 
@@ -216,18 +216,26 @@
     });
 
     const compareSelects = document.querySelectorAll('.custom-select');
-    const metricTemplates = {
-      'political-climate': name => `${name} balances coalition priorities with regional cooperation, keeping migration debates steady but closely watched ahead of major votes.`,
-      'migration-statistics': name => `${name} reports seasonal fluctuations tied to labour demand and border pressure, with weekly updates shaping media coverage and parliamentary questions.`,
-      'current-policies': name => `${name} aligns with EU frameworks while tailoring reception and integration measures to local capacity, using periodic reviews to adjust enforcement.`,
-      'application-possibilities': name => `${name} is expanding digital intake and case-management tools to streamline applications, with targeted support for municipalities handling higher volumes.`
-    };
     const metricFallbacks = {
       'political-climate': 'Select a country to view the political climate overview.',
       'migration-statistics': 'Select a country to view the latest migration statistics context.',
       'current-policies': 'Select a country to view current policy highlights.',
       'application-possibilities': 'Select a country to view application pathway notes.'
     };
+    const metricLoading = {
+      'political-climate': 'Loading the political climate overview from the country profile.',
+      'migration-statistics': 'Loading the migration statistics context from the country profile.',
+      'current-policies': 'Loading the current policy highlights from the country profile.',
+      'application-possibilities': 'Loading application pathway notes from the country profile.'
+    };
+    const metricSelectors = {
+      'political-climate': '.section-political',
+      'migration-statistics': '.section-migration',
+      'current-policies': '.section-policies',
+      'application-possibilities': '.section-application'
+    };
+    const countryCache = new Map();
+    let panelRequestId = 0;
 
     function getCountryName(select) {
       const currentValue = select.dataset.selected || '';
@@ -236,28 +244,94 @@
       return selectedOption ? selectedOption.textContent.trim() : '';
     }
 
-    function updatePanelContent(select) {
+    async function fetchCountryData(slug) {
+      if (!slug) return null;
+      if (countryCache.has(slug)) return countryCache.get(slug);
+      try {
+        const response = await fetch(`countries/${slug}.html`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Failed to load ${slug}`);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const name = doc.querySelector('.country-title h1')?.textContent.trim() || slug;
+        const intro = doc.querySelector('.page-intro p')?.textContent.trim() || '';
+        const metrics = {};
+        Object.entries(metricSelectors).forEach(([metric, selector]) => {
+          const paragraph = doc.querySelector(selector);
+          metrics[metric] = paragraph ? paragraph.textContent.trim() : '';
+        });
+        const payload = { name, intro, metrics };
+        countryCache.set(slug, payload);
+        return payload;
+      } catch (error) {
+        countryCache.set(slug, null);
+        return null;
+      }
+    }
+
+    async function updatePanelContent(select) {
       const panel = select.closest('.comparison-panel');
       if (!panel) return;
+      const countrySlug = select.dataset.selected || '';
       const countryName = getCountryName(select);
       const intro = panel.querySelector('.panel-intro');
+      const cards = panel.querySelectorAll('.compare-card');
+      const requestId = `${panelRequestId += 1}`;
+      panel.dataset.requestId = requestId;
+
+      if (!countrySlug) {
+        if (intro) {
+          intro.textContent = 'No country selected yet. Choose one to view its profile highlights.';
+        }
+        cards.forEach(card => {
+          const metric = card.dataset.metric;
+          const paragraph = card.querySelector('p');
+          if (!paragraph || !metric || !metricFallbacks[metric]) return;
+          paragraph.textContent = metricFallbacks[metric];
+        });
+        return;
+      }
+
       if (intro) {
         intro.textContent = countryName
-          ? `Highlights for ${countryName}.`
-          : 'No country selected yet. Choose one to view its profile highlights.';
+          ? `Loading highlights for ${countryName}...`
+          : 'Loading highlights from the selected country profile...';
       }
-      const cards = panel.querySelectorAll('.compare-card');
+      cards.forEach(card => {
+        const metric = card.dataset.metric;
+        const paragraph = card.querySelector('p');
+        if (!paragraph || !metric || !metricLoading[metric]) return;
+        paragraph.textContent = metricLoading[metric];
+      });
+
+      const data = await fetchCountryData(countrySlug);
+      if (panel.dataset.requestId !== requestId) return;
+
+      if (!data) {
+        if (intro) {
+          intro.textContent = 'Unable to load the country profile. Please choose another country.';
+        }
+        cards.forEach(card => {
+          const metric = card.dataset.metric;
+          const paragraph = card.querySelector('p');
+          if (!paragraph || !metric || !metricFallbacks[metric]) return;
+          paragraph.textContent = metricFallbacks[metric];
+        });
+        return;
+      }
+
+      if (intro) {
+        intro.textContent = data.intro
+          ? `Highlights for ${data.name}. ${data.intro}`
+          : `Highlights for ${data.name}.`;
+      }
+
       cards.forEach(card => {
         const metric = card.dataset.metric;
         const paragraph = card.querySelector('p');
         if (!paragraph || !metric) return;
-        if (countryName && metricTemplates[metric]) {
-          paragraph.textContent = metricTemplates[metric](countryName);
-          return;
-        }
-        if (!countryName && metricFallbacks[metric]) {
-          paragraph.textContent = metricFallbacks[metric];
-        }
+        const content = data.metrics[metric];
+        paragraph.textContent = content || metricFallbacks[metric] || '';
       });
     }
 

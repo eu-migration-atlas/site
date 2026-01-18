@@ -248,9 +248,19 @@
       const name = doc.querySelector('.country-title h1')?.textContent.trim() || slug;
       const intro = doc.querySelector('.page-intro p')?.textContent.trim() || '';
       const metrics = {};
+      const cards = Array.from(doc.querySelectorAll('.country-section-card')).map(card => ({
+        title: card.querySelector('h2')?.textContent.trim() || '',
+        text: card.querySelector('p')?.textContent.trim() || ''
+      }));
+
       Object.entries(metricSelectors).forEach(([metric, selector]) => {
-        const paragraph = doc.querySelector(selector);
-        metrics[metric] = paragraph ? paragraph.textContent.trim() : '';
+        const keywords = selector?.keywords || [];
+        const match = cards.find(card =>
+          keywords.some(keyword =>
+            card.title.toLowerCase().includes(keyword.toLowerCase())
+          )
+        );
+        metrics[metric] = match ? match.text : '';
       });
       return { name, intro, metrics };
     }

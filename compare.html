@@ -229,10 +229,10 @@
       'application-possibilities': 'Loading application pathway notes from the country profile.'
     };
     const metricSelectors = {
-      'political-climate': '.section-political',
-      'migration-statistics': '.section-migration',
-      'current-policies': '.section-policies',
-      'application-possibilities': '.section-application'
+      'political-climate': { keywords: ['Political climate', 'Political context', 'Politics', 'Political'], },
+      'migration-statistics': { keywords: ['Migration statistics', 'Migration trends', 'Statistics', 'Numbers'], },
+      'current-policies': { keywords: ['Current policies', 'Policy direction', 'Policies', 'Legislation', 'Frameworks'], },
+      'application-possibilities': { keywords: ['Application possibilities', 'Application pathways', 'Asylum procedure', 'Applications', 'Pathways'], }
     };
     const countryCache = new Map();
     let panelRequestId = 0;
@@ -287,9 +287,12 @@
     async function fetchCountryData(slug) {
       if (!slug) return null;
       if (countryCache.has(slug)) return countryCache.get(slug);
+
       try {
-        const response = await fetch(`countries/${slug}.html`, { cache: 'no-store' });
+        const countryUrl = new URL(`countries/${slug}.html`, window.location.href);
+        const response = await fetch(countryUrl.toString(), { cache: 'no-store' });
         if (!response.ok) throw new Error(`Failed to load ${slug}`);
+
         const html = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
@@ -409,10 +412,9 @@
       options.forEach(item => item.setAttribute('aria-selected', 'false'));
       option.setAttribute('aria-selected', 'true');
 
-      if (label && value) {
-        label.textContent = option.textContent.trim();
-        select.dataset.selected = value;
-      }
+      // Update visible label + selected value (allow clearing selection)
+      if (label) label.textContent = option.textContent.trim();
+      select.dataset.selected = value;
 
       closeAllSelects();
       updateDisabledOptions();

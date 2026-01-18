@@ -244,6 +244,46 @@
       return selectedOption ? selectedOption.textContent.trim() : '';
     }
 
+    function parseCountryDocument(doc, slug) {
+      const name = doc.querySelector('.country-title h1')?.textContent.trim() || slug;
+      const intro = doc.querySelector('.page-intro p')?.textContent.trim() || '';
+      const metrics = {};
+      Object.entries(metricSelectors).forEach(([metric, selector]) => {
+        const paragraph = doc.querySelector(selector);
+        metrics[metric] = paragraph ? paragraph.textContent.trim() : '';
+      });
+      return { name, intro, metrics };
+    }
+
+    function loadCountryDataViaIframe(slug) {
+      return new Promise(resolve => {
+        const frame = document.createElement('iframe');
+        frame.style.display = 'none';
+        frame.src = `countries/${slug}.html`;
+        frame.onload = () => {
+          try {
+            const doc = frame.contentDocument;
+            if (!doc) {
+              frame.remove();
+              resolve(null);
+              return;
+            }
+            const payload = parseCountryDocument(doc, slug);
+            frame.remove();
+            resolve(payload);
+          } catch (error) {
+            frame.remove();
+            resolve(null);
+          }
+        };
+        frame.onerror = () => {
+          frame.remove();
+          resolve(null);
+        };
+        document.body.appendChild(frame);
+      });
+    }
+
     async function fetchCountryData(slug) {
       if (!slug) return null;
       if (countryCache.has(slug)) return countryCache.get(slug);
@@ -256,75 +296,13 @@
         const html = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-
-        // Name + intro (fallback to <title> if needed)
-        const name = (doc.querySelector('.country-title h1')?.textContent
-          || doc.querySelector('h1')?.textContent
-          || doc.title
-          || slug).trim();
-
-        const intro = (doc.querySelector('.page-intro p')?.textContent
-          || doc.querySelector('.page-intro')?.textContent
-          || '').trim();
-
-        // Heuristic metric extraction: find a relevant heading, then pick the first paragraph after it.
-        const metrics = {};
-
-        function pickParagraphAfter(node) {
-          if (!node) return '';
-          let el = node.nextElementSibling;
-          // Walk a bit to find the first paragraph-ish text block
-          for (let i = 0; i < 12 && el; i++) {
-            const tag = (el.tagName || '').toLowerCase();
-            if (tag === 'p') return el.textContent.trim();
-            // Some pages wrap content in divs; if a div contains a p, take the first p
-            const innerP = el.querySelector && el.querySelector('p');
-            if (innerP) return innerP.textContent.trim();
-            el = el.nextElementSibling;
-          }
-          return '';
-        }
-
-        function findByKeywords(keywords) {
-          const heads = Array.from(doc.querySelectorAll('h2, h3, h4'));
-          const lowered = keywords.map(k => k.toLowerCase());
-          for (const h of heads) {
-            const t = (h.textContent || '').trim().toLowerCase();
-            if (!t) continue;
-            if (lowered.some(k => t.includes(k))) {
-              const para = pickParagraphAfter(h);
-              if (para) return para;
-            }
-          }
-          return '';
-        }
-
-        Object.entries(metricSelectors).forEach(([metric, config]) => {
-          const keywords = (config && config.keywords) ? config.keywords : [];
-          let content = '';
-
-          // If a selector exists, try it first (in case some pages match the old class names)
-          if (config && config.selector) {
-            const el = doc.querySelector(config.selector);
-            if (el) {
-              // Prefer a paragraph inside the section when possible
-              content = (el.querySelector('p')?.textContent || el.textContent || '').trim();
-            }
-          }
-
-          if (!content && keywords.length) {
-            content = findByKeywords(keywords);
-          }
-
-          metrics[metric] = content;
-        });
-
-        const payload = { name, intro, metrics };
+        const payload = parseCountryDocument(doc, slug);
         countryCache.set(slug, payload);
         return payload;
       } catch (error) {
-        countryCache.set(slug, null);
-        return null;
+        const payload = await loadCountryDataViaIframe(slug);
+        countryCache.set(slug, payload);
+        return payload;
       }
     }
 
